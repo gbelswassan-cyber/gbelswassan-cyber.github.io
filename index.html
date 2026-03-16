@@ -24,23 +24,17 @@
         @keyframes ticker { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 
         header {
-            background: linear-gradient(rgba(0, 45, 91, 0.85), rgba(0, 45, 91, 0.85)), url('img 2.png');
+            background: linear-gradient(rgba(0, 45, 91, 0.85), rgba(0, 45, 91, 0.85)), url('1000119176.png');
             background-size: cover; background-position: center; color: white; padding: 80px 20px; text-align: center; border-bottom: 8px solid var(--ajrak-gold);
         }
-        /* Logo Styling */
-        .header-logo { 
-            width: 130px; 
-            height: 130px; 
-            border-radius: 50%; 
-            border: 4px solid var(--ajrak-gold); 
-            background: white; 
-            margin-bottom: 15px;
-            object-fit: contain;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-        header h1 { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; text-transform: uppercase; line-height: 1.2; margin: 0 auto; }
         
-        .header-address { color: var(--ajrak-gold); font-size: 1.1rem; display: block; margin-top: 10px; font-weight: 500; }
+        .header-logo { 
+            width: 140px; height: 140px; border-radius: 50%; border: 4px solid var(--ajrak-gold); 
+            background: white; margin-bottom: 15px; object-fit: contain; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        header h1 { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; text-transform: uppercase; line-height: 1.2; margin: 0 auto; }
+        .header-address { color: var(--ajrak-gold); font-size: 1.1rem; display: block; margin-top: 10px; font-weight: 500; font-family: 'Poppins', sans-serif; }
         .semis-code { display: inline-block; background: var(--ajrak-gold); color: var(--ajrak-blue); padding: 5px 15px; border-radius: 5px; font-weight: 800; margin-top: 15px; }
 
         nav {
@@ -52,11 +46,12 @@
         .nav-links a { color: white; text-decoration: none; font-size: 0.9rem; font-weight: 600; }
         .admission-btn { background: var(--ajrak-red); padding: 8px 15px; border-radius: 50px; border: 2px solid var(--ajrak-gold); color: white !important; font-weight: bold; }
 
-        .container { max-width: 1100px; margin: 50px auto; padding: 0 20px; }
-        .section-title { text-align: center; color: var(--ajrak-blue); margin-bottom: 40px; font-weight: 800; position: relative; }
-        .section-title::after { content: ''; width: 60px; height: 4px; background: var(--ajrak-red); position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); }
+        .container { max-width: 1200px; margin: 50px auto; padding: 0 20px; }
+        .section-title { text-align: center; color: var(--ajrak-blue); margin-bottom: 40px; font-weight: 800; position: relative; text-transform: uppercase; }
+        .section-title::after { content: ''; width: 80px; height: 5px; background: var(--ajrak-red); position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); }
 
-        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; }
+        /* Links Grid */
+        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; margin-bottom: 60px; }
         .link-card { 
             background: white; padding: 25px; border-radius: 12px; text-align: center; text-decoration: none; 
             color: var(--ajrak-blue); font-weight: 800; border: 1px solid #ddd; transition: 0.3s;
@@ -64,9 +59,16 @@
         .link-card:hover { background: var(--ajrak-red); color: white; transform: translateY(-5px); border-color: var(--ajrak-gold); }
         .link-card span { display: block; font-size: 0.75rem; font-weight: 400; margin-top: 5px; opacity: 0.8; }
 
-        footer { background: #000; color: white; padding: 60px 20px; text-align: center; border-top: 6px solid var(--ajrak-red); }
-        .footer-name { color: var(--ajrak-gold); font-size: 1.4rem; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; }
-        .web-url { color: var(--ajrak-gold); font-weight: bold; text-decoration: none; font-size: 1.1rem; }
+        /* Faculty Table */
+        .table-container { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); overflow-x: auto; margin-bottom: 60px; }
+        table { width: 100%; border-collapse: collapse; min-width: 850px; }
+        th { background: var(--ajrak-blue); color: white; padding: 15px; text-align: left; text-transform: uppercase; font-size: 0.9rem; }
+        td { padding: 15px; border-bottom: 1px solid #eee; font-size: 0.95rem; }
+        .badge { background: #f0f4f8; padding: 4px 10px; border-radius: 4px; font-weight: 600; color: var(--ajrak-blue); border: 1px solid #d1d9e0; }
+
+        footer { background: #000; color: white; padding: 80px 20px 40px; text-align: center; border-top: 8px solid var(--ajrak-red); }
+        .footer-name { color: var(--ajrak-gold); font-size: 1.5rem; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; }
+        .web-url { color: var(--ajrak-gold); font-weight: bold; text-decoration: none; font-size: 1.2rem; display: inline-block; margin-top: 20px; }
 
         @media (max-width: 768px) { .nav-links { display: none; } header h1 { font-size: 1.3rem; } }
     </style>
@@ -78,7 +80,7 @@
     </div>
 
     <header>
-        <img src="logo.png" class="header-logo" alt="School Logo">
+        <img src="1000119177.png" class="header-logo" alt="School Logo">
         <h1>Government Boys Elementary Lower Secondary School Wassan</h1>
         <div class="header-address">📍 Village Muhammad Sharif Wassan, Taluka & District Naushahro Feroze, Sindh</div>
         <div class="semis-code">SEMIS CODE: 416040489</div>
@@ -87,31 +89,62 @@
     <nav>
         <a href="#" class="nav-brand">GBELS WASSAN</a>
         <ul class="nav-links">
-            <li><a href="#links">Educational Portals</a></li>
+            <li><a href="#links">Portals</a></li>
+            <li><a href="#faculty">Faculty</a></li>
             <li><a href="https://gbelswassan-cyber.github.io/admission-portal/index.html" class="admission-btn">Admission 2026</a></li>
         </ul>
     </nav>
 
     <div class="container">
-        <h2 class="section-title" id="links">Original Government Portals</h2>
+        
+        <h2 class="section-title" id="links">Educational Boards & Portals</h2>
         <div class="links-grid">
             <a href="https://sindheducation.gov.pk" target="_blank" class="link-card">SELD Sindh <span>School Education Dept.</span></a>
-            <a href="http://itgrc.sindheducation.gov.pk" target="_blank" class="link-card">HR & E-Transfer <span>Official Employee Portal</span></a>
-            <a href="https://apply.sts.net.pk" target="_blank" class="link-card">STS IBA Sukkur <span>Jobs & Testing Service</span></a>
+            <a href="http://itgrc.sindheducation.gov.pk" target="_blank" class="link-card">HR & E-Transfer <span>Employee Portal</span></a>
+            <a href="https://apply.sts.net.pk" target="_blank" class="link-card">STS IBA Sukkur <span>Jobs & Testing</span></a>
             <a href="https://spsc.gov.pk" target="_blank" class="link-card">SPSC Official <span>Public Service Commission</span></a>
             <a href="https://ebooks.stbb.edu.pk" target="_blank" class="link-card">STBB Books <span>PDF Textbooks Online</span></a>
             <a href="https://steda.sindh.gov.pk" target="_blank" class="link-card">STEDA Sindh <span>Teacher Development</span></a>
             <a href="https://www.bisesba.edu.pk" target="_blank" class="link-card">BISE SBA <span>Exam & Results Board</span></a>
             <a href="https://pite.sindh.gov.pk" target="_blank" class="link-card">PITE Portal <span>Training Institute</span></a>
         </div>
+
+        <h2 class="section-title" id="faculty">Official Faculty Roster</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Name of Employee</th>
+                        <th>P.ID</th>
+                        <th>Designation</th>
+                        <th>Qualification</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td><strong>Sarfaraz Ali Wassan</strong></td><td>10718953</td><td><span class="badge">PST (BPS-14)</span></td><td>M.A + M.Phil</td></tr>
+                    <tr><td>2</td><td><strong>Ali Sher Wassan</strong></td><td>10381947</td><td><span class="badge">PST (BPS-16)</span></td><td>P.T.C + B.A</td></tr>
+                    <tr><td>3</td><td><strong>Aftab Ahmed Mooro</strong></td><td>10718932</td><td><span class="badge">PST (BPS-14)</span></td><td>M.A + M.Ed</td></tr>
+                    <tr><td>4</td><td><strong>Muneer Ahmed</strong></td><td>11016664</td><td><span class="badge">PST (BPS-14)</span></td><td>M.A + B.Ed</td></tr>
+                    <tr><td>5</td><td><strong>Toqeer Ahmed</strong></td><td>11116636</td><td><span class="badge">PST (BPS-14)</span></td><td>MSc Mathematics</td></tr>
+                    <tr><td>6</td><td><strong>Iftikhar Ahmed</strong></td><td>10829825</td><td><span class="badge">PST (BPS-14)</span></td><td>M.A + M.Ed</td></tr>
+                    <tr><td>7</td><td><strong>Mehdi Khoso</strong></td><td>10718934</td><td><span class="badge">PST (BPS-14)</span></td><td>M.A + M.Ed</td></tr>
+                    <tr><td>8</td><td><strong>Nek Muhammad</strong></td><td>10718971</td><td><span class="badge">PST (BPS-14)</span></td><td>M.A + M.Ed</td></tr>
+                    <tr style="background:#fffafa;"><td>9</td><td><strong>Mushtaque Ahmed</strong></td><td>10713543</td><td><span class="badge" style="color:red;">Chowkidar</span></td><td>Primary</td></tr>
+                </tbody>
+            </table>
+        </div>
+
     </div>
 
     <footer>
         <h2 class="footer-name">Government Boys Elementary Lower Secondary School Wassan</h2>
-        <p>📍 Village Muhammad Sharif Wassan, Naushahro Feroze, Sindh</p>
-        <p style="margin-top:10px;">WhatsApp: +92 300 8909756</p>
+        <p>📍 Village Muhammad Sharif Wassan, Taluka & District Naushahro Feroze, Sindh</p>
+        <p style="margin-top:10px;">WhatsApp: +92 300 8909756 | Email: gbelswassan@gmail.com</p>
         <a href="https://gbelswassan-cyber.github.io" class="web-url">gbelswassan-cyber.github.io</a>
+        <p style="margin-top:30px; font-size:0.8rem; opacity:0.5;">© 2026 All Rights Reserved | GBELS Wassan Portal</p>
     </footer>
 
 </body>
-</html>
+                </html>
+
