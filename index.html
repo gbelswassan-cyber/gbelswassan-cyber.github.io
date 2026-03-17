@@ -17,14 +17,14 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: #333; line-height: 1.8; scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: #333; line-height: 1.8; }
 
-        /* Ticker Area */
+        /* Ticker */
         .ticker-wrapper { background: #ff0000; color: white; padding: 12px 0; overflow: hidden; border-bottom: 3px solid var(--ajrak-gold); }
         .ticker-text { display: inline-block; white-space: nowrap; animation: ticker 30s linear infinite; direction: rtl; font-family: 'Noto Sans Sindhi', sans-serif; font-size: 1.1rem; }
         @keyframes ticker { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 
-        /* Professional Header */
+        /* Header */
         header {
             background: linear-gradient(rgba(0, 45, 91, 0.85), rgba(0, 45, 91, 0.85)), url('img 2.png');
             background-size: cover; background-position: center; color: white; padding: 90px 20px; text-align: center; border-bottom: 8px solid var(--ajrak-gold);
@@ -35,72 +35,62 @@
         .header-map-link:hover { text-decoration: underline; }
         .semis-code { display: inline-block; background: var(--ajrak-gold); color: var(--ajrak-blue); padding: 6px 20px; border-radius: 5px; font-weight: 800; margin-top: 20px; font-size: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
 
-        /* Navigation */
+        /* Nav */
         nav {
             background: var(--ajrak-blue); padding: 18px 5%; position: sticky; top: 0; z-index: 1000;
             display: flex; justify-content: space-between; align-items: center; box-shadow: 0 5px 20px rgba(0,0,0,0.3);
         }
         .nav-brand { color: var(--ajrak-gold); font-weight: 800; font-size: 1.2rem; border: 2px solid var(--ajrak-gold); padding: 5px 12px; border-radius: 5px; text-decoration: none; }
         .nav-links { list-style: none; display: flex; gap: 25px; align-items: center; }
-        .nav-links a { color: white; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: 0.3s; cursor: pointer; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
         .nav-links a:hover { color: var(--ajrak-gold); }
         .admission-btn { background: var(--ajrak-red); padding: 10px 22px; border-radius: 50px; border: 2px solid var(--ajrak-gold); animation: pulse 2s infinite; font-weight: bold !important; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
-        /* Container Sections */
+        /* Content */
         .container { max-width: 1150px; margin: 60px auto; padding: 0 25px; }
         .section-card { background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); margin-bottom: 50px; border: 1px solid #eee; }
         .section-title { text-align: center; color: var(--ajrak-blue); margin-bottom: 45px; position: relative; font-weight: 800; text-transform: uppercase; font-size: 1.8rem; letter-spacing: 1px; }
         .section-title::after { content: ''; width: 80px; height: 5px; background: var(--ajrak-red); position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); }
 
-        /* Mission Section */
+        /* Mission & History Detail */
         .mission-flex { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; margin-bottom: 20px; }
-        .mission-text { flex: 1; background: #f8fbff; padding: 35px; border-radius: 15px; border-right: 8px solid var(--ajrak-blue); direction: rtl; font-family: 'Noto Sans Sindhi', sans-serif; font-size: 1.15rem; }
+        .mission-text { flex: 1; background: #f8fbff; padding: 35px; border-radius: 15px; border-right: 8px solid var(--ajrak-blue); direction: rtl; font-family: 'Noto Sans Sindhi', sans-serif; font-size: 1.15rem; box-shadow: inset 0 0 15px rgba(0,0,0,0.02); }
         .mission-img { width: 400px; border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); border: 5px solid white; }
+        .history-content { direction: rtl; font-family: 'Noto Sans Sindhi', sans-serif; text-align: justify; font-size: 1.2rem; line-height: 2.2; }
 
-        /* Faculty Table (Full List) */
+        /* Table */
         .table-container { overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; min-width: 800px; }
-        th { background: var(--ajrak-blue); color: white; padding: 20px; text-align: left; }
-        td { padding: 18px; border-bottom: 1px solid #eee; }
-        .badge { background: #e3f2fd; padding: 5px 12px; border-radius: 5px; font-weight: bold; border: 1px solid #ddd; }
+        th { background: var(--ajrak-blue); color: white; padding: 20px; text-align: left; font-size: 1rem; }
+        td { padding: 18px; border-bottom: 1px solid #eee; font-size: 1rem; }
+        tr:hover { background: #fffde7; }
+        .badge { padding: 5px 12px; border-radius: 5px; font-size: 0.9rem; font-weight: bold; border: 1px solid #ddd; }
 
-        /* Important Links Grid */
+        /* Boards/Links Section */
         .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
         .link-card { 
             background: #ffffff; padding: 25px; border-radius: 12px; text-align: center; 
             text-decoration: none; color: var(--ajrak-blue); font-weight: 800; 
-            border: 2px solid #e9ecef; transition: 0.4s; display: flex; flex-direction: column; align-items: center;
+            border: 2px solid #e9ecef; transition: 0.4s; display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
-        .link-card:hover { background: var(--ajrak-red); color: white; transform: translateY(-5px); border-color: var(--ajrak-gold); }
+        .link-card:hover { background: var(--ajrak-red); color: white; border-color: var(--ajrak-gold); transform: translateY(-8px); box-shadow: 0 10px 20px rgba(165, 42, 42, 0.2); }
         .link-card span { font-size: 0.8rem; font-weight: 400; margin-top: 5px; opacity: 0.8; }
 
-        /* Gallery Grid */
+        /* Gallery */
         .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .gallery-grid img { width: 100%; border-radius: 15px; height: 250px; object-fit: cover; transition: 0.4s; cursor: pointer; }
+        .gallery-grid img { width: 100%; border-radius: 15px; height: 250px; object-fit: cover; transition: 0.4s; cursor: pointer; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
         .gallery-grid img:hover { transform: scale(1.03); }
 
-        /* MODAL POP-UP (About Us - English Content) */
-        .modal {
-            display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.9); overflow-y: auto;
-        }
-        .modal-content {
-            background-color: white; margin: 5% auto; border-radius: 20px;
-            width: 85%; max-width: 850px; position: relative; animation: slideDown 0.4s; overflow: hidden;
-        }
-        @keyframes slideDown { from {top: -300px; opacity: 0} to {top: 0; opacity: 1} }
-        .close-btn { position: absolute; right: 20px; top: 15px; font-size: 40px; color: white; cursor: pointer; z-index: 10; font-weight: bold; }
-        .modal-header { background: var(--ajrak-blue); color: white; padding: 25px; text-align: center; }
-        .modal-body { padding: 40px; display: flex; gap: 30px; flex-wrap: wrap; align-items: center; }
-        .modal-img { width: 280px; border-radius: 12px; border: 6px solid #f9f9f9; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .modal-text { flex: 1; min-width: 300px; text-align: left; }
-
         /* Footer */
-        footer { background: #000; color: white; padding: 80px 20px 40px; text-align: center; border-top: 8px solid var(--ajrak-red); }
-        .web-url { color: var(--ajrak-gold); font-size: 1.2rem; font-weight: bold; margin-top: 20px; display: inline-block; text-decoration: none; }
+        footer { background: #000; color: white; padding: 100px 20px 50px; text-align: center; border-top: 8px solid var(--ajrak-red); }
+        .footer-name { color: var(--ajrak-gold); font-size: 1.6rem; margin-bottom: 20px; font-weight: 800; text-transform: uppercase; }
+        .footer-links a { color: white; text-decoration: none; transition: 0.3s; margin: 0 10px; }
+        .footer-links a:hover { color: var(--ajrak-gold); text-decoration: underline; }
+        .web-url { color: var(--ajrak-gold); font-size: 1.2rem; font-weight: bold; margin-top: 20px; display: inline-block; }
 
-        @media (max-width: 768px) { .nav-links { display: none; } .mission-img { width: 100%; } .modal-body { flex-direction: column; text-align: center; } }
+        @media (max-width: 992px) { .mission-img { width: 100%; } }
+        @media (max-width: 768px) { .nav-links { display: none; } header h1 { font-size: 1.5rem; } }
     </style>
 </head>
 <body>
@@ -110,20 +100,22 @@
     </div>
 
     <header>
-        <img src="logo.png.png" class="header-logo" alt="GBELS Logo">
+        <img src="logo.png.png" class="header-logo" alt="GBELS Wassan Logo">
         <h1>Government Boys Elementary Lower Secondary School Wassan</h1>
-        <a href="#" class="header-map-link">📍 Village Muhammad Sharif Wassan, Naushahro Feroze, Sindh</a>
+        <a href="https://maps.app.goo.gl/YourMapLink" target="_blank" class="header-map-link">
+            📍 Village Muhammad Sharif Wassan, Taluka & District Naushahro Feroze, Sindh
+        </a>
         <div class="semis-code">SEMIS CODE: 416040489</div>
     </header>
 
     <nav>
         <a href="#" class="nav-brand">GBELS WASSAN</a>
         <ul class="nav-links">
-            <li><a onclick="openAbout()">About Us</a></li>
             <li><a href="#about">Mission</a></li>
+            <li><a href="#history">History</a></li>
             <li><a href="#faculty">Faculty</a></li>
-            <li><a href="#links">Important Links</a></li>
             <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#links">Boards & Links</a></li>
             <li><a href="https://gbelswassan-cyber.github.io/admission-portal/index.html" class="admission-btn">Admission 2026</a></li>
         </ul>
     </nav>
@@ -132,14 +124,22 @@
         
         <h2 class="section-title" id="about">Our Mission (اسان جا مقصد)</h2>
         <div class="section-card mission-flex">
-            <img src="img 1.png" class="mission-img" alt="Vision">
+            <img src="img 1.png" class="mission-img" alt="School Vision">
             <div class="mission-text">
-                <p>اسان جو بنيادي مقصد شاگردن کي جديد تعليم سان گڏوگڏ اخلاقي تربيت فراهم ڪرڻ آهي. اسان چاهيون ٿا ته اسان جا شاگرد ڊجيٽل دور جي چئلينجز کي منهن ڏيڻ لاءِ تيار ٿين.</p>
-                <div style="margin-top:15px;">
-                    <p>✅ **معياري تعليم:** تجربيڪار اسٽاف ذريعي تدريس.</p>
-                    <p>✅ **ڊجيٽل اسڪول:** آئي ٽي سهولتن جو استعمال.</p>
+                <p>اسان جو بنيادي مقصد ڳوٺ محمد شريف وسڻ ۽ ان جي آس پاس وارن علائقن جي شاگردن کي اعليٰ ۽ معياري تعليم فراهم ڪرڻ آهي. اسان چاهيون ٿا ته اسان جا شاگرد نه صرف تعليمي طور تي پر اخلاقي طور تي به ملڪ جا بهترين شهري ثابت ٿين.</p>
+                <div style="margin-top:20px;">
+                    <p>✅ **معياري تعليم:** جديد دور جي تقاضائن موجب تدريس.</p>
+                    <p>✅ **ڪردار سازي:** شاگردن جي اخلاقي ۽ ذهني تربيت.</p>
+                    <p>✅ **ڊجيٽل سهولتون:** اسڪول کي مڪمل ڊجيٽلائيز ڪرڻ ۽ شاگردن کي ٽيڪنالاجي سان روشناس ڪرائڻ.</p>
+                    <p>✅ **راندين جون سرگرميون:** جسماني واڌ ويجهه لاءِ راندين کي هٿي ڏيڻ.</p>
                 </div>
             </div>
+        </div>
+
+        <h2 class="section-title" id="history">School History (اسان جي تاريخ)</h2>
+        <div class="section-card history-content">
+            <p>گورنمينٽ بوائز ايليمينٽري لوئر سيڪنڊري اسڪول وسڻ جي تاريخ تمام پراڻي ۽ شاندار آهي. هن علم جي مرڪز جو بنياد <strong>1956ع</strong> ۾ رکيو ويو، جنهن جو مقصد علائقي ۾ تعليمي کوٽ کي ختم ڪرڻ هو. گذريل ڪيترن ئي ڏهاڪن کان هي اسڪول هزارين شاگردن کي علم جي روشني فراهم ڪري چڪو آهي.</p>
+            <p style="margin-top:15px;">وقت گذرڻ سان گڏ اسڪول جي بلڊنگ ۽ تعليمي معيار ۾ وڏيون تبديليون آيون آهن. سال <strong>2026ع</strong> هن اداري لاءِ تمام اهم آهي، ڇاڪاڻ ته هن سال اسڪول کي اپ گريڊ ڪري <strong>ايليمينٽري لوئر سيڪنڊري</strong> جو درجو ڏنو ويو آهي، جنهن کانپوءِ هاڻي هتي اٺين ڪلاس تائين معياري تعليم فراهم ڪئي پئي وڃي.</p>
         </div>
 
         <h2 class="section-title" id="faculty">Official Faculty Roster</h2>
@@ -155,86 +155,59 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td>1</td><td><strong>Sarfaraz Ali Wassan</strong></td><td>10718953</td><td><span class="badge">PST (BPS-14)</span></td><td>M.A + M.Phil</td></tr>
-                    <tr><td>2</td><td><strong>Ali Sher Wassan</strong></td><td>10381947</td><td><span class="badge">PST (BPS-16)</span></td><td>P.T.C + B.A</td></tr>
-                    <tr><td>3</td><td><strong>Aftab Ahmed Mooro</strong></td><td>10718932</td><td><span class="badge">PST (BPS-14)</span></td><td>M.A + M.Ed</td></tr>
-                    <tr><td>4</td><td><strong>Muneer Ahmed</strong></td><td>11016664</td><td><span class="badge" style="background:var(--ajrak-gold)">PST (BPS-14)</span></td><td>M.A + B.Ed</td></tr>
-                    <tr><td>5</td><td><strong>Toqeer Ahmed</strong></td><td>11116636</td><td><span class="badge">PST (BPS-14)</span></td><td>MSc Mathematics</td></tr>
-                    <tr><td>6</td><td><strong>Iftikhar Ahmed</strong></td><td>10829825</td><td><span class="badge">PST (BPS-14)</span></td><td>M.A + M.Ed</td></tr>
-                    <tr><td>7</td><td><strong>Mehdi Khoso</strong></td><td>10718934</td><td><span class="badge">PST (BPS-14)</span></td><td>M.A + M.Ed</td></tr>
-                    <tr><td>8</td><td><strong>Nek Muhammad</strong></td><td>10718971</td><td><span class="badge">PST (BPS-14)</span></td><td>M.A + M.Ed</td></tr>
-                    <tr style="background:#fffafa;"><td>9</td><td><strong>Mushtaque Ahmed</strong></td><td>10713543</td><td><span class="badge" style="color:red">Chowkidar</span></td><td>Primary</td></tr>
+                    <tr><td>1</td><td><strong>Sarfaraz Ali Wassan</strong></td><td>10718953</td><td><span class="badge" style="background:#e3f2fd;">PST (BPS-14)</span></td><td>M.A + M.Phil</td></tr>
+                    <tr><td>2</td><td><strong>Ali Sher Wassan</strong></td><td>10381947</td><td><span class="badge" style="background:#e3f2fd;">PST (BPS-16)</span></td><td>P.T.C + B.A</td></tr>
+                    <tr><td>3</td><td><strong>Aftab Ahmed Mooro</strong></td><td>10718932</td><td><span class="badge" style="background:#e3f2fd;">PST (BPS-14)</span></td><td>M.A + M.Ed</td></tr>
+                    <tr><td>4</td><td><strong>Muneer Ahmed</strong></td><td>11016664</td><td><span class="badge" style="background:#e3f2fd;">PST (BPS-14)</span></td><td>M.A + B.Ed</td></tr>
+                    <tr><td>5</td><td><strong>Toqeer Ahmed</strong></td><td>11116636</td><td><span class="badge" style="background:#e3f2fd;">PST (BPS-14)</span></td><td>MSc Mathematics</td></tr>
+                    <tr><td>6</td><td><strong>Iftikhar Ahmed</strong></td><td>10829825</td><td><span class="badge" style="background:#e3f2fd;">PST (BPS-14)</span></td><td>M.A + M.Ed</td></tr>
+                    <tr><td>7</td><td><strong>Mehdi Khoso</strong></td><td>10718934</td><td><span class="badge" style="background:#e3f2fd;">PST (BPS-14)</span></td><td>M.A + M.Ed</td></tr>
+                    <tr><td>8</td><td><strong>Nek Muhammad</strong></td><td>10718971</td><td><span class="badge" style="background:#e3f2fd;">PST (BPS-14)</span></td><td>M.A + M.Ed</td></tr>
+                    <tr style="background:#fffafa;"><td>9</td><td><strong>Mushtaque Ahmed</strong></td><td>10713543</td><td><span class="badge" style="background:#ffebee; color:#c62828;">Chowkidar</span></td><td>Primary Education</td></tr>
                 </tbody>
             </table>
         </div>
 
         <h2 class="section-title" id="links">Educational Boards & Portals</h2>
         <div class="section-card links-grid">
-            <a href="https://www.sindheducation.gov.pk/notifications?id=0&key=pite&pageNumber=1" target="_blank" class="link-card">
-                SE&LD Sindh <span>Notifications & PITE</span>
-            </a>
-            <a href="https://eportal.sindheducation.gov.pk/" target="_blank" class="link-card">
-                E-Transfer Portal <span>Online Teacher Transfer</span>
-            </a>
-            <a href="https://apply.sts.net.pk" target="_blank" class="link-card">STS IBA Sukkur <span>Jobs & Testing</span></a>
-            <a href="https://stbb.edu.pk" target="_blank" class="link-card">STBB Books <span>PDF Textbooks</span></a>
-            <a href="https://www.bisesba.edu.pk" target="_blank" class="link-card">BISE SBA <span>Exam Board</span></a>
-            <a href="https://spsc.gov.pk" target="_blank" class="link-card">SPSC Official <span>Service Commission</span></a>
+            <a href="https://seld.sindh.gov.pk" target="_blank" class="link-card">SELD Sindh <span>School Education Dept.</span></a>
+            <a href="https://sedhr.sindh.gov.pk" target="_blank" class="link-card">E-Transfer Portal <span>Human Resources Dept.</span></a>
+            <a href="https://apply.sts.net.pk" target="_blank" class="link-card">STS IBA Sukkur <span>Jobs & Testing Service</span></a>
+            <a href="https://spsc.gov.pk" target="_blank" class="link-card">SPSC Official <span>Public Service Commission</span></a>
+            <a href="https://stbb.edu.pk" target="_blank" class="link-card">STBB Books <span>PDF Textbooks Online</span></a>
+            <a href="https://steda.gos.pk" target="_blank" class="link-card">STEDA Sindh <span>Teacher Development</span></a>
+            <a href="https://www.bisesba.edu.pk" target="_blank" class="link-card">BISE SBA <span>Exam & Results Board</span></a>
+            <a href="https://pite.edu.pk" target="_blank" class="link-card">PITE Portal <span>Training Institute</span></a>
         </div>
 
-        <h2 class="section-title" id="gallery">School Gallery</h2>
+        <h2 class="section-title" id="gallery">School Gallery (تصويرون)</h2>
         <div class="section-card gallery-grid">
             <img src="img 1.png" alt="Activity 1">
             <img src="img 2.png" alt="Activity 2">
             <img src="img 3.png" alt="Activity 3">
             <img src="img 4.png" alt="Activity 4">
+            <img src="img 5.png" alt="Activity 5">
+            <img src="img 6.png" alt="Activity 6">
         </div>
 
-    </div>
-
-    <div id="aboutModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeAbout()">&times;</span>
-            <div class="modal-header">
-                <h2>About the Developer & Vision</h2>
-            </div>
-            <div class="modal-body">
-                <img src="1000063802.jpg" class="modal-img" alt="Muneer Ahmed Wassan">
-                <div class="modal-text">
-                    <h3 style="color:var(--ajrak-red); font-size: 1.6rem; margin-bottom: 5px;">Muneer Ahmed Wassan</h3>
-                    <p><strong>Primary School Teacher (PST BPS-14)</strong></p>
-                    <hr style="margin: 15px 0; border: 0; border-top: 1px solid #ddd;">
-                    
-                    <p>This official web portal is a dedicated project by **Mr. Muneer Ahmed** to modernize our school's administration. By integrating digital solutions, he aims to provide better access to educational resources for our community.</p>
-                    
-                    <p style="margin-top: 15px;">His vision is to ensure that technology serves as a bridge for education in Village Muhammad Sharif Wassan, making information accessible to every student and parent through their digital devices.</p>
-                </div>
-            </div>
-        </div>
     </div>
 
     <footer>
-        <h2 style="color:var(--ajrak-gold);">Government Boys Elementary Lower Secondary School Wassan</h2>
-        <p>Taluka & District Naushahro Feroze, Sindh | WhatsApp: +92 300 8909756</p>
-        <a href="https://gbelswassan-cyber.github.io" class="web-url">gbelswassan-cyber.github.io</a>
-        <p style="margin-top:20px; opacity:0.6;">Developed by Muneer Ahmed Wassan © 2026</p>
+        <h2 class="footer-name">Government Boys Elementary Lower Secondary School Wassan</h2>
+        <div class="footer-links">
+            <p style="margin-bottom:15px;">
+                <a href="https://maps.app.goo.gl/YourMapLink" target="_blank">📍 Village Muhammad Sharif Wassan, Naushahro Feroze</a>
+            </p>
+            <p>
+                WhatsApp: <a href="https://wa.me/923008909756" target="_blank"><strong>+92 300 8909756</strong></a> | 
+                Email: <a href="mailto:gbelswassan@gmail.com"><strong>gbelswassan@gmail.com</strong></a>
+            </p>
+            <a href="https://gbelswassan-cyber.github.io" class="web-url">gbelswassan-cyber.github.io</a>
+        </div>
+        <div style="margin-top:60px; font-size:0.85rem; opacity:0.6;">
+            © 2026 Government Boys Elementary Lower Secondary School Wassan | Official Portal Development
+        </div>
     </footer>
 
-    <script>
-        function openAbout() {
-            document.getElementById("aboutModal").style.display = "block";
-            document.body.style.overflow = "hidden";
-        }
-        function closeAbout() {
-            document.getElementById("aboutModal").style.display = "none";
-            document.body.style.overflow = "auto";
-        }
-        window.onclick = function(event) {
-            let modal = document.getElementById("aboutModal");
-            if (event.target == modal) { closeAbout(); }
-        }
-    </script>
-
 </body>
-    </html>
-                
+</html>
