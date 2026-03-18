@@ -26,7 +26,7 @@
         .school-info p { margin: 2px 0; font-size: 10px; font-weight: 600; color: #333; }
         .admission-tag { font-size: 12px; color: var(--accent); font-weight: bold; border: 1.5px solid #000; padding: 3px 15px; display: inline-block; margin-top: 5px; border-radius: 4px; }
 
-        /* Photo Box - Passport Size (Automatic Fit) */
+        /* Photo Box */
         .photo-box { width: 90px; height: 110px; border: 2px dashed #555; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 10px; background: #fdfdfd; font-weight: bold; overflow: hidden; position: relative; cursor: pointer; }
         .photo-box img { width: 100%; height: 100%; object-fit: cover; display: none; }
 
@@ -38,10 +38,6 @@
         label { font-weight: bold; font-size: 11px; margin-bottom: 3px; color: #222; }
         input, select { padding: 8px; border: 1px solid #999; border-radius: 4px; font-size: 13px; background: #fff; }
 
-        /* Required Documents Checkboxes & Uploads */
-        .doc-section { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 5px; }
-        .doc-item { display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: bold; }
-
         /* Office Use Section */
         .office-section { border: 1.5px solid var(--primary); padding: 12px; background: #f9f9f9; border-radius: 6px; margin-top: 15px; }
         .office-title { text-align: center; font-weight: 900; text-decoration: underline; margin-bottom: 10px; font-size: 13px; }
@@ -50,16 +46,13 @@
 
         /* Submit Button */
         .btn-submit { background: var(--whatsapp); color: white; padding: 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; width: 100%; margin: 10px 0; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .btn-submit:hover { background: #1eb954; }
+        .btn-submit:disabled { background: #ccc; cursor: not-allowed; }
 
-        /* Print Settings */
         @media print {
             @page { size: A4; margin: 0; }
             .no-print { display: none !important; }
             body { padding: 0; background: white; }
             .page-border { border: 2px solid var(--primary); box-shadow: none; width: 100%; height: 100%; margin: 0; padding: 10mm; }
-            input { border: none !important; border-bottom: 1px dotted #000 !important; }
-            select { appearance: none; border: none; border-bottom: 1px dotted #000; }
         }
     </style>
 </head>
@@ -148,15 +141,6 @@
             </div>
         </div>
 
-        <div class="section">
-            <span class="section-label">DECLARATION</span>
-            <p style="font-size:10px; margin:0 0 10px 0;">I hereby declare that the information provided is true and correct.</p>
-            <div class="row">
-                <div class="field"><label>Signature of Parent:</label><input type="text"></div>
-                <div class="field"><label>Date:</label><input type="date"></div>
-            </div>
-        </div>
-
         <div class="no-print">
             <button type="button" id="submitBtn" class="btn-submit" onclick="handleUpload()">Apply Online & Send via WhatsApp ✅</button>
             <p id="status" style="text-align:center; font-size:12px; color:var(--primary); font-weight:bold;"></p>
@@ -168,9 +152,6 @@
                 <div class="field"><label>G.R Number:</label><input type="text" readonly></div>
                 <div class="field"><label>Admission Date:</label><input type="text" readonly></div>
             </div>
-            <div class="row" style="font-size:11px; font-weight:bold;">
-                <span>[ ] Verified</span> &nbsp; <span>[ ] All OK</span> &nbsp; <span>[ ] Approved</span> &nbsp; <span>[ ] Pending</span>
-            </div>
             <div class="signature-row">
                 <div class="sig-line">Class Teacher Signature</div>
                 <div class="sig-line">Admission Incharge</div>
@@ -181,7 +162,6 @@
 </div>
 
 <script>
-    // Photo Preview Logic
     function showPreview(input) {
         if (input.files && input.files[0]) {
             const reader = new FileReader();
@@ -194,13 +174,12 @@
         }
     }
 
-    // Full Upload Logic to Drive & Sheet
     async function handleUpload() {
         const btn = document.getElementById('submitBtn');
         const status = document.getElementById('status');
         
-        if(!document.getElementById('s_name').value) {
-            alert("مهرباني ڪري شاگرد جو نالو لکو!");
+        if(!document.getElementById('s_name').value || !document.getElementById('cnic').value) {
+            alert("مهرباني ڪري شاگرد جو نالو ۽ B-Form نمبر لکو!");
             return;
         }
 
@@ -226,38 +205,45 @@
         };
 
         try {
-            const files = document.querySelectorAll('.doc-file');
+            const docFiles = document.querySelectorAll('.doc-file');
             const studentPhoto = document.getElementById('student_img');
             
-            let allFiles = Array.from(files);
-            if(studentPhoto.files[0]) allFiles.push(studentPhoto);
+            // Photo upload
+            if(studentPhoto.files[0]) {
+                const b64 = await toBase64(studentPhoto.files[0]);
+                payload.files.push({
+                    base64: b64.split(',')[1],
+                    type: studentPhoto.files[0].type,
+                    name: "Passport_Photo_" + payload.s_name
+                });
+            }
 
-            for (let f of allFiles) {
+            // Documents upload
+            for (let f of docFiles) {
                 if(f.files[0]) {
-                    const base64 = await toBase64(f.files[0]);
+                    const b64 = await toBase64(f.files[0]);
                     payload.files.push({
-                        base64: base64.split(',')[1],
+                        base64: b64.split(',')[1],
                         type: f.files[0].type,
-                        name: (f.getAttribute('data-name') || "Passport-Photo") + "_" + payload.s_name
+                        name: f.getAttribute('data-name') + "_" + payload.s_name
                     });
                 }
             }
 
-            // APPS SCRIPT URL HERE
-            const SCRIPT_URL = "https://script.google.com/macros/s/YOUR_URL_HERE/exec";
+            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz_kqBIICpldYvuhCik02JxY7Ugp-cYV181LB3S1eGjkS9WAdwIFPHL3czQ1jBtHjpd9A/exec";
 
             const response = await fetch(SCRIPT_URL, {
                 method: 'POST',
+                mode: 'no-cors', // Permission issues bachne ke liye
                 body: JSON.stringify(payload)
             });
 
-            const result = await response.json();
-            if(result.status === 'success') {
-                status.innerText = "ڊيٽا محفوظ ٿي وئي! WhatsApp کلي رهيو آهي...";
-                sendToWA(payload);
-            }
+            // "no-cors" me response read nahi hota, isliye manually success man-na parta hai
+            status.innerText = "ڊيٽا موڪلي وئي! WhatsApp کلي رهيو آهي...";
+            setTimeout(() => sendToWA(payload), 2000);
+
         } catch (e) {
-            status.innerText = "Error! ليڪن WhatsApp تي اپلاءِ ڪري سگهجي ٿو.";
+            status.innerText = "Error! ليڪن WhatsApp تي اپلاءِ ٿي سگهي ٿو.";
             sendToWA(payload);
         }
     }
@@ -270,16 +256,16 @@
     });
 
     function sendToWA(data) {
-        const msg = `*GBELS WASSAN ADMISSION 2026-27*%0A` +
-                    `Student: ${data.s_name}%0A` +
-                    `Father: ${data.f_name}%0A` +
-                    `Class: ${data.adm_class}%0A` +
-                    `CNIC: ${data.cnic}%0A` +
-                    `Status: Cloud Uploaded ✅`;
+        const msg = `*GBELS WASSAN ADMISSION*%0A` +
+                    `شاگرد: ${data.s_name}%0A` +
+                    `پيءُ جو نالو: ${data.f_name}%0A` +
+                    `ڪلاس: ${data.adm_class}%0A` +
+                    `B-Form: ${data.cnic}%0A` +
+                    `*Data Uploaded to Cloud* ✅`;
         window.open(`https://wa.me/923008909756?text=${msg}`, '_blank');
         document.getElementById('submitBtn').disabled = false;
+        document.getElementById('status').innerText = "فارم ڪاميابيءَ سان جمع ٿي ويو!";
     }
 </script>
 </body>
-    </html>
-
+</html>
