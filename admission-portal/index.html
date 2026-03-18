@@ -9,16 +9,13 @@
         :root { --primary: #002d5b; --accent: #8b0000; --whatsapp: #25D366; --btn-dark: #333; }
         body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f2f5; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; }
 
-        /* Navigation Buttons */
         .selection-menu { background: #eef6ff; padding: 15px; border: 2px dashed var(--primary); border-radius: 12px; margin-bottom: 15px; text-align: center; width: 100%; max-width: 800px; box-sizing: border-box; }
         .btn-choice { padding: 12px 25px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: white; margin: 5px; font-size: 14px; transition: 0.3s; }
         .btn-manual { background: var(--btn-dark); }
         .btn-online { background: var(--primary); }
 
-        /* A4 Page Layout */
         .page-border { background: white; width: 210mm; min-height: 297mm; padding: 10mm; border: 3px solid var(--primary); box-shadow: 0 0 20px rgba(0,0,0,0.2); position: relative; box-sizing: border-box; }
 
-        /* Header Styling */
         .header { display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 15px; }
         .logo { width: 85px; height: 85px; border-radius: 50%; border: 1px solid #ddd; }
         .school-info { text-align: center; flex: 1; padding: 0 10px; }
@@ -26,11 +23,9 @@
         .school-info p { margin: 2px 0; font-size: 10px; font-weight: 600; color: #333; }
         .admission-tag { font-size: 12px; color: var(--accent); font-weight: bold; border: 1.5px solid #000; padding: 3px 15px; display: inline-block; margin-top: 5px; border-radius: 4px; }
 
-        /* Photo Box */
         .photo-box { width: 90px; height: 110px; border: 2px dashed #555; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 10px; background: #fdfdfd; font-weight: bold; overflow: hidden; position: relative; cursor: pointer; }
         .photo-box img { width: 100%; height: 100%; object-fit: cover; display: none; }
 
-        /* Form Sections */
         .section { border: 1.2px solid #000; padding: 15px 10px 8px 10px; border-radius: 5px; margin-bottom: 15px; position: relative; }
         .section-label { position: absolute; top: -10px; left: 12px; background: white; padding: 0 8px; font-weight: 800; font-size: 11px; color: var(--accent); text-transform: uppercase; }
         .row { display: flex; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
@@ -38,13 +33,11 @@
         label { font-weight: bold; font-size: 11px; margin-bottom: 3px; color: #222; }
         input, select { padding: 8px; border: 1px solid #999; border-radius: 4px; font-size: 13px; background: #fff; }
 
-        /* Office Use Section */
         .office-section { border: 1.5px solid var(--primary); padding: 12px; background: #f9f9f9; border-radius: 6px; margin-top: 15px; }
         .office-title { text-align: center; font-weight: 900; text-decoration: underline; margin-bottom: 10px; font-size: 13px; }
         .signature-row { display: flex; justify-content: space-between; margin-top: 30px; }
         .sig-line { border-top: 1.2px solid #000; width: 170px; text-align: center; font-size: 11px; font-weight: bold; padding-top: 4px; }
 
-        /* Submit Button */
         .btn-submit { background: var(--whatsapp); color: white; padding: 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; width: 100%; margin: 10px 0; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .btn-submit:disabled { background: #ccc; cursor: not-allowed; }
 
@@ -132,13 +125,6 @@
                 <div class="field"><label>Father CNIC:</label><input type="file" class="doc-file" data-name="Father-CNIC"></div>
                 <div class="field"><label>Result Card:</label><input type="file" class="doc-file" data-name="Result-Card"></div>
             </div>
-            <div class="doc-section" style="margin-top:10px;">
-                <div class="doc-item">[ ] 4 Photos</div>
-                <div class="doc-item">[ ] B-Form Copy</div>
-                <div class="doc-item">[ ] SLC</div>
-                <div class="doc-item">[ ] CNIC Copy</div>
-                <div class="doc-item">[ ] Result Card</div>
-            </div>
         </div>
 
         <div class="no-print">
@@ -184,7 +170,7 @@
         }
 
         btn.disabled = true;
-        status.innerText = "فائلون اپلوڊ ٿي رهيون آهن، مهرباني ڪري انتظار ڪريو...";
+        status.innerText = "ڊيٽا ۽ فائلون اپلوڊ ٿي رهيون آهن، مهرباني ڪري انتظار ڪريو...";
 
         const payload = {
             s_name: document.getElementById('s_name').value,
@@ -208,17 +194,15 @@
             const docFiles = document.querySelectorAll('.doc-file');
             const studentPhoto = document.getElementById('student_img');
             
-            // Photo upload
             if(studentPhoto.files[0]) {
                 const b64 = await toBase64(studentPhoto.files[0]);
                 payload.files.push({
                     base64: b64.split(',')[1],
                     type: studentPhoto.files[0].type,
-                    name: "Passport_Photo_" + payload.s_name
+                    name: "Photo_" + payload.s_name
                 });
             }
 
-            // Documents upload
             for (let f of docFiles) {
                 if(f.files[0]) {
                     const b64 = await toBase64(f.files[0]);
@@ -232,18 +216,19 @@
 
             const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz_kqBIICpldYvuhCik02JxY7Ugp-cYV181LB3S1eGjkS9WAdwIFPHL3czQ1jBtHjpd9A/exec";
 
-            const response = await fetch(SCRIPT_URL, {
+            // No-cors mode for better compatibility
+            await fetch(SCRIPT_URL, {
                 method: 'POST',
-                mode: 'no-cors', // Permission issues bachne ke liye
+                mode: 'no-cors',
                 body: JSON.stringify(payload)
             });
 
-            // "no-cors" me response read nahi hota, isliye manually success man-na parta hai
-            status.innerText = "ڊيٽا موڪلي وئي! WhatsApp کلي رهيو آهي...";
+            status.innerText = "ڪاميابي! WhatsApp کلي رهيو آهي...";
             setTimeout(() => sendToWA(payload), 2000);
 
         } catch (e) {
-            status.innerText = "Error! ليڪن WhatsApp تي اپلاءِ ٿي سگهي ٿو.";
+            console.error(e);
+            status.innerText = "اپلوڊ ۾ ڪجهه مسئلو آيو، پر WhatsApp کلي رهيو آهي.";
             sendToWA(payload);
         }
     }
@@ -256,15 +241,17 @@
     });
 
     function sendToWA(data) {
-        const msg = `*GBELS WASSAN ADMISSION*%0A` +
-                    `شاگرد: ${data.s_name}%0A` +
+        const msg = `*GBELS WASSAN ADMISSION FORM*%0A` +
+                    `----------------------------%0A` +
+                    `شاگرد جو نالو: ${data.s_name}%0A` +
                     `پيءُ جو نالو: ${data.f_name}%0A` +
                     `ڪلاس: ${data.adm_class}%0A` +
                     `B-Form: ${data.cnic}%0A` +
-                    `*Data Uploaded to Cloud* ✅`;
+                    `----------------------------%0A` +
+                    `ڊيٽا ڪلائوڊ تي اپلوڊ ڪئي وئي آهي. ✅`;
         window.open(`https://wa.me/923008909756?text=${msg}`, '_blank');
         document.getElementById('submitBtn').disabled = false;
-        document.getElementById('status').innerText = "فارم ڪاميابيءَ سان جمع ٿي ويو!";
+        document.getElementById('status').innerText = "فارم جمع ٿي ويو!";
     }
 </script>
 </body>
