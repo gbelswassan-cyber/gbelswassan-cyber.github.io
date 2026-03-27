@@ -170,7 +170,7 @@
         }
 
         btn.disabled = true;
-        status.innerText = "ڊيٽا ۽ فائلون اپلوڊ ٿي رهيون آهن، مهرباني ڪري انتظار ڪريو...";
+        status.innerText = "ڊيٽا اپلوڊ ٿي رهي آهي، مهرباني ڪري انتظار ڪريو...";
 
         const payload = {
             s_name: document.getElementById('s_name').value,
@@ -186,59 +186,29 @@
             last_class: document.getElementById('last_class').value,
             grade: document.getElementById('grade').value,
             occupation: document.getElementById('occupation').value,
-            address: document.getElementById('address').value,
-            files: []
+            address: document.getElementById('address').value
         };
 
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz_kqBIICpldYvuhCik02JxY7Ugp-cYV181LB3S1eGjkS9WAdwIFPHL3czQ1jBtHjpd9A/exec";
+
         try {
-            const docFiles = document.querySelectorAll('.doc-file');
-            const studentPhoto = document.getElementById('student_img');
-            
-            if(studentPhoto.files[0]) {
-                const b64 = await toBase64(studentPhoto.files[0]);
-                payload.files.push({
-                    base64: b64.split(',')[1],
-                    type: studentPhoto.files[0].type,
-                    name: "Photo_" + payload.s_name
-                });
-            }
-
-            for (let f of docFiles) {
-                if(f.files[0]) {
-                    const b64 = await toBase64(f.files[0]);
-                    payload.files.push({
-                        base64: b64.split(',')[1],
-                        type: f.files[0].type,
-                        name: f.getAttribute('data-name') + "_" + payload.s_name
-                    });
-                }
-            }
-
-            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz_kqBIICpldYvuhCik02JxY7Ugp-cYV181LB3S1eGjkS9WAdwIFPHL3czQ1jBtHjpd9A/exec";
-
-            // No-cors mode for better compatibility
-            await fetch(SCRIPT_URL, {
+            const response = await fetch(SCRIPT_URL, {
                 method: 'POST',
-                mode: 'no-cors',
-                body: JSON.stringify(payload)
+                body: JSON.stringify(payload),
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8',
+                }
             });
 
-            status.innerText = "ڪاميابي! WhatsApp کلي رهيو آهي...";
+            status.innerText = "ڊيٽا ڪاميابيءَ سان شيٽ ۾ محفوظ ٿي وئي! WhatsApp کلي رهيو آهي...";
             setTimeout(() => sendToWA(payload), 2000);
 
         } catch (e) {
             console.error(e);
-            status.innerText = "اپلوڊ ۾ ڪجهه مسئلو آيو، پر WhatsApp کلي رهيو آهي.";
-            sendToWA(payload);
+            status.innerText = "ڊيٽا موڪلڻ ۾ ڪجهه مسئلو آيو، پر WhatsApp کلي رهيو آهي.";
+            setTimeout(() => sendToWA(payload), 2000);
         }
     }
-
-    const toBase64 = file => new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
-    });
 
     function sendToWA(data) {
         const msg = `*GBELS WASSAN ADMISSION FORM*%0A` +
@@ -248,7 +218,7 @@
                     `ڪلاس: ${data.adm_class}%0A` +
                     `B-Form: ${data.cnic}%0A` +
                     `----------------------------%0A` +
-                    `ڊيٽا ڪلائوڊ تي اپلوڊ ڪئي وئي آهي. ✅`;
+                    `ڊيٽا آن لائن جمع ڪئي وئي آهي. ✅`;
         window.open(`https://wa.me/923008909756?text=${msg}`, '_blank');
         document.getElementById('submitBtn').disabled = false;
         document.getElementById('status').innerText = "فارم جمع ٿي ويو!";
