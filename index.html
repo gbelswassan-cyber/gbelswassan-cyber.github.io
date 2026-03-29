@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://gbelswassan-cyber.github.io/" />
     <title>Government Boys Elementary Lower Secondary School Wassan | Official Web Portal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Noto+Naskh+Arabic:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Noto+Sans+Sindhi:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --ajrak-red: #a52a2a;
@@ -14,13 +16,18 @@
             --white: #ffffff;
             --bg-light: #f4f7f9;
         }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: #333; line-height: 1.8; }
+
+        /* Ticker */
         .ticker-wrapper { background: #ff0000; color: white; padding: 12px 0; overflow: hidden; border-bottom: 3px solid var(--ajrak-gold); }
-        .ticker-text { display: inline-block; white-space: nowrap; animation: ticker 30s linear infinite; direction: rtl; font-family: 'Noto Naskh Arabic', serif; font-size: 1.2rem; }
+        .ticker-text { display: inline-block; white-space: nowrap; animation: ticker 30s linear infinite; direction: rtl; font-family: 'Noto Sans Sindhi', sans-serif; font-size: 1.1rem; }
         @keyframes ticker { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+        /* Header */
         header {
-            background: linear-gradient(rgba(0, 45, 91, 0.80), rgba(0, 45, 91, 0.80)), url('New building.png');
+            background: linear-gradient(rgba(0, 45, 91, 0.85), rgba(0, 45, 91, 0.85)), url('img 2.png');
             background-size: cover; background-position: center; color: white; padding: 90px 20px; text-align: center; border-bottom: 8px solid var(--ajrak-gold);
         }
         .header-logo { width: 130px; border-radius: 50%; border: 4px solid var(--ajrak-gold); background: white; margin-bottom: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
@@ -28,10 +35,11 @@
         .header-map-link { color: var(--ajrak-gold); text-decoration: none; font-size: 1.1rem; display: block; margin-top: 15px; font-weight: 500; }
         .header-map-link:hover { text-decoration: underline; }
         .semis-code { display: inline-block; background: var(--ajrak-gold); color: var(--ajrak-blue); padding: 6px 20px; border-radius: 5px; font-weight: 800; margin-top: 20px; font-size: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+
+        /* Nav */
         nav {
             background: var(--ajrak-blue); padding: 18px 5%; position: sticky; top: 0; z-index: 1000;
             display: flex; justify-content: space-between; align-items: center; box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            flex-wrap: wrap;
         }
         .nav-brand { color: var(--ajrak-gold); font-weight: 800; font-size: 1.2rem; border: 2px solid var(--ajrak-gold); padding: 5px 12px; border-radius: 5px; text-decoration: none; }
         .nav-links { list-style: none; display: flex; gap: 25px; align-items: center; }
@@ -39,53 +47,51 @@
         .nav-links a:hover { color: var(--ajrak-gold); }
         .admission-btn { background: var(--ajrak-red); padding: 10px 22px; border-radius: 50px; border: 2px solid var(--ajrak-gold); animation: pulse 2s infinite; font-weight: bold !important; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; background: none; border: none; padding: 5px; }
-        .hamburger span { display: block; width: 26px; height: 3px; background: var(--ajrak-gold); border-radius: 3px; transition: 0.3s; }
+
+        /* Content */
         .container { max-width: 1150px; margin: 60px auto; padding: 0 25px; }
         .section-card { background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); margin-bottom: 50px; border: 1px solid #eee; }
         .section-title { text-align: center; color: var(--ajrak-blue); margin-bottom: 45px; position: relative; font-weight: 800; text-transform: uppercase; font-size: 1.8rem; letter-spacing: 1px; }
         .section-title::after { content: ''; width: 80px; height: 5px; background: var(--ajrak-red); position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); }
+
+        /* Mission & History Detail */
         .mission-flex { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; margin-bottom: 20px; }
-        .mission-text { flex: 1; background: #f8fbff; padding: 35px; border-radius: 15px; border-right: 8px solid var(--ajrak-blue); direction: rtl; font-family: 'Noto Naskh Arabic', serif; font-size: 1.2rem; line-height: 2.2; box-shadow: inset 0 0 15px rgba(0,0,0,0.02); }
+        .mission-text { flex: 1; background: #f8fbff; padding: 35px; border-radius: 15px; border-right: 8px solid var(--ajrak-blue); direction: rtl; font-family: 'Noto Sans Sindhi', sans-serif; font-size: 1.15rem; box-shadow: inset 0 0 15px rgba(0,0,0,0.02); }
         .mission-img { width: 400px; border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); border: 5px solid white; }
-        .history-content { direction: rtl; font-family: 'Noto Naskh Arabic', serif; text-align: justify; font-size: 1.2rem; line-height: 2.4; }
-        .sindhi { direction: rtl; font-family: 'Noto Naskh Arabic', serif; }
+        .history-content { direction: rtl; font-family: 'Noto Sans Sindhi', sans-serif; text-align: justify; font-size: 1.2rem; line-height: 2.2; }
+
+        /* Table */
         .table-container { overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; min-width: 800px; }
         th { background: var(--ajrak-blue); color: white; padding: 20px; text-align: left; font-size: 1rem; }
         td { padding: 18px; border-bottom: 1px solid #eee; font-size: 1rem; }
         tr:hover { background: #fffde7; }
         .badge { padding: 5px 12px; border-radius: 5px; font-size: 0.9rem; font-weight: bold; border: 1px solid #ddd; }
+
+        /* Boards/Links Section */
         .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-        .link-card {
-            background: #ffffff; padding: 25px; border-radius: 12px; text-align: center;
-            text-decoration: none; color: var(--ajrak-blue); font-weight: 800;
+        .link-card { 
+            background: #ffffff; padding: 25px; border-radius: 12px; text-align: center; 
+            text-decoration: none; color: var(--ajrak-blue); font-weight: 800; 
             border: 2px solid #e9ecef; transition: 0.4s; display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
         .link-card:hover { background: var(--ajrak-red); color: white; border-color: var(--ajrak-gold); transform: translateY(-8px); box-shadow: 0 10px 20px rgba(165, 42, 42, 0.2); }
         .link-card span { font-size: 0.8rem; font-weight: 400; margin-top: 5px; opacity: 0.8; }
+
+        /* Gallery */
         .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
         .gallery-grid img { width: 100%; border-radius: 15px; height: 250px; object-fit: cover; transition: 0.4s; cursor: pointer; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
         .gallery-grid img:hover { transform: scale(1.03); }
+
+        /* Footer */
         footer { background: #000; color: white; padding: 100px 20px 50px; text-align: center; border-top: 8px solid var(--ajrak-red); }
         .footer-name { color: var(--ajrak-gold); font-size: 1.6rem; margin-bottom: 20px; font-weight: 800; text-transform: uppercase; }
         .footer-links a { color: white; text-decoration: none; transition: 0.3s; margin: 0 10px; }
         .footer-links a:hover { color: var(--ajrak-gold); text-decoration: underline; }
         .web-url { color: var(--ajrak-gold); font-size: 1.2rem; font-weight: bold; margin-top: 20px; display: inline-block; }
+
         @media (max-width: 992px) { .mission-img { width: 100%; } }
-        @media (max-width: 768px) {
-            header h1 { font-size: 1.5rem; }
-            .hamburger { display: flex; }
-            .nav-links {
-                display: none; flex-direction: column; width: 100%; gap: 0;
-                background: var(--ajrak-blue); padding: 10px 0 15px; margin-top: 10px;
-            }
-            .nav-links.open { display: flex; }
-            .nav-links li { width: 100%; text-align: center; }
-            .nav-links a { display: block; padding: 12px 20px; font-size: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
-            .nav-links li:last-child a { border-bottom: none; margin-top: 10px; }
-            .admission-btn { display: inline-block; margin: 5px auto; width: auto; }
-        }
+        @media (max-width: 768px) { .nav-links { display: none; } header h1 { font-size: 1.5rem; } }
     </style>
 </head>
 <body>
@@ -105,24 +111,21 @@
 
     <nav>
         <a href="#" class="nav-brand">GBELS WASSAN</a>
-        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-            <span></span><span></span><span></span>
-        </button>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#about" onclick="closeMenu()">Mission</a></li>
-            <li><a href="#history" onclick="closeMenu()">History</a></li>
-            <li><a href="#faculty" onclick="closeMenu()">Faculty</a></li>
-            <li><a href="#gallery" onclick="closeMenu()">Gallery</a></li>
-            <li><a href="#links" onclick="closeMenu()">Boards & Links</a></li>
+        <ul class="nav-links">
+            <li><a href="#about">Mission</a></li>
+            <li><a href="#history">History</a></li>
+            <li><a href="#faculty">Faculty</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#links">Boards & Links</a></li>
             <li><a href="https://gbelswassan-cyber.github.io/admission-portal/index.html" class="admission-btn">Admission 2026</a></li>
         </ul>
     </nav>
 
     <div class="container">
-
+        
         <h2 class="section-title" id="about">Our Mission (اسان جا مقصد)</h2>
         <div class="section-card mission-flex">
-            <img src="img1.png" class="mission-img" alt="School Vision">
+            <img src="img 1.png" class="mission-img" alt="School Vision">
             <div class="mission-text">
                 <p>اسان جو بنيادي مقصد ڳوٺ محمد شريف وسڻ ۽ ان جي آس پاس وارن علائقن جي شاگردن کي اعليٰ ۽ معياري تعليم فراهم ڪرڻ آهي. اسان چاهيون ٿا ته اسان جا شاگرد نه صرف تعليمي طور تي پر اخلاقي طور تي به ملڪ جا بهترين شهري ثابت ٿين.</p>
                 <div style="margin-top:20px;">
@@ -169,4 +172,43 @@
         <h2 class="section-title" id="links">Educational Boards & Portals</h2>
         <div class="section-card links-grid">
             <a href="https://www.sindheducation.gov.pk/" target="_blank" class="link-card">SE&LD Sindh <span>School Education Dept.</span></a>
-            <a href="https://eportal.sindheducation.gov.pk/" target="_blank" class="link-card">E-Transfer Portal <span>Human
+            <a href="https://eportal.sindheducation.gov.pk/" target="_blank" class="link-card">E-Transfer Portal <span>Human Resources Dept.</span></a>
+            <a href="https://apply.sts.net.pk/?ssid=658" target="_blank" class="link-card">STS IBA Sukkur <span>Jobs & Testing Service</span></a>
+            <a href="https://spsc.gov.pk/" target="_blank" class="link-card">SPSC Official <span>Public Service Commission</span></a>
+            <a href="https://stbb.edu.pk/" target="_blank" class="link-card">STBB Books <span>PDF Textbooks Online</span></a>
+            <a href="https://steda.gos.pk/" target="_blank" class="link-card">STEDA Sindh <span>Teacher Development</span></a>
+            <a href="https://bisesba.edu.pk/" target="_blank" class="link-card">BISE SBA <span>Exam & Results Board</span></a>
+            <a href="https://pitesindh.edu.pk/labschool.php" target="_blank" class="link-card">PITE Sindh <span>Training Institute</span></a>
+        </div>
+
+        <h2 class="section-title" id="gallery">School Gallery (تصويرون)</h2>
+        <div class="section-card gallery-grid">
+            <img src="img 1.png" alt="Activity 1">
+            <img src="img 2.png" alt="Activity 2">
+            <img src="img 3.png" alt="Activity 3">
+            <img src="img 4.png" alt="Activity 4">
+            <img src="img 5.png" alt="Activity 5">
+            <img src="img 6.png" alt="Activity 6">
+        </div>
+
+    </div>
+
+    <footer>
+        <h2 class="footer-name">Government Boys Elementary Lower Secondary School Wassan</h2>
+        <div class="footer-links">
+            <p style="margin-bottom:15px;">
+                <a href="https://www.google.com/maps/search/?api=1&query=Muhammad+Sharif+Wassan" target="_blank">📍 Village Muhammad Sharif Wassan, Naushahro Feroze</a>
+            </p>
+            <p>
+                WhatsApp: <a href="https://wa.me/923008909756" target="_blank"><strong>+92 300 8909756</strong></a> | 
+                Email: <a href="mailto:gbelswassan@gmail.com"><strong>gbelswassan@gmail.com</strong></a>
+            </p>
+            <a href="https://gbelswassan-cyber.github.io" class="web-url">gbelswassan-cyber.github.io</a>
+        </div>
+        <div style="margin-top:60px; font-size:0.85rem; opacity:0.6;">
+            © 2026 Government Boys Elementary Lower Secondary School Wassan | Official Portal Development
+        </div>
+    </footer>
+
+</body>
+</html>
