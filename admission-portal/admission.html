@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://gbelswassan-cyber.github.io/admission-portal/" />
     <title>Admission Portal | GBELS WASSAN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #002d5b; --accent: #8b0000; --whatsapp: #25D366; --btn-dark: #333; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f2f5; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; }
+        body { font-family: 'Poppins', 'Segoe UI', Tahoma, sans-serif; background: #f0f2f5; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; }
+        .sindhi { direction: rtl; font-family: 'Noto Naskh Arabic', serif; font-size: 1rem; line-height: 2; }
 
         .selection-menu { background: #eef6ff; padding: 15px; border: 2px dashed var(--primary); border-radius: 12px; margin-bottom: 15px; text-align: center; width: 100%; max-width: 800px; box-sizing: border-box; }
         .btn-choice { padding: 12px 25px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: white; margin: 5px; font-size: 14px; transition: 0.3s; }
@@ -46,13 +48,16 @@
             .no-print { display: none !important; }
             body { padding: 0; background: white; }
             .page-border { border: 2px solid var(--primary); box-shadow: none; width: 100%; height: 100%; margin: 0; padding: 10mm; }
+            input, select { border: none; border-bottom: 1px solid #000; background: transparent; }
+            select option[value=""] { display: none; }
+            input::placeholder { color: transparent; }
         }
     </style>
 </head>
 <body>
 
 <div class="selection-menu no-print">
-    <p style="margin:0 0 10px 0; font-weight:bold; color:var(--primary);">داخلا پورٽل ۾ ڀليڪار (GBELS WASSAN)</p>
+    <p class="sindhi" style="margin:0 0 10px 0; font-weight:bold; color:var(--primary);">داخلا پورٽل ۾ ڀليڪار (GBELS WASSAN)</p>
     <button class="btn-choice btn-manual" onclick="window.print()">Manual Form (PDF ڊائون لوڊ / پرنٽ) 🖨️</button>
     <button class="btn-choice btn-online" onclick="document.getElementById('form-start').scrollIntoView({behavior: 'smooth'});">Online Apply (آن لائن فارم ڀريو) 📲</button>
 </div>
@@ -85,12 +90,12 @@
                 <div class="field"><label>Date of Birth:</label><input type="date" id="dob" required></div>
                 <div class="field">
                     <label>Gender:</label>
-                    <select id="gender"><option>Male</option><option>Female</option></select>
+                    <select id="gender"><option value="">-- Select --</option><option>Male</option><option>Female</option></select>
                 </div>
             </div>
             <div class="row">
-                <div class="field"><label>B-Form / CNIC Number:</label><input type="text" id="cnic" placeholder="45302-XXXXXXX-X" required></div>
-                <div class="field"><label>Religion:</label><input type="text" id="religion" value="Islam"></div>
+                <div class="field"><label>B-Form / CNIC Number:</label><input type="text" id="cnic" required></div>
+                <div class="field"><label>Religion:</label><input type="text" id="religion" value=""></div>
             </div>
         </div>
 
