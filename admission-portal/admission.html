@@ -3,9 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="cLGrBw34bJuSt0ts047IZ32uP57Ti6_TikbvE2ubUUA">
+    
     <link rel="canonical" href="https://gbelswassan-cyber.github.io/admission-portal/" />
     <title>Admission Portal | GBELS WASSAN</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+    <script>eruda.init();</script>
+
     <style>
         :root { --primary: #002d5b; --accent: #8b0000; --whatsapp: #25D366; --btn-dark: #333; }
         body { font-family: 'Poppins', 'Segoe UI', Tahoma, sans-serif; background: #f0f2f5; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; }
@@ -35,14 +43,11 @@
         .sig-line { border-top: 1.2px solid #000; width: 170px; text-align: center; font-size: 11px; font-weight: bold; padding-top: 4px; }
         .btn-submit { background: var(--whatsapp); color: white; padding: 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; width: 100%; margin: 10px 0; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .btn-submit:disabled { background: #ccc; cursor: not-allowed; }
+        
         @media print {
-            @page { size: A4; margin: 0; }
             .no-print { display: none !important; }
             body { padding: 0; background: white; }
             .page-border { border: 2px solid var(--primary); box-shadow: none; width: 100%; height: 100%; margin: 0; padding: 10mm; }
-            input, select { border: none; border-bottom: 1px solid #000; background: transparent; }
-            select option[value=""] { display: none; }
-            input::placeholder { color: transparent; }
         }
     </style>
 </head>
@@ -50,22 +55,23 @@
 
 <div class="selection-menu no-print">
     <p class="sindhi" style="margin:0 0 10px 0; font-weight:bold; color:var(--primary);">داخلا پورٽل ۾ ڀليڪار (GBELS WASSAN)</p>
-    <button class="btn-choice btn-manual" onclick="window.print()">Manual Form (PDF ڊائون لوڊ / پرنٽ) 🖨️</button>
+    <button class="btn-choice btn-manual" onclick="manualDownload()">Manual Form (PDF ڊائون لوڊ / پرنٽ) 🖨️</button>
     <button class="btn-choice btn-online" onclick="document.getElementById('form-start').scrollIntoView({behavior: 'smooth'});">Online Apply (آن لائن فارم ڀريو) 📲</button>
 </div>
 
-<div class="page-border" id="form-start">
+<div class="page-border" id="admission-form-content">
     <div class="header">
         <img src="https://gbelswassan-cyber.github.io/logo.png.png" class="logo" alt="School Logo">
-        <div class="school-info">
+        <div class="school-info" id="form-start">
             <h1>GOVERNMENT BOYS ELEMENTARY LOWER SECONDARY SCHOOL WASSAN</h1>
             <p>Village Muhammad Sharif Wassan, Taluka & District Naushahro Feroze</p>
             <p style="font-size:9px;">SEMIS Code: 416040489 | WhatsApp: +92 300 8909756</p>
             <span class="admission-tag">ADMISSION FORM (Session: 2026-2027)</span>
         </div>
+        
         <div class="photo-box" onclick="document.getElementById('student_img').click()">
             <span id="photo-txt">Passport Size<br>Photo Here</span>
-            <img id="preview" alt="Student Photo">
+            <img id="preview" src="" alt="Student Photo">
             <input type="file" id="student_img" accept="image/*" style="display:none" onchange="showPreview(this)">
         </div>
     </div>
@@ -114,9 +120,9 @@
             </div>
         </div>
 
-        <div class="section">
+        <div class="section no-print">
             <span class="section-label">4. REQUIRED DOCUMENTS (MANDATORY)</span>
-            <div class="doc-section no-print">
+            <div class="doc-section">
                 <div class="field"><label>B-Form Copy:</label><input type="file" class="doc-file" data-name="B-Form"></div>
                 <div class="field"><label>SLC Copy:</label><input type="file" class="doc-file" data-name="SLC"></div>
                 <div class="field"><label>Father CNIC:</label><input type="file" class="doc-file" data-name="Father-CNIC"></div>
@@ -145,12 +151,17 @@
 </div>
 
 <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz8qGLtaN-P4Y7FddjUfzi8CcnOj4yDvmKF4O1_EviS0aj8GcgEAS8vRKrqQQh_HtbH/exec";
+
+    console.log("Portal Initialized. Apps Script URL linked.");
+
     function showPreview(input) {
         if (input.files && input.files[0]) {
             const reader = new FileReader();
             reader.onload = e => {
-                document.getElementById('preview').src = e.target.result;
-                document.getElementById('preview').style.display = 'block';
+                const previewImg = document.getElementById('preview');
+                previewImg.src = e.target.result;
+                previewImg.style.display = 'block';
                 document.getElementById('photo-txt').style.display = 'none';
             };
             reader.readAsDataURL(input.files[0]);
@@ -166,6 +177,18 @@
         });
     }
 
+    function manualDownload() {
+        const element = document.getElementById('admission-form-content');
+        const opt = {
+            margin: [10, 10, 10, 10],
+            filename: 'Blank_Admission_Form.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+        html2pdf().set(opt).from(element).save();
+    }
+
     async function handleUpload() {
         const btn = document.getElementById('submitBtn');
         const status = document.getElementById('status');
@@ -176,45 +199,48 @@
         }
 
         btn.disabled = true;
-        status.innerText = "دستاويز اپلوڊ ٿي رهيا آهن، مهرباني ڪري انتظار ڪريو...";
-
-        const docs = {};
-        
-        const docInputs = document.querySelectorAll('.doc-file');
-        for (const input of docInputs) {
-            if (input.files && input.files[0]) {
-                const name = input.dataset.name;
-                docs[name] = await fileToBase64(input.files[0]);
-            }
-        }
-
-        const photoInput = document.getElementById('student_img');
-        if (photoInput.files && photoInput.files[0]) {
-            docs['Photo'] = await fileToBase64(photoInput.files[0]);
-        }
-
-        const payload = {
-            s_name: document.getElementById('s_name').value,
-            f_name: document.getElementById('f_name').value,
-            phone: document.getElementById('phone').value,
-            caste: document.getElementById('caste').value,
-            dob: document.getElementById('dob').value,
-            gender: document.getElementById('gender').value,
-            cnic: document.getElementById('cnic').value,
-            religion: document.getElementById('religion').value,
-            adm_class: document.getElementById('adm_class').value,
-            prev_school: document.getElementById('prev_school').value,
-            last_class: document.getElementById('last_class').value,
-            grade: document.getElementById('grade').value,
-            occupation: document.getElementById('occupation').value,
-            address: document.getElementById('address').value,
-            docs: docs
-        };
-
-        // توهان جي نئين گوگل اسڪرپٽ لنڪ (gbelswassan@gmail.com واري)
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbCpDo-_NDEAKYmSMmJ9wN5OCaiLMD-wdDLpv6jUHs8ODIkOa0fTPUb-KJyk2I3hDl9/exec";
+        status.style.color = "var(--primary)";
+        status.innerText = "ڊيٽا اپلوڊ ٿي رهي آهي... (مهرباني ڪري انتظار ڪريو)";
+        console.log("Starting Upload Process...");
 
         try {
+            const docs = {};
+            const docInputs = document.querySelectorAll('.doc-file');
+            
+            for (const input of docInputs) {
+                if (input.files && input.files[0]) {
+                    const name = input.dataset.name;
+                    docs[name] = await fileToBase64(input.files[0]);
+                    console.log("File Processed: " + name);
+                }
+            }
+
+            const photoInput = document.getElementById('student_img');
+            if (photoInput.files && photoInput.files[0]) {
+                docs['Photo'] = await fileToBase64(photoInput.files[0]);
+                console.log("Photo Processed.");
+            }
+
+            const payload = {
+                s_name: document.getElementById('s_name').value,
+                f_name: document.getElementById('f_name').value,
+                phone: document.getElementById('phone').value,
+                caste: document.getElementById('caste').value,
+                dob: document.getElementById('dob').value,
+                gender: document.getElementById('gender').value,
+                cnic: document.getElementById('cnic').value,
+                religion: document.getElementById('religion').value,
+                adm_class: document.getElementById('adm_class').value,
+                prev_school: document.getElementById('prev_school').value,
+                last_class: document.getElementById('last_class').value,
+                grade: document.getElementById('grade').value,
+                occupation: document.getElementById('occupation').value,
+                address: document.getElementById('address').value,
+                docs: docs
+            };
+
+            console.log("Sending Data to Google Sheets...");
+            
             await fetch(SCRIPT_URL, {
                 method: 'POST',
                 body: JSON.stringify(payload),
@@ -222,29 +248,53 @@
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' }
             });
 
-            status.innerText = "ڊيٽا ۽ دستاويز ڪاميابيءَ سان محفوظ ٿي ويا! WhatsApp کلي رهيو آهي...";
-            setTimeout(() => sendToWA(payload), 2000);
+            console.log("Server Request Sent.");
+            status.innerText = "ڊيٽا محفوظ ٿي وئي! PDF تيار ٿي رهي آهي...";
+            downloadPDF(payload);
 
         } catch (e) {
-            console.error(e);
-            status.innerText = "ڊيٽا موڪلڻ ۾ ڪجهه مسئلو آيو، پر WhatsApp کلي رهيو آهي.";
-            setTimeout(() => sendToWA(payload), 2000);
+            console.error("Submission Error Details:", e);
+            status.style.color = "red";
+            status.innerText = "Error: " + e.message;
+            setTimeout(() => {
+                downloadPDF({s_name: document.getElementById('s_name').value || "Student"});
+            }, 2000);
         }
     }
 
+    function downloadPDF(data) {
+        const element = document.getElementById('admission-form-content');
+        const opt = {
+            margin: [10, 10, 10, 10],
+            filename: (data.s_name || 'Student') + '_Admission_Form.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        html2pdf().set(opt).from(element).save().then(() => {
+            console.log("PDF Downloaded.");
+            sendToWA(data);
+        });
+    }
+
     function sendToWA(data) {
-        const msg = `*GBELS WASSAN ADMISSION FORM*%0A` +
-                    `----------------------------%0A` +
-                    `شاگرد جو نالو: ${data.s_name}%0A` +
-                    `پيءُ جو نالو: ${data.f_name}%0A` +
-                    `ڪلاس: ${data.adm_class}%0A` +
-                    `B-Form: ${data.cnic}%0A` +
-                    `----------------------------%0A` +
-                    `ڊيٽا آن لائن جمع ڪئي وئي آهي. ✅`;
+        const msg = encodeURIComponent(
+            "*GBELS WASSAN - NEW ADMISSION FORM*\n" +
+            "----------------------------\n" +
+            "Student Name: " + (data.s_name || "N/A") + "\n" +
+            "Father's Name: " + (data.f_name || "N/A") + "\n" +
+            "Admission Class: " + (data.adm_class || "N/A") + "\n" +
+            "Contact No: " + (data.phone || "N/A") + "\n" +
+            "----------------------------\n" +
+            "Status: Data & Documents submitted online. ✅"
+        );
         window.open(`https://wa.me/923008909756?text=${msg}`, '_blank');
         document.getElementById('submitBtn').disabled = false;
-        document.getElementById('status').innerText = "فارم جمع ٿي ويو!";
+        document.getElementById('status').style.color = "green";
+        document.getElementById('status').innerText = "فارم ڪاميابي سان جمع ٿي ويو!";
     }
 </script>
+
 </body>
 </html>
