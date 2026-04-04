@@ -8,57 +8,60 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #002d5b; --accent: #8b0000; --whatsapp: #25D366; --btn-dark: #333; }
-        body { font-family: 'Poppins', 'Segoe UI', Tahoma, sans-serif; background: #f0f2f5; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; }
-        .sindhi { direction: rtl; font-family: 'Noto Naskh Arabic', serif; font-size: 1rem; line-height: 2; }
-        .selection-menu { background: #eef6ff; padding: 15px; border: 2px dashed var(--primary); border-radius: 12px; margin-bottom: 15px; text-align: center; width: 100%; max-width: 800px; box-sizing: border-box; }
-        .btn-choice { padding: 12px 25px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: white; margin: 5px; font-size: 14px; transition: 0.3s; }
+        body { font-family: 'Poppins', 'Segoe UI', Tahoma, sans-serif; background: #f0f2f5; margin: 0; padding: 5px; display: flex; flex-direction: column; align-items: center; }
+        .sindhi { direction: rtl; font-family: 'Noto Naskh Arabic', serif; font-size: 0.9rem; line-height: 1.6; }
+        .selection-menu { background: #eef6ff; padding: 10px; border: 2px dashed var(--primary); border-radius: 12px; margin-bottom: 10px; text-align: center; width: 100%; max-width: 800px; box-sizing: border-box; }
+        .btn-choice { padding: 10px 20px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: white; margin: 5px; font-size: 13px; transition: 0.3s; }
         .btn-manual { background: var(--btn-dark); }
         .btn-online { background: var(--primary); }
-        .page-border { background: white; width: 210mm; min-height: 297mm; padding: 10mm; border: 3px solid var(--primary); box-shadow: 0 0 20px rgba(0,0,0,0.2); position: relative; box-sizing: border-box; }
+        
+        /* A4 Single Page Optimization */
+        .page-border { background: white; width: 210mm; height: 296mm; padding: 8mm; border: 2px solid var(--primary); box-shadow: 0 0 20px rgba(0,0,0,0.2); position: relative; box-sizing: border-box; overflow: hidden; }
+        
+        .header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1.5px solid #000; padding-bottom: 5px; margin-bottom: 8px; }
+        .logo { width: 70px; height: 70px; border-radius: 50%; }
+        .school-info { text-align: center; flex: 1; padding: 0 5px; }
+        .school-info h1 { margin: 0; color: var(--primary); font-size: 15px; text-transform: uppercase; font-weight: 800; }
+        .school-info p { margin: 1px 0; font-size: 9px; font-weight: 600; color: #333; }
+        .admission-tag { font-size: 11px; color: var(--accent); font-weight: bold; border: 1.2px solid #000; padding: 2px 12px; display: inline-block; margin-top: 3px; border-radius: 4px; }
+        
+        .photo-box { width: 80px; height: 95px; border: 1.5px dashed #555; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 9px; background: #fdfdfd; cursor: pointer; overflow: hidden; }
+        .photo-box img { width: 100%; height: 100%; object-fit: cover; display: none; }
+
+        .section { border: 1px solid #000; padding: 10px 8px 5px 8px; border-radius: 4px; margin-bottom: 8px; position: relative; }
+        .section-label { position: absolute; top: -9px; left: 10px; background: white; padding: 0 5px; font-weight: 800; font-size: 10px; color: var(--accent); }
+        
+        .row { display: flex; gap: 10px; margin-bottom: 6px; flex-wrap: wrap; }
+        .field { flex: 1; display: flex; flex-direction: column; min-width: 120px; }
+        label { font-weight: bold; font-size: 10px; margin-bottom: 2px; color: #222; }
+        input, select { padding: 6px; border: 1px solid #999; border-radius: 3px; font-size: 12px; background: #fff; }
+        
+        .office-section { border: 1.2px solid var(--primary); padding: 8px; background: #f9f9f9; border-radius: 5px; margin-top: 5px; }
+        .office-title { text-align: center; font-weight: 900; text-decoration: underline; margin-bottom: 5px; font-size: 11px; }
+        .signature-row { display: flex; justify-content: space-between; margin-top: 20px; }
+        .sig-line { border-top: 1px solid #000; width: 150px; text-align: center; font-size: 10px; font-weight: bold; padding-top: 2px; }
+        
+        .btn-submit { background: var(--whatsapp); color: white; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 15px; width: 100%; margin: 5px 0; }
+
+        @media print {
+            body { padding: 0; background: white; }
+            .no-print { display: none !important; }
+            .page-border { border: 1px solid var(--primary); box-shadow: none; width: 100%; height: 100%; margin: 0; padding: 8mm; }
+            input, select { border: none; border-bottom: 1px solid #ccc; }
+        }
         
         @media (max-width: 768px) {
-            .page-border { width: 100%; min-height: auto; padding: 5mm; border-width: 2px; }
-            .header { flex-direction: column; text-align: center; }
-            .logo { margin-bottom: 10px; }
+            .page-border { width: 100%; height: auto; padding: 5mm; }
             .row { flex-direction: column; gap: 5px; }
-            .signature-row { flex-direction: column; gap: 20px; align-items: center; }
-            .sig-line { width: 100%; }
-        }
-
-        .header { display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 15px; }
-        .logo { width: 85px; height: 85px; border-radius: 50%; border: 1px solid #ddd; }
-        .school-info { text-align: center; flex: 1; padding: 0 10px; }
-        .school-info h1 { margin: 0; color: var(--primary); font-size: 17px; text-transform: uppercase; font-weight: 800; }
-        .school-info p { margin: 2px 0; font-size: 10px; font-weight: 600; color: #333; }
-        .admission-tag { font-size: 12px; color: var(--accent); font-weight: bold; border: 1.5px solid #000; padding: 3px 15px; display: inline-block; margin-top: 5px; border-radius: 4px; }
-        .photo-box { width: 90px; height: 110px; border: 2px dashed #555; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 10px; background: #fdfdfd; font-weight: bold; overflow: hidden; position: relative; cursor: pointer; }
-        .photo-box img { width: 100%; height: 100%; object-fit: cover; display: none; }
-        .section { border: 1.2px solid #000; padding: 15px 10px 8px 10px; border-radius: 5px; margin-bottom: 15px; position: relative; }
-        .section-label { position: absolute; top: -10px; left: 12px; background: white; padding: 0 8px; font-weight: 800; font-size: 11px; color: var(--accent); text-transform: uppercase; }
-        .row { display: flex; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
-        .field { flex: 1; display: flex; flex-direction: column; min-width: 150px; }
-        label { font-weight: bold; font-size: 11px; margin-bottom: 3px; color: #222; }
-        input, select { padding: 8px; border: 1px solid #999; border-radius: 4px; font-size: 13px; background: #fff; }
-        .office-section { border: 1.5px solid var(--primary); padding: 12px; background: #f9f9f9; border-radius: 6px; margin-top: 15px; }
-        .office-title { text-align: center; font-weight: 900; text-decoration: underline; margin-bottom: 10px; font-size: 13px; }
-        .signature-row { display: flex; justify-content: space-between; margin-top: 30px; }
-        .sig-line { border-top: 1.2px solid #000; width: 170px; text-align: center; font-size: 11px; font-weight: bold; padding-top: 4px; }
-        .btn-submit { background: var(--whatsapp); color: white; padding: 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; width: 100%; margin: 10px 0; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .btn-submit:disabled { background: #ccc; cursor: not-allowed; }
-        
-        @media print {
-            .no-print { display: none !important; }
-            body { padding: 0; background: white; }
-            .page-border { border: 2px solid var(--primary); box-shadow: none; width: 100%; height: 100%; margin: 0; padding: 10mm; }
         }
     </style>
 </head>
 <body>
 
 <div class="selection-menu no-print">
-    <p class="sindhi" style="margin:0 0 10px 0; font-weight:bold; color:var(--primary);">داخلا پورٽل ۾ ڀليڪار (GBELS WASSAN)</p>
-    <button class="btn-choice btn-manual" onclick="window.print()">Manual Form (PDF ڊائون لوڊ / پرنٽ) 🖨️</button>
-    <button class="btn-choice btn-online" onclick="document.getElementById('form-start').scrollIntoView({behavior: 'smooth'});">Online Apply (آن لائن فارم ڀريو) 📲</button>
+    <p class="sindhi" style="margin:0 0 5px 0; font-weight:bold; color:var(--primary);">فارم کي هڪ صفحي تي رکڻ لاءِ سيٽنگ ڪئي وئي آهي</p>
+    <button class="btn-choice btn-manual" onclick="window.print()">Manual Form (Print/PDF) 🖨️</button>
+    <button class="btn-choice btn-online" onclick="document.getElementById('form-start').scrollIntoView({behavior: 'smooth'});">Online Apply 📲</button>
 </div>
 
 <div class="page-border" id="form-start">
@@ -67,11 +70,11 @@
         <div class="school-info">
             <h1>GOVERNMENT BOYS ELEMENTARY LOWER SECONDARY SCHOOL WASSAN</h1>
             <p>Village Muhammad Sharif Wassan, Taluka & District Naushahro Feroze</p>
-            <p style="font-size:9px;">SEMIS Code: 416040489 | WhatsApp: +92 300 8909756</p>
-            <span class="admission-tag">ADMISSION FORM (Session: 2026-2027)</span>
+            <p style="font-size:8px;">SEMIS Code: 416040489 | WhatsApp: +92 300 8909756</p>
+            <span class="admission-tag">ADMISSION FORM (2026-2027)</span>
         </div>
         <div class="photo-box" onclick="document.getElementById('student_img').click()">
-            <span id="photo-txt">Passport Size<br>Photo Here</span>
+            <span id="photo-txt">Photo Here</span>
             <img id="preview" alt="Student Photo">
             <input type="file" id="student_img" accept="image/*" style="display:none" onchange="showPreview(this)">
         </div>
@@ -81,11 +84,11 @@
         <div class="section">
             <span class="section-label">1. STUDENT INFORMATION (شاگرد جي معلومات)</span>
             <div class="row">
-                <div class="field"><label>Student Full Name:</label><input type="text" id="s_name" required></div>
+                <div class="field"><label>Full Name:</label><input type="text" id="s_name" required></div>
                 <div class="field"><label>Father's Name:</label><input type="text" id="f_name" required></div>
             </div>
             <div class="row">
-                <div class="field"><label>Surname / Caste:</label><input type="text" id="caste" required></div>
+                <div class="field"><label>Caste:</label><input type="text" id="caste" required></div>
                 <div class="field"><label>Date of Birth:</label><input type="date" id="dob" required></div>
                 <div class="field">
                     <label>Gender:</label>
@@ -93,54 +96,55 @@
                 </div>
             </div>
             <div class="row">
-                <div class="field"><label>B-Form / CNIC Number:</label><input type="text" id="cnic" required></div>
+                <div class="field"><label>B-Form / CNIC:</label><input type="text" id="cnic" required></div>
                 <div class="field"><label>Religion:</label><input type="text" id="religion"></div>
             </div>
         </div>
 
         <div class="section">
-            <span class="section-label">2. ACADEMIC & CONTACT DETAILS</span>
+            <span class="section-label">2. ACADEMIC DETAILS</span>
             <div class="row">
-                <div class="field"><label>Admission Required in Class:</label><input type="text" id="adm_class" required></div>
-                <div class="field"><label>Previous School Name:</label><input type="text" id="prev_school"></div>
+                <div class="field"><label>Admission in Class:</label><input type="text" id="adm_class" required></div>
+                <div class="field"><label>Previous School:</label><input type="text" id="prev_school"></div>
             </div>
         </div>
 
         <div class="section">
-            <span class="section-label">3. PARENT / GUARDIAN DETAILS</span>
+            <span class="section-label">3. GUARDIAN DETAILS</span>
             <div class="row">
-                <div class="field"><label>Father Occupation:</label><input type="text" id="occupation"></div>
-                <div class="field"><label>Mobile / WhatsApp No:</label><input type="text" id="phone" required></div>
+                <div class="field"><label>Occupation:</label><input type="text" id="occupation"></div>
+                <div class="field"><label>WhatsApp No:</label><input type="text" id="phone" required></div>
             </div>
             <div class="row">
-                <div class="field"><label>Residential Address:</label><input type="text" id="address" required></div>
+                <div class="field"><label>Address:</label><input type="text" id="address" required></div>
             </div>
         </div>
 
         <div class="section">
-            <span class="section-label">4. REQUIRED DOCUMENTS (MANDATORY)</span>
-            <div class="doc-section no-print">
-                <div class="field"><label>B-Form Copy:</label><input type="file" class="doc-file" data-name="B-Form"></div>
-                <div class="field"><label>SLC Copy:</label><input type="file" class="doc-file" data-name="SLC"></div>
+            <span class="section-label">4. DOCUMENTS</span>
+            <div class="row no-print">
+                <div class="field"><label>B-Form:</label><input type="file" class="doc-file" data-name="B-Form"></div>
+                <div class="field"><label>SLC:</label><input type="file" class="doc-file" data-name="SLC"></div>
                 <div class="field"><label>Father CNIC:</label><input type="file" class="doc-file" data-name="Father-CNIC"></div>
             </div>
+            <p style="font-size:9px; margin:0; padding:0;">Required: B-Form Copy, SLC Copy, Father's CNIC Copy.</p>
         </div>
 
         <div class="no-print">
-            <button type="button" id="submitBtn" class="btn-submit" onclick="handleUpload()">Apply Online & Send via WhatsApp ✅</button>
-            <p id="status" style="text-align:center; font-size:13px; color:var(--primary); font-weight:bold; min-height: 20px; padding: 5px;"></p>
+            <button type="button" id="submitBtn" class="btn-submit" onclick="handleUpload()">Apply & Send WhatsApp ✅</button>
+            <p id="status" style="text-align:center; font-size:12px; font-weight:bold;"></p>
         </div>
 
         <div class="office-section">
-            <div class="office-title">FOR OFFICE USE ONLY (صرف آفيس جي استعمال لاءِ)</div>
+            <div class="office-title">FOR OFFICE USE ONLY</div>
             <div class="row">
                 <div class="field"><label>G.R Number:</label><input type="text" readonly></div>
                 <div class="field"><label>Admission Date:</label><input type="text" readonly></div>
             </div>
             <div class="signature-row">
-                <div class="sig-line">Class Teacher Signature</div>
-                <div class="sig-line">Admission Incharge</div>
-                <div class="sig-line">Head Master Stamp</div>
+                <div class="sig-line">Teacher Sign</div>
+                <div class="sig-line">Incharge Sign</div>
+                <div class="sig-line">H.M Stamp</div>
             </div>
         </div>
     </form>
@@ -159,95 +163,48 @@
         }
     }
 
-    function fileToBase64(file) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result.split(',')[1]);
-            reader.onerror = error => reject(error);
-        });
-    }
-
     async function handleUpload() {
         const btn = document.getElementById('submitBtn');
         const status = document.getElementById('status');
-        
         const sName = document.getElementById('s_name').value;
         const cnic = document.getElementById('cnic').value;
 
         if(!sName || !cnic) {
-            alert("مهرباني ڪري شاگرد جو نالو ۽ B-Form نمبر لکو!");
+            alert("Please fill name and CNIC!");
             return;
         }
 
         try {
             btn.disabled = true;
-            status.style.color = "var(--primary)";
-            status.innerText = "فائيل اپلوڊ ٿي رهيا آهن، مهرباني ڪري انتظار ڪريو...";
-
-            const docs = {};
-            const docInputs = document.querySelectorAll('.doc-file');
+            status.innerText = "پروسيسنگ...";
             
-            for (const input of docInputs) {
-                if (input.files && input.files[0]) {
-                    const name = input.dataset.name;
-                    docs[name] = await fileToBase64(input.files[0]);
-                }
-            }
-
-            const photoInput = document.getElementById('student_img');
-            if (photoInput.files && photoInput.files[0]) {
-                docs['Photo'] = await fileToBase64(photoInput.files[0]);
-            }
+            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz8qGLtaN-P4Y7FddjUfzi8CcnOj4yDvmKF4O1_EviS0aj8GcgEAS8vRKrqQQh_HtbH/exec";
 
             const payload = {
                 s_name: sName,
                 f_name: document.getElementById('f_name').value,
                 phone: document.getElementById('phone').value,
-                caste: document.getElementById('caste').value,
-                dob: document.getElementById('dob').value,
-                gender: document.getElementById('gender').value,
                 cnic: cnic,
-                religion: document.getElementById('religion').value,
-                adm_class: document.getElementById('adm_class').value,
-                address: document.getElementById('address').value,
-                docs: docs
+                adm_class: document.getElementById('adm_class').value
             };
-
-            // New Script URL Updated
-            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz8qGLtaN-P4Y7FddjUfzi8CcnOj4yDvmKF4O1_EviS0aj8GcgEAS8vRKrqQQh_HtbH/exec";
 
             await fetch(SCRIPT_URL, {
                 method: 'POST',
                 body: JSON.stringify(payload),
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                mode: 'no-cors'
             });
 
-            status.innerText = "ڊيٽا ڪاميابيءَ سان محفوظ ٿي وئي! WhatsApp کلي رهيو آهي...";
-            setTimeout(() => sendToWA(payload), 1500);
+            status.innerText = "موڪليو ويو!";
+            setTimeout(() => {
+                const msg = `*ADMISSION FORM*%0AName: ${sName}%0AFather: ${payload.f_name}%0AClass: ${payload.adm_class}%0ACNIC: ${cnic}`;
+                window.open(`https://wa.me/923008909756?text=${msg}`, '_blank');
+                btn.disabled = false;
+            }, 1000);
 
-        } catch (error) {
-            console.error("Error:", error);
-            status.style.color = "red";
-            status.innerText = "ڪو مسئلو آيو آهي، پر WhatsApp کلي رهيو آهي.";
-            setTimeout(() => sendToWA({s_name: sName, f_name: document.getElementById('f_name').value, cnic: cnic, adm_class: document.getElementById('adm_class').value}), 2000);
+        } catch (e) {
+            alert("Error sending data!");
+            btn.disabled = false;
         }
-    }
-
-    function sendToWA(data) {
-        const msg = `*GBELS WASSAN ADMISSION FORM*%0A` +
-                    `----------------------------%0A` +
-                    `شاگرد جو نالو: ${data.s_name}%0A` +
-                    `پيءُ جو نالو: ${data.f_name || 'N/A'}%0A` +
-                    `ڪلاس: ${data.adm_class || 'N/A'}%0A` +
-                    `B-Form: ${data.cnic}%0A` +
-                    `----------------------------%0A` +
-                    `ڊيٽا آن لائن جمع ڪئي وئي آهي. ✅`;
-        
-        window.open(`https://wa.me/923008909756?text=${msg}`, '_blank');
-        document.getElementById('submitBtn').disabled = false;
-        document.getElementById('status').innerText = "فارم جمع ٿي ويو!";
     }
 </script>
 
