@@ -3,14 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="cLGrBw34bJuSt0ts047IZ32uP57Ti6_TikbvE2ubUUA">
-    
     <link rel="canonical" href="https://gbelswassan-cyber.github.io/admission-portal/" />
     <title>Admission Portal | GBELS WASSAN</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
     <style>
         :root { --primary: #002d5b; --accent: #8b0000; --whatsapp: #25D366; --btn-dark: #333; }
         body { font-family: 'Poppins', 'Segoe UI', Tahoma, sans-serif; background: #f0f2f5; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; }
@@ -40,7 +35,6 @@
         .sig-line { border-top: 1.2px solid #000; width: 170px; text-align: center; font-size: 11px; font-weight: bold; padding-top: 4px; }
         .btn-submit { background: var(--whatsapp); color: white; padding: 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; width: 100%; margin: 10px 0; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .btn-submit:disabled { background: #ccc; cursor: not-allowed; }
-        
         @media print {
             @page { size: A4; margin: 0; }
             .no-print { display: none !important; }
@@ -56,14 +50,14 @@
 
 <div class="selection-menu no-print">
     <p class="sindhi" style="margin:0 0 10px 0; font-weight:bold; color:var(--primary);">داخلا پورٽل ۾ ڀليڪار (GBELS WASSAN)</p>
-    <button class="btn-choice btn-manual" onclick="manualDownload()">Manual Form (PDF ڊائون لوڊ / پرنٽ) 🖨️</button>
+    <button class="btn-choice btn-manual" onclick="window.print()">Manual Form (PDF ڊائون لوڊ / پرنٽ) 🖨️</button>
     <button class="btn-choice btn-online" onclick="document.getElementById('form-start').scrollIntoView({behavior: 'smooth'});">Online Apply (آن لائن فارم ڀريو) 📲</button>
 </div>
 
-<div class="page-border" id="admission-form-content">
+<div class="page-border" id="form-start">
     <div class="header">
         <img src="https://gbelswassan-cyber.github.io/logo.png.png" class="logo" alt="School Logo">
-        <div class="school-info" id="form-start">
+        <div class="school-info">
             <h1>GOVERNMENT BOYS ELEMENTARY LOWER SECONDARY SCHOOL WASSAN</h1>
             <p>Village Muhammad Sharif Wassan, Taluka & District Naushahro Feroze</p>
             <p style="font-size:9px;">SEMIS Code: 416040489 | WhatsApp: +92 300 8909756</p>
@@ -172,18 +166,6 @@
         });
     }
 
-    function manualDownload() {
-        const element = document.getElementById('admission-form-content');
-        const opt = {
-            margin:       [10, 10, 10, 10],
-            filename:     'Blank_Admission_Form.pdf',
-            image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2, useCORS: true },
-            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-        };
-        html2pdf().set(opt).from(element).save();
-    }
-
     async function handleUpload() {
         const btn = document.getElementById('submitBtn');
         const status = document.getElementById('status');
@@ -194,9 +176,10 @@
         }
 
         btn.disabled = true;
-        status.innerText = "Processing & Uploading documents, please wait...";
+        status.innerText = "دستاويز اپلوڊ ٿي رهيا آهن، مهرباني ڪري انتظار ڪريو...";
 
         const docs = {};
+        
         const docInputs = document.querySelectorAll('.doc-file');
         for (const input of docInputs) {
             if (input.files && input.files[0]) {
@@ -228,8 +211,8 @@
             docs: docs
         };
 
-        // Your Authorized Script URL
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxoI6avpwzh3O3vyNlfnyCCHKwRWBx4IEDO6nEVMamd_uzfgbETHtmM5rDbYZpn82TL/exec";
+        // توهان جي نئين گوگل اسڪرپٽ لنڪ (gbelswassan@gmail.com واري)
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbCpDo-_NDEAKYmSMmJ9wN5OCaiLMD-wdDLpv6jUHs8ODIkOa0fTPUb-KJyk2I3hDl9/exec";
 
         try {
             await fetch(SCRIPT_URL, {
@@ -239,47 +222,28 @@
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' }
             });
 
-            status.innerText = "Data Saved! Downloading Form & Opening WhatsApp...";
-            downloadPDF(payload);
+            status.innerText = "ڊيٽا ۽ دستاويز ڪاميابيءَ سان محفوظ ٿي ويا! WhatsApp کلي رهيو آهي...";
+            setTimeout(() => sendToWA(payload), 2000);
 
         } catch (e) {
             console.error(e);
-            status.innerText = "Error saving data, but opening WhatsApp...";
-            downloadPDF(payload);
+            status.innerText = "ڊيٽا موڪلڻ ۾ ڪجهه مسئلو آيو، پر WhatsApp کلي رهيو آهي.";
+            setTimeout(() => sendToWA(payload), 2000);
         }
     }
 
-    function downloadPDF(data) {
-        const element = document.getElementById('admission-form-content');
-        const opt = {
-            margin:       [10, 10, 10, 10],
-            filename:     data.s_name + '_Admission_Form.pdf',
-            image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2, useCORS: true },
-            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-        };
-
-        html2pdf().set(opt).from(element).save().then(() => {
-            sendToWA(data);
-        });
-    }
-
     function sendToWA(data) {
-        const msg = encodeURIComponent(
-            "*GBELS WASSAN - NEW ADMISSION FORM*\n" +
-            "----------------------------\n" +
-            "Student Name: " + data.s_name + "\n" +
-            "Father's Name: " + data.f_name + "\n" +
-            "Admission Class: " + data.adm_class + "\n" +
-            "B-Form/CNIC: " + data.cnic + "\n" +
-            "Contact No: " + data.phone + "\n" +
-            "----------------------------\n" +
-            "Status: Data & Documents submitted online. ✅"
-        );
-        
+        const msg = `*GBELS WASSAN ADMISSION FORM*%0A` +
+                    `----------------------------%0A` +
+                    `شاگرد جو نالو: ${data.s_name}%0A` +
+                    `پيءُ جو نالو: ${data.f_name}%0A` +
+                    `ڪلاس: ${data.adm_class}%0A` +
+                    `B-Form: ${data.cnic}%0A` +
+                    `----------------------------%0A` +
+                    `ڊيٽا آن لائن جمع ڪئي وئي آهي. ✅`;
         window.open(`https://wa.me/923008909756?text=${msg}`, '_blank');
         document.getElementById('submitBtn').disabled = false;
-        document.getElementById('status').innerText = "Form Submitted & PDF Downloaded!";
+        document.getElementById('status').innerText = "فارم جمع ٿي ويو!";
     }
 </script>
 </body>
