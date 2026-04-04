@@ -14,7 +14,6 @@
     <style>
         :root { --primary: #002d5b; --accent: #8b0000; --whatsapp: #25D366; --btn-dark: #333; }
         
-        /* 06. Auto-Scaling & A4 Layout */
         * { box-sizing: border-box; -webkit-print-color-adjust: exact; }
         body { font-family: 'Poppins', 'Segoe UI', Tahoma, sans-serif; background: #f0f2f5; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; }
         
@@ -26,7 +25,6 @@
         .btn-manual { background: var(--btn-dark); }
         .btn-online { background: var(--primary); }
 
-        /* 05. A4 Page Border */
         .page-border { 
             background: white; 
             width: 210mm; 
@@ -60,6 +58,11 @@
         label { font-weight: bold; font-size: 11px; margin-bottom: 3px; color: #222; }
         input, select { padding: 8px; border: 1px solid #999; border-radius: 4px; font-size: 13px; background: #fff; }
 
+        /* Documents Checklist Styling */
+        .doc-item { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; width: 48%; }
+        .check-box { width: 18px; height: 18px; border: 1.5px solid #000; display: inline-block; border-radius: 3px; }
+        .doc-text { font-size: 11px; font-weight: bold; }
+
         .office-section { border: 1.5px solid var(--primary); padding: 12px; background: #f9f9f9; border-radius: 6px; margin-top: 15px; }
         .office-title { text-align: center; font-weight: 900; text-decoration: underline; margin-bottom: 10px; font-size: 13px; }
         
@@ -67,21 +70,19 @@
         .sig-line { border-top: 1.2px solid #000; width: 170px; text-align: center; font-size: 11px; font-weight: bold; padding-top: 4px; }
 
         .btn-submit { background: var(--whatsapp); color: white; padding: 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; width: 100%; margin: 10px 0; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .btn-submit:disabled { background: #ccc; cursor: not-allowed; }
 
-        /* 07. Print Settings - Hide Buttons */
         @media print {
             @page { size: A4; margin: 0; }
-            .no-print, .selection-menu, eruda-container { display: none !important; }
+            .no-print, .selection-menu, eruda-container, .upload-input { display: none !important; }
             body { padding: 0; background: white; }
             .page-border { border: 2px solid var(--primary); box-shadow: none; width: 100%; height: 100%; margin: 0; padding: 10mm; }
             input, select { border: none; border-bottom: 1px solid #000; background: transparent; }
-            input::placeholder { color: transparent; }
+            .doc-section { display: flex !important; flex-wrap: wrap; }
         }
 
-        /* Responsive scaling for mobile */
         @media (max-width: 800px) {
             .page-border { width: 95vw; height: auto; min-height: 297mm; padding: 5mm; }
+            .doc-item { width: 100%; }
         }
     </style>
 </head>
@@ -155,11 +156,18 @@
 
         <div class="section">
             <span class="section-label">4. REQUIRED DOCUMENTS (MANDATORY)</span>
-            <div class="doc-section no-print">
-                <div class="field"><label>B-Form Copy:</label><input type="file" class="doc-file" data-name="B-Form"></div>
-                <div class="field"><label>SLC Copy:</label><input type="file" class="doc-file" data-name="SLC"></div>
-                <div class="field"><label>Father CNIC:</label><input type="file" class="doc-file" data-name="Father-CNIC"></div>
-                <div class="field"><label>Result Card:</label><input type="file" class="doc-file" data-name="Result-Card"></div>
+            <div class="row doc-section" style="margin-top:5px;">
+                <div class="doc-item"><div class="check-box"></div> <span class="doc-text">Copy of B-Form (شاگرد جو بي فارم)</span></div>
+                <div class="doc-item"><div class="check-box"></div> <span class="doc-text">Father's CNIC Copy (پيءُ جي شناختي ڪارڊ ڪاپي)</span></div>
+                <div class="doc-item"><div class="check-box"></div> <span class="doc-text">School Leaving Certificate (SLC)</span></div>
+                <div class="doc-item"><div class="check-box"></div> <span class="doc-text">Last Class Result Card</span></div>
+            </div>
+            <div class="no-print upload-input" style="margin-top:10px; border-top:1px dashed #ccc; padding-top:10px;">
+                <label style="color:var(--accent);">آن لائن اپلوڊ لاءِ هتي فائلون چونڊيو:</label>
+                <div class="row">
+                   <div class="field"><input type="file" class="doc-file" data-name="B-Form"></div>
+                   <div class="field"><input type="file" class="doc-file" data-name="SLC"></div>
+                </div>
             </div>
         </div>
 
@@ -184,7 +192,6 @@
 </div>
 
 <script>
-    // 01. Web App URL (Corrected as per your instruction)
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz8qGLtaN-P4Y7FddjUfzi8CcnOj4yDvmKF4O1_EviS0aj8GcgEAS8vRKrqQQh_HtbH/exec";
 
     function showPreview(input) {
@@ -208,34 +215,27 @@
         });
     }
 
-    // 04. Error Handling & Submission
     async function handleUpload() {
         const btn = document.getElementById('submitBtn');
         const status = document.getElementById('status');
-
         if(!document.getElementById('s_name').value || !document.getElementById('cnic').value) {
             alert("مهرباني ڪري شاگرد جو نالو ۽ B-Form نمبر لکو!");
             return;
         }
-
         btn.disabled = true;
         status.innerText = "ڊيٽا موڪلي پئي وڃي، مهرباني ڪري انتظار ڪريو...";
-
         try {
             const docs = {};
             const docInputs = document.querySelectorAll('.doc-file');
             for (const input of docInputs) {
                 if (input.files && input.files[0]) {
-                    const name = input.dataset.name;
-                    docs[name] = await fileToBase64(input.files[0]);
+                    docs[input.dataset.name] = await fileToBase64(input.files[0]);
                 }
             }
-
             const photoInput = document.getElementById('student_img');
             if (photoInput.files && photoInput.files[0]) {
                 docs['Photo'] = await fileToBase64(photoInput.files[0]);
             }
-
             const payload = {
                 s_name: document.getElementById('s_name').value,
                 f_name: document.getElementById('f_name').value,
@@ -253,37 +253,18 @@
                 address: document.getElementById('address').value,
                 docs: docs
             };
-
-            // Post to Google Sheet & Drive
-            await fetch(SCRIPT_URL, {
-                method: 'POST',
-                body: JSON.stringify(payload),
-                mode: 'no-cors'
-            });
-
+            await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload), mode: 'no-cors' });
             status.innerText = "ڊيٽا محفوظ ٿي وئي! PDF ڊائون لوڊ ٿي رهي آهي...";
-            
-            // 09. Auto PDF Download after Submit
-            setTimeout(() => {
-                window.print(); 
-                sendToWA(payload);
-            }, 1500);
-
+            setTimeout(() => { window.print(); sendToWA(payload); }, 1500);
         } catch (e) {
-            // 03. Detail Error Log in Console
-            console.error("Submission Error: ", e);
+            console.error(e);
             status.innerText = "ڪجهه مسئلو آيو آهي، پر توهان پرنٽ وٺي سگهو ٿا.";
             setTimeout(() => window.print(), 1000);
         }
     }
 
     function sendToWA(data) {
-        const msg = `*GBELS WASSAN ADMISSION FORM*%0A` +
-                    `----------------------------%0A` +
-                    `شاگرد جو نالو: ${data.s_name}%0A` +
-                    `پيءُ جو نالو: ${data.f_name}%0A` +
-                    `ڪلاس: ${data.adm_class}%0A` +
-                    `ڊيٽا آن لائن جمع ڪئي وئي آهي. ✅`;
+        const msg = `*GBELS WASSAN ADMISSION FORM*%0Aشاگرد جو نالو: ${data.s_name}%0Aپيءُ جو نالو: ${data.f_name}%0Aڪلاس: ${data.adm_class}%0Aڊيٽا آن لائن جمع ڪئي وئي آهي. ✅`;
         window.open(`https://wa.me/923008909756?text=${msg}`, '_blank');
         document.getElementById('submitBtn').disabled = false;
     }
