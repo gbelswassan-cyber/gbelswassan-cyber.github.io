@@ -3,259 +3,415 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>School Management System</title>
+    <title>Admission Form - GBELS WASSAN</title>
     <style>
         :root {
-            --bg-dark: #121212;
-            --panel-dark: #1e1e1e;
+            --primary-blue: #1a237e;
             --accent-green: #2ecc71;
-            --accent-blue: #3498db;
-            --accent-red: #e74c3c;
-            --accent-orange: #f39c12;
-            --text-white: #ffffff;
+            --bg-gray: #f4f4f4;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-white);
+            background-color: #121212; /* Screen background */
             margin: 0;
             padding: 0;
         }
 
-        /* Header Style */
-        .header {
-            background-color: var(--panel-dark);
+        /* Controls for Screen */
+        .no-print-nav {
+            background: #1e1e1e;
             padding: 15px;
             text-align: center;
-            font-size: 20px;
-            font-weight: bold;
             border-bottom: 2px solid var(--accent-green);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        }
+
+        .btn-nav {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            color: white;
         }
 
         .container {
-            padding: 15px;
-            max-width: 600px;
-            margin: auto;
-        }
-
-        /* Dashboard Buttons Grid */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .menu-card {
-            background: var(--panel-dark);
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            cursor: pointer;
-            border: 1px solid #333;
-            transition: 0.3s;
-        }
-
-        .menu-card:active { transform: scale(0.95); }
-        .menu-card i { font-size: 24px; display: block; margin-bottom: 5px; }
-        
-        .bg-green { border-bottom: 4px solid var(--accent-green); }
-        .bg-blue { border-bottom: 4px solid var(--accent-blue); }
-        .bg-orange { border-bottom: 4px solid var(--accent-orange); }
-        .bg-red { border-bottom: 4px solid var(--accent-red); }
-
-        /* Form Styling */
-        .form-section {
-            background: var(--panel-dark);
-            padding: 20px;
-            border-radius: 15px;
-            display: none; 
-        }
-
-        .active { display: block; }
-
-        input, select {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            background: #333;
-            border: 1px solid #444;
-            color: white;
-            border-radius: 8px;
-            box-sizing: border-box;
-        }
-
-        .main-btn {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            color: white;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        /* Search Bar */
-        .search-area {
-            display: flex;
-            gap: 5px;
-        }
-        .search-area input { flex: 2; }
-        .search-area button { flex: 1; background: var(--accent-orange); border:none; border-radius:8px; color:white; cursor: pointer;}
-
-        #searchResult {
+            max-width: 900px;
+            margin: 20px auto;
             padding: 10px;
+        }
+
+        /* --- THE FORM SHEET DESIGN (تصوير جي مطابق) --- */
+        .admission-sheet {
+            background: white;
+            color: black;
+            padding: 40px;
+            border: 2px solid #333;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .header-section {
+            text-align: center;
+            border-bottom: 2px solid black;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+
+        .logo-placeholder {
+            position: absolute;
+            top: 40px;
+            right: 40px; /* Logo on right */
+            width: 80px;
+        }
+
+        .photo-box {
+            position: absolute;
+            top: 40px;
+            left: 40px; /* Photo on left */
+            width: 100px;
+            height: 120px;
+            border: 1px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .school-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin: 0;
+        }
+
+        .school-info {
+            font-size: 11px;
+            margin: 2px 0;
+        }
+
+        .form-badge {
+            border: 1px solid black;
+            padding: 4px 15px;
+            display: inline-block;
+            font-weight: bold;
             margin-top: 10px;
-            border-radius: 8px;
             font-size: 14px;
         }
 
+        /* Section Titles */
+        .section-head {
+            background: #f0f0f0;
+            border: 1px solid black;
+            padding: 5px 10px;
+            font-weight: bold;
+            font-size: 13px;
+            margin: 15px 0 10px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Form Grid */
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+
+        input[type="text"], input[type="date"], input[type="tel"], select {
+            width: 100%;
+            padding: 7px;
+            border: 1px solid #999;
+            box-sizing: border-box;
+            font-size: 13px;
+        }
+
+        /* Document Upload / Checkbox Area */
+        .doc-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid #eee;
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+
+        .doc-check {
+            width: 15px;
+            height: 15px;
+            border: 1px solid black;
+            margin-left: 10px;
+        }
+
+        /* Office Use Section */
+        .office-box {
+            margin-top: 20px;
+            border: 1px dashed black;
+            padding: 10px;
+        }
+
+        .footer-sigs {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .sig-line {
+            border-top: 1px solid black;
+            width: 180px;
+            padding-top: 5px;
+        }
+
+        /* --- Search Bar Styling --- */
+        #search-panel {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        /* Hide UI on Print */
+        @media print {
+            .no-print-nav, #search-panel, .btn-submit-row, input[type="file"] {
+                display: none !important;
+            }
+            body { background: white; }
+            .container { margin: 0; padding: 0; max-width: 100%; }
+            .admission-sheet { border: none; box-shadow: none; padding: 20px; }
+        }
     </style>
 </head>
 <body>
 
-<div class="header">ايڊميشن پورٽل</div>
+<div class="no-print-nav">
+    <button class="btn-nav" style="background: var(--accent-green);" onclick="toggleSearch()">🔍 ريڪارڊ ڳوليو</button>
+    <button class="btn-nav" style="background: #555;" onclick="window.location.reload()">🔄 نئون فارم</button>
+</div>
 
 <div class="container">
-    
-    <div class="menu-grid">
-        <div class="menu-card bg-green" onclick="openSection('manual')">
-            📄<br>Manual Form
+
+    <div id="search-panel">
+        <h4 style="color: white; margin: 0 0 10px 0;">ريڪارڊ ڳوليو (B-Form نمبر داخل ڪريو)</h4>
+        <div style="display: flex; gap: 10px;">
+            <input type="text" id="searchInput" placeholder="45304-xxxxxxx-x" style="flex: 2;">
+            <button onclick="fetchStudentData()" style="flex: 1; background: orange; border: none; cursor: pointer; font-weight: bold;">ڳوليو</button>
         </div>
-        <div class="menu-card bg-blue" onclick="openSection('online')">
-            🌐<br>Online Apply
-        </div>
-        <div class="menu-card bg-red" onclick="openSection('print-online')">
-            🖨️<br>Print Form
-        </div>
-        <div class="menu-card bg-orange" onclick="openSection('search')">
-            🔍<br>Search Record
-        </div>
+        <p id="statusMsg" style="color: #2ecc71; font-size: 12px; margin-top: 10px;"></p>
     </div>
 
-    <div id="search" class="form-section">
-        <h3>🔍 ريڪارڊ ڳوليو</h3>
-        <div class="search-area">
-            <input type="text" id="searchId" placeholder="B-Form / CNIC نمبر هڻو">
-            <button onclick="searchData()">ڳوليو</button>
-        </div>
-        <div id="searchResult"></div>
-    </div>
+    <div class="admission-sheet" id="mainForm">
+        
+        <div class="photo-box">شاگرد جي تصوير</div>
 
-    <div id="form-container" class="form-section">
-        <h3 id="form-title">داخلا فارم</h3>
+        <div class="header-section">
+            <h1 class="school-name">GOVERNMENT BOYS ELEMENTARY LOWER SECONDARY SCHOOL WASSAN</h1>
+            <p class="school-info">Village Muhammad Sharif Wassan, Taluka & District Naushahro Feroze</p>
+            <p class="school-info">SEMIS Code: 416040490 | WhatsApp: +92 300 0000000</p>
+            <div class="form-badge">ADMISSION FORM (Session: 2026-2027)</div>
+        </div>
+
         <form id="admissionForm">
-            <input type="text" name="s_name" id="s_name" placeholder="شاگرد جو نالو" required>
-            <input type="text" name="f_name" id="f_name" placeholder="پيءُ جو نالو" required>
-            <input type="text" name="cnic" id="cnic" placeholder="B-Form / CNIC نمبر" required>
-            <select name="class" id="class">
-                <option value="1">ڪلاس 1</option>
-                <option value="2">ڪلاس 2</option>
-                <option value="3">ڪلاس 3</option>
-                <option value="4">ڪلاس 4</option>
-                <option value="5">ڪلاس 5</option>
-            </select>
-            <input type="tel" name="phone" id="phone" placeholder="موبائل نمبر">
-            
-            <button type="button" id="submitBtn" class="main-btn" onclick="handleAction()" style="background: var(--accent-blue);">سبمٽ ڪريو</button>
+            <div class="section-head">
+                <span>1. STUDENT INFORMATION (شاگرد جي معلومات)</span>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Student Full Name:</label>
+                    <input type="text" id="s_name">
+                </div>
+                <div class="form-group">
+                    <label>Father's Name:</label>
+                    <input type="text" id="f_name">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Surname / Caste:</label>
+                    <input type="text" id="caste">
+                </div>
+                <div class="form-group">
+                    <label>Date of Birth:</label>
+                    <input type="date" id="dob">
+                </div>
+                <div class="form-group">
+                    <label>Gender:</label>
+                    <select id="gender"><option>Male</option><option>Female</option></select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>B-Form / CNIC Number:</label>
+                    <input type="text" id="cnic_display">
+                </div>
+                <div class="form-group">
+                    <label>Religion:</label>
+                    <input type="text" value="Islam" id="religion">
+                </div>
+            </div>
+
+            <div class="section-head">
+                <span>2. ACADEMIC & CONTACT DETAILS</span>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Admission Required in Class:</label>
+                    <select id="adm_class">
+                        <option>Class One</option><option>Class Two</option>
+                        <option>Class Three</option><option>Class Four</option><option>Class Five</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Previous School Name:</label>
+                    <input type="text" id="prev_school">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Last Class Passed:</label>
+                    <input type="text" id="last_class">
+                </div>
+                <div class="form-group">
+                    <label>Percentage / Grade:</label>
+                    <input type="text" id="grade">
+                </div>
+            </div>
+
+            <div class="section-head">
+                <span>3. PARENT / GUARDIAN DETAILS</span>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Father Occupation:</label>
+                    <input type="text" id="job">
+                </div>
+                <div class="form-group">
+                    <label>Mobile / WhatsApp No:</label>
+                    <input type="tel" id="whatsapp">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Residential Address:</label>
+                    <input type="text" id="address">
+                </div>
+            </div>
+
+            <div class="section-head">
+                <span>4. REQUIRED DOCUMENTS (MANDATORY)</span>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <div class="doc-row">
+                        <span>B-Form Copy:</span>
+                        <div style="display:flex; align-items:center;">
+                            <input type="file" class="no-print">
+                            <div class="doc-check"></div>
+                        </div>
+                    </div>
+                    <div class="doc-row">
+                        <span>SLC Copy:</span>
+                        <div style="display:flex; align-items:center;">
+                            <input type="file" class="no-print">
+                            <div class="doc-check"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="doc-row">
+                        <span>Father CNIC:</span>
+                        <div style="display:flex; align-items:center;">
+                            <input type="file" class="no-print">
+                            <div class="doc-check"></div>
+                        </div>
+                    </div>
+                    <div class="doc-row">
+                        <span>Result Card:</span>
+                        <div style="display:flex; align-items:center;">
+                            <input type="file" class="no-print">
+                            <div class="doc-check"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="office-box">
+                <div style="text-align: center; font-weight: bold; margin-bottom: 10px; font-size: 12px;">FOR OFFICE USE ONLY (صرف آفيس جي استعمال لاء)</div>
+                <div class="form-row">
+                    <div class="form-group"><label>G.R Number:</label><input type="text"></div>
+                    <div class="form-group"><label>Admission Date:</label><input type="text"></div>
+                </div>
+            </div>
+
+            <div class="footer-sigs">
+                <div class="sig-line">Class Teacher Signature</div>
+                <div class="sig-line">Admission Incharge</div>
+                <div class="sig-line">Head Master Stamp</div>
+            </div>
+
+            <div class="btn-submit-row no-print" style="margin-top: 30px; display: flex; gap: 10px;">
+                <button type="button" onclick="window.print()" style="flex: 1; padding: 15px; background: #e74c3c; color: white; border: none; font-weight: bold; cursor: pointer;">🖨️ پرنٽ ۽ ڊائون لوڊ ڪريو</button>
+                <button type="button" onclick="alert('آن لائن درخواست موڪلي وئي!')" style="flex: 1; padding: 15px; background: var(--accent-green); color: white; border: none; font-weight: bold; cursor: pointer;">Apply Online & Send WhatsApp ✅</button>
+            </div>
         </form>
     </div>
-
 </div>
 
 <script>
-    let currentMode = "";
-    // توھان جي گوگل اسڪرپٽ ويب يو آر ايل
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwSAKtUa6CbUgyYJuIEadXN56jIGVuporFE6KwD5erNWCjem1U_aQ-Y3i6ng00fXA80Kg/exec";
 
-    function openSection(section) {
-        document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
-        
-        if(section === 'search') {
-            document.getElementById('search').classList.add('active');
-        } else {
-            document.getElementById('form-container').classList.add('active');
-            currentMode = section;
-            
-            const btn = document.getElementById('submitBtn');
-            const title = document.getElementById('form-title');
-
-            if(section === 'manual') {
-                title.innerText = "Manual Form Entry";
-                btn.innerText = "محفوظ ۽ پرنٽ ڪريو";
-                btn.style.background = "var(--accent-green)";
-            } else if(section === 'online') {
-                title.innerText = "Online Application";
-                btn.innerText = "آن لائن اپلاءِ ڪريو";
-                btn.style.background = "var(--accent-blue)";
-            } else if(section === 'print-online') {
-                title.innerText = "Download/Print Form";
-                btn.innerText = "پرنٽ ڪيو";
-                btn.style.background = "var(--accent-red)";
-            }
-        }
+    function toggleSearch() {
+        const panel = document.getElementById('search-panel');
+        panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
     }
 
-    function handleAction() {
-        const name = document.getElementById('s_name').value;
-        if(!name) { alert("مهرباني ڪري نالو لکو"); return; }
+    function fetchStudentData() {
+        const id = document.getElementById('searchInput').value;
+        const msg = document.getElementById('statusMsg');
+        
+        if(!id) { alert("B-Form نمبر لکو"); return; }
+        
+        msg.innerText = "ڊيٽا ڳولي رهيو آهي... مهرباني ڪري انتظار ڪريو.";
+        msg.style.color = "orange";
 
-        if(currentMode === 'online') {
-            alert("ڊيٽا موڪلي وئي! واٽس اپ کلي رهيو آهي...");
-            window.open("https://wa.me/923000000000?text=نئين داخلا: " + name);
-            window.print();
-        } else {
-            window.print();
-            if(currentMode === 'manual') document.getElementById('admissionForm').reset();
-        }
-    }
+        fetch(`${SCRIPT_URL}?action=search&id=${id}`)
+            .then(res => res.json())
+            .then(data => {
+                if(data.status === "success" || data.result === "found") {
+                    msg.innerText = "ريڪارڊ ملي ويو! فارم ڀرجي چڪو آهي.";
+                    msg.style.color = "#2ecc71";
 
-    function searchData() {
-        const val = document.getElementById('searchId').value;
-        const resDiv = document.getElementById('searchResult');
-        
-        if(!val) { alert("نمبر لکو"); return; }
-        
-        resDiv.style.color = "orange";
-        resDiv.innerText = "ڳولي رهيو آهي... مهرباني ڪري انتظار ڪريو.";
-        
-        // گوگل اسڪرپٽ کي CNIC موڪلڻ
-        fetch(SCRIPT_URL + "?action=search&cnic=" + val)
-        .then(response => response.json())
-        .then(data => {
-            if(data.result === "found" || data.status === "success") {
-                resDiv.style.color = "var(--accent-green)";
-                let studentName = data.name || (data.data && data.data.name);
-                resDiv.innerText = "مستند ريڪارڊ مليو: " + studentName;
-                
-                // فارم ۾ آٽو فل ڪرڻ
-                document.getElementById('s_name').value = studentName || "";
-                if(data.f_name || (data.data && data.data.f_name)) {
-                    document.getElementById('f_name').value = data.f_name || data.data.f_name;
+                    // Mapping data to fields
+                    document.getElementById('s_name').value = data.name || "";
+                    document.getElementById('f_name').value = data.fatherName || "";
+                    document.getElementById('cnic_display').value = id;
+                    document.getElementById('whatsapp').value = data.phone || "";
+                    document.getElementById('caste').value = data.caste || "";
+                    document.getElementById('address').value = data.address || "";
+                } else {
+                    msg.innerText = "معاف ڪجو، هي ريڪارڊ موجود ناهي.";
+                    msg.style.color = "red";
                 }
-                document.getElementById('cnic').value = val;
-                
-                // سرچ بعد فارم سيڪشن کولي ڇڏيو
-                setTimeout(() => {
-                    openSection('print-online');
-                }, 1000);
-
-            } else {
-                resDiv.style.color = "var(--accent-red)";
-                resDiv.innerText = "ريڪارڊ نه مليو: " + (data.message || "چيڪ ڪريو");
-            }
-        })
-        .catch(error => {
-            resDiv.style.color = "var(--accent-red)";
-            resDiv.innerText = "ڳولا دوران غلطي ٿي. انٽرنيٽ چيڪ ڪريو.";
-            console.error('Error:', error);
-        });
+            })
+            .catch(err => {
+                msg.innerText = "رابطي ۾ غلطي ٿي وئي.";
+                msg.style.color = "red";
+            });
     }
 </script>
 
