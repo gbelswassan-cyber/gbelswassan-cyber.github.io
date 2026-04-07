@@ -7,144 +7,130 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         :root { --blue: #002d5b; --gold: #ffcc00; --red: #a52a2a; }
-        body { font-family: Arial, sans-serif; background-color: #f0f4f8; margin: 0; padding: 15px; }
+        body { font-family: Arial, sans-serif; background-color: #f0f4f8; margin: 0; padding: 10px; }
 
-        /* Top Navigation Buttons */
+        /* Top Navigation */
         .top-nav {
             max-width: 800px; margin: 0 auto 15px; background: #e8f0fe;
-            border: 1px dashed #333; padding: 15px; display: flex;
-            justify-content: center; gap: 20px; align-items: center;
+            border: 1px dashed #333; padding: 12px; display: flex;
+            justify-content: center; gap: 15px; align-items: center;
         }
         .nav-btn {
-            padding: 8px 15px; border-radius: 5px; text-decoration: none;
-            font-weight: bold; font-size: 0.85rem; border: 2px solid var(--blue);
-            display: flex; align-items: center; gap: 8px;
+            padding: 8px 12px; border-radius: 5px; text-decoration: none;
+            font-weight: bold; font-size: 0.8rem; border: 2px solid var(--blue);
         }
         .manual-btn { background: #333; color: white; border-color: #333; }
         .online-btn { background: var(--blue); color: white; }
 
-        /* Form Container Box */
+        /* Form Container */
         .form-box {
             max-width: 850px; margin: auto; background: white;
-            border: 2px solid var(--blue); padding: 40px; position: relative;
+            border: 2px solid var(--blue); padding: 25px; position: relative;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
-        /* Header Section */
-        .header-main { text-align: center; border-bottom: 1px solid #ccc; margin-bottom: 20px; }
-        .school-logo { width: 80px; position: absolute; left: 40px; top: 40px; }
-        .student-photo-box { width: 90px; height: 110px; border: 1px solid #333; position: absolute; right: 40px; top: 40px; background: #fafafa; }
+        /* Header Area */
+        .header-main { text-align: center; border-bottom: 1px solid #ccc; margin-bottom: 20px; padding-top: 10px; }
+        .school-logo { width: 70px; position: absolute; left: 20px; top: 20px; }
+        .student-photo-box { width: 85px; height: 105px; border: 1px solid #333; position: absolute; right: 20px; top: 20px; background: #fdfdfd; }
         
-        h2 { color: var(--blue); font-size: 1.2rem; margin: 5px 0; width: 70%; margin: auto; text-transform: uppercase; }
-        .sub-header { font-size: 0.75rem; color: #555; margin-bottom: 10px; line-height: 1.4; }
-        .session-tag { border: 1px solid #333; padding: 2px 15px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-top: 10px; font-weight: bold; }
+        h2 { color: var(--blue); font-size: 1.1rem; margin: 5px 0; width: 65%; margin: auto; }
+        .sub-header { font-size: 0.7rem; color: #555; margin-bottom: 8px; line-height: 1.3; }
+        .session-tag { border: 1px solid #333; padding: 2px 12px; border-radius: 15px; font-size: 0.75rem; font-weight: bold; display: inline-block; }
 
-        /* Form Styling */
-        .section-title { color: var(--red); font-size: 0.85rem; font-weight: bold; border-bottom: 1px solid #ccc; margin: 25px 0 15px; display: block; padding-bottom: 5px; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 12px; }
+        /* Form Layout */
+        .section-title { color: var(--red); font-size: 0.8rem; font-weight: bold; border-bottom: 1px solid #eee; margin: 20px 0 10px; display: block; padding-bottom: 3px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px; }
         .input-group { display: flex; flex-direction: column; }
-        label { font-size: 0.8rem; font-weight: bold; margin-bottom: 4px; color: #333; }
-        input, select { padding: 8px; border: 1px solid #aaa; border-radius: 3px; font-size: 0.9rem; }
-        .full { grid-column: span 2; }
+        label { font-size: 0.75rem; font-weight: bold; margin-bottom: 3px; }
+        input, select { padding: 7px; border: 1px solid #bbb; border-radius: 3px; font-size: 0.85rem; width: 100%; box-sizing: border-box; }
+        
+        /* Office Use Section (Short) */
+        .office-section { margin-top: 25px; border: 1.5px solid #444; padding: 12px; background: #fafafa; }
+        .office-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; }
+        .sign-box { border-top: 1px solid #333; margin-top: 25px; font-size: 0.7rem; font-weight: bold; text-align: center; padding-top: 4px; }
 
-        /* Submit Button */
-        .apply-btn { width: 100%; background: #2ecc71; color: white; border: none; padding: 15px; border-radius: 5px; font-weight: bold; font-size: 1rem; cursor: pointer; margin-top: 25px; transition: 0.3s; }
-        .apply-btn:disabled { background: #95a5a6; cursor: not-allowed; }
-
-        /* Console Window */
-        #console-window { background: #1a1a1a; color: #00ff00; padding: 12px; border-radius: 5px; font-family: 'Courier New', monospace; font-size: 11px; height: 130px; overflow-y: auto; margin-top: 25px; border: 2px solid #555; line-height: 1.5; }
-        .log-success { color: #00ff00; }
-        .log-error { color: #ff4444; }
-        .log-info { color: #00d9ff; }
+        .apply-btn { width: 100%; background: #27ae60; color: white; border: none; padding: 12px; border-radius: 4px; font-weight: bold; font-size: 1rem; cursor: pointer; margin-top: 20px; }
+        #console-window { background: #000; color: #0f0; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 10px; height: 100px; overflow-y: auto; margin-top: 15px; border: 1px solid #555; }
     </style>
 </head>
 <body>
 
     <div class="top-nav">
-        <span style="font-size: 0.85rem; font-weight: bold; color: var(--blue);">داخلا پورٽل مھڪار (GBELS WASSAN)</span>
-        <a href="YOUR_MANUAL_PDF_LINK" target="_blank" class="nav-btn manual-btn">📄 Manual Form (PDF) ڊائون لوڊ</a>
-        <a href="#" class="nav-btn online-btn">💻 Online Apply (آن لائن فارم ڀريو)</a>
+        <span style="font-size: 0.8rem; font-weight: bold;">داخلا پورٽل مھڪار (GBELS WASSAN)</span>
+        <a href="#" class="nav-btn manual-btn">📄 Manual Form (PDF)</a>
+        <a href="#" class="nav-btn online-btn">💻 Online Apply</a>
     </div>
 
     <div class="form-box">
-        <img src="https://via.placeholder.com/80" class="school-logo" alt="School Logo">
-        <div class="student-photo-box">
-            <p style="font-size:0.6rem; text-align:center; margin-top:40px; color: #999;">Passport Size<br>Photo</p>
-        </div>
+        <img src="logo.png" class="school-logo">
+        <div class="student-photo-box"><p style="font-size:0.5rem; text-align:center; margin-top:40px;">Photo Here</p></div>
 
         <div class="header-main">
             <h2>GOVERNMENT BOYS ELEMENTARY LOWER SECONDARY SCHOOL WASSAN</h2>
-            <div class="sub-header">Village Muhammad Sharif Wassan, Taluka & District Naushahro Feroze<br>SEMIS Code: 416040489 | WhatsApp: +92 300 8909756</div>
-            <div class="session-tag">ADMISSION FORM (Session: 2026-2027)</div>
+            <div class="sub-header">Taluka & District Naushahro Feroze | SEMIS: 416040489</div>
+            <div class="session-tag">ADMISSION FORM (2026-2027)</div>
         </div>
 
         <form id="admissionForm">
             <span class="section-title">1. STUDENT INFORMATION (شاگرد جي معلومات)</span>
             <div class="grid">
-                <div class="input-group"><label>Student Full Name:</label><input type="text" id="sName" placeholder="e.g. Hafsa" required></div>
-                <div class="input-group"><label>Father's Name:</label><input type="text" id="fName" placeholder="e.g. Saeed Ahmed" required></div>
-                <div class="input-group"><label>Surname / Caste:</label><input type="text" id="caste" placeholder="e.g. Wassan" required></div>
+                <div class="input-group"><label>Full Name:</label><input type="text" id="sName" required></div>
+                <div class="input-group"><label>Father Name:</label><input type="text" id="fName" required></div>
+                <div class="input-group"><label>Caste:</label><input type="text" id="caste" required></div>
                 <div class="input-group"><label>Date of Birth:</label><input type="date" id="dob" required></div>
                 <div class="input-group"><label>Gender:</label><select id="gender"><option>Male</option><option>Female</option></select></div>
-                <div class="input-group"><label>Religion:</label><input type="text" id="religion" value="Islam"></div>
+                <div class="input-group"><label>B-Form / CNIC:</label><input type="text" id="cnic" required></div>
             </div>
-            <div class="input-group"><label>B-Form / CNIC Number:</label><input type="text" id="cnic" placeholder="45304-XXXXXXX-X" required></div>
 
-            <span class="section-title">2. ACADEMIC & CONTACT DETAILS</span>
+            <span class="section-title">2. ACADEMIC & CONTACT</span>
             <div class="grid">
-                <div class="input-group"><label>Admission Required in Class:</label><input type="text" id="tClass" placeholder="e.g. Class Two" required></div>
-                <div class="input-group"><label>Previous School Name:</label><input type="text" id="pSchool" placeholder="e.g. GBELS Wassan"></div>
+                <div class="input-group"><label>Class Required:</label><input type="text" id="tClass" required></div>
+                <div class="input-group"><label>Previous School:</label><input type="text" id="pSchool"></div>
+                <div class="input-group"><label>WhatsApp No:</label><input type="tel" id="whatsapp" required></div>
+                <div class="input-group"><label>Address:</label><input type="text" id="address" required></div>
             </div>
-            <div class="grid">
-                <div class="input-group"><label>Mobile / WhatsApp No:</label><input type="tel" id="whatsapp" placeholder="03001234567" required></div>
-                <div class="input-group"><label>Father Occupation:</label><input type="text" id="occup" placeholder="e.g. Teacher"></div>
-            </div>
-            <div class="input-group"><label>Residential Address:</label><input type="text" id="address" class="full" required></div>
 
-            <span class="section-title">3. REQUIRED DOCUMENTS (MANDATORY)</span>
+            <span class="section-title">3. DOCUMENTS (REQUIRED)</span>
             <div class="grid">
-                <div class="input-group"><label>B-Form Copy:</label><input type="file" id="fileB" accept="image/*" required></div>
-                <div class="input-group"><label>SLC Copy:</label><input type="file" id="fileS" accept="image/*" required></div>
-                <div class="input-group"><label>Father CNIC:</label><input type="file" id="fileC" accept="image/*" required></div>
-                <div class="input-group"><label>Result Card:</label><input type="file" id="fileR" accept="image/*" required></div>
+                <div class="input-group"><label>B-Form Copy:</label><input type="file" id="fileB" required></div>
+                <div class="input-group"><label>SLC Copy:</label><input type="file" id="fileS" required></div>
+                <div class="input-group"><label>Father CNIC:</label><input type="file" id="fileC" required></div>
+                <div class="input-group"><label>Result Card:</label><input type="file" id="fileR" required></div>
+            </div>
+
+            <div class="office-section">
+                <h5 style="text-align: center; margin: 0 0 10px; text-decoration: underline;">FOR OFFICE USE ONLY</h5>
+                <div class="office-grid">
+                    <div class="input-group"><label>G.R Number:</label><input type="text" style="border:none; border-bottom:1px solid #333;"></div>
+                    <div class="input-group"><label>Admission Date:</label><input type="text" style="border:none; border-bottom:1px solid #333;"></div>
+                </div>
+                <div class="office-grid">
+                    <div class="sign-box">Class Teacher Signature</div>
+                    <div class="sign-box">HM / Incharge Signature</div>
+                </div>
             </div>
 
             <button type="submit" id="submitBtn" class="apply-btn">Apply Online & Send via WhatsApp ✅</button>
         </form>
 
-        <div id="console-window">
-            <span class="log-info">> [SYSTEM] GBELS Wassan Admission Portal Loaded.</span><br>
-            <span class="log-info">> [SYSTEM] Waiting for user input...</span>
-        </div>
+        <div id="console-window">> [SYSTEM] Ready for admission...</div>
     </div>
 
     <script>
-        // --- YOUR SCRIPT URL ---
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0YfSmQrLTiob9juGfMkVy_-thwhLRc9cH_roq0J_fTuGoAxdrsEAuFS2oPBP2Ejsf/exec";
 
-        const logWindow = document.getElementById('console-window');
-        function addLog(text, type = 'info') {
-            const time = new Date().toLocaleTimeString();
-            logWindow.innerHTML += `<br><span class="log-${type}">> [${time}] ${text}</span>`;
-            logWindow.scrollTop = logWindow.scrollHeight;
-        }
-
+        const log = (msg) => { document.getElementById('console-window').innerHTML += `<br>> ${msg}`; };
         const toBase64 = file => new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = error => reject(error);
+            const reader = new FileReader(); reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result); reader.onerror = error => reject(error);
         });
 
         document.getElementById('admissionForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            btn.disabled = true;
+            log("Process started...");
             
             try {
-                addLog("Submission started. Processing files...", "info");
-
-                // Convert images to Base64
                 const bFile = await toBase64(document.getElementById('fileB').files[0]);
                 const sFile = await toBase64(document.getElementById('fileS').files[0]);
                 const fFile = await toBase64(document.getElementById('fileC').files[0]);
@@ -156,53 +142,22 @@
                     caste: document.getElementById('caste').value,
                     dob: document.getElementById('dob').value,
                     gender: document.getElementById('gender').value,
-                    religion: document.getElementById('religion').value,
+                    religion: "Islam",
                     cnic: document.getElementById('cnic').value,
                     targetClass: document.getElementById('tClass').value,
                     prevSchool: document.getElementById('pSchool').value,
                     whatsapp: document.getElementById('whatsapp').value,
-                    occup: document.getElementById('occup').value,
+                    occup: "N/A",
                     address: document.getElementById('address').value,
-                    bFormFile: bFile,
-                    slcFile: sFile,
-                    fatherCnicFile: fFile,
-                    resultCardFile: rFile
+                    bFormFile: bFile, slcFile: sFile, fatherCnicFile: fFile, resultCardFile: rFile
                 };
 
-                addLog("Sending data to Google Sheet & Drive...", "info");
-
-                // Send to Google Script
-                await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    body: JSON.stringify(payload)
-                });
-
-                addLog("Data sent successfully!", "success");
-
-                // Generate PDF Receipt
-                addLog("Generating PDF Receipt...", "info");
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF();
-                doc.text("GBELS WASSAN - ADMISSION RECEIPT", 20, 20);
-                doc.text(`Student: ${payload.name}`, 20, 40);
-                doc.text(`Father: ${payload.father}`, 20, 50);
-                doc.text(`Class: ${payload.targetClass}`, 20, 60);
-                doc.save(`Receipt_${payload.name}.pdf`);
-                addLog("Receipt downloaded.", "success");
-
-                // WhatsApp Redirect
-                setTimeout(() => {
-                    addLog("Redirecting to WhatsApp...", "info");
-                    const waMsg = `*GBELS WASSAN ADMISSION*%0AName: ${payload.name}%0AFather: ${payload.father}%0AClass: ${payload.targetClass}%0A_Form submitted online._`;
-                    window.open(`https://wa.me/923008909756?text=${waMsg}`, '_blank');
-                    btn.disabled = false;
-                }, 2000);
-
-            } catch (error) {
-                addLog("ERROR: " + error.message, "error");
-                btn.disabled = false;
-            }
+                log("Sending data to Google Script...");
+                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
+                log("Success! Data saved to Sheet.");
+                
+                window.open(`https://wa.me/923008909756?text=New Admission: ${payload.name}`, '_blank');
+            } catch (err) { log("ERROR: " + err); }
         });
     </script>
 </body>
