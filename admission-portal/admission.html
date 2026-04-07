@@ -3,95 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GBELS WASSAN Admission Portal</title>
+    <title>Admission Portal - GBELS WASSAN</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
-        :root { --blue: #002d5b; --gold: #ffcc00; --red: #a52a2a; }
-        body { font-family: Arial, sans-serif; background-color: #f0f4f8; margin: 0; padding: 10px; }
-
-        /* Top Navigation */
-        .top-nav {
-            max-width: 800px; margin: 0 auto 15px; background: #e8f0fe;
-            border: 1px dashed #333; padding: 12px; display: flex;
-            justify-content: center; gap: 15px; align-items: center;
-        }
-        .nav-btn {
-            padding: 8px 12px; border-radius: 5px; text-decoration: none;
-            font-weight: bold; font-size: 0.8rem; border: 2px solid var(--blue);
-        }
-        .manual-btn { background: #333; color: white; border-color: #333; }
-        .online-btn { background: var(--blue); color: white; }
-
-        /* Form Container */
-        .form-box {
-            max-width: 850px; margin: auto; background: white;
-            border: 2px solid var(--blue); padding: 25px; position: relative;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        /* Header Area */
-        .header-main { text-align: center; border-bottom: 1px solid #ccc; margin-bottom: 20px; padding-top: 10px; }
-        .school-logo { width: 70px; position: absolute; left: 20px; top: 20px; }
-        .student-photo-box { width: 85px; height: 105px; border: 1px solid #333; position: absolute; right: 20px; top: 20px; background: #fdfdfd; }
+        :root { --blue: #002d5b; --red: #a52a2a; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f4f8; margin: 0; padding: 10px; }
         
-        h2 { color: var(--blue); font-size: 1.1rem; margin: 5px 0; width: 65%; margin: auto; }
-        .sub-header { font-size: 0.7rem; color: #555; margin-bottom: 8px; line-height: 1.3; }
-        .session-tag { border: 1px solid #333; padding: 2px 12px; border-radius: 15px; font-size: 0.75rem; font-weight: bold; display: inline-block; }
+        .top-nav { max-width: 850px; margin: 0 auto 15px; background: white; border: 1px dashed #333; padding: 10px; display: flex; justify-content: center; gap: 15px; align-items: center; border-radius: 8px; }
+        .nav-btn { padding: 8px 15px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 0.8rem; border: 2px solid var(--blue); color: var(--blue); }
+        .active-btn { background: var(--blue); color: white; }
 
-        /* Form Layout */
-        .section-title { color: var(--red); font-size: 0.8rem; font-weight: bold; border-bottom: 1px solid #eee; margin: 20px 0 10px; display: block; padding-bottom: 3px; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px; }
+        .form-box { max-width: 850px; margin: auto; background: white; border: 2px solid var(--blue); padding: 25px; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        
+        /* Header */
+        .school-logo { width: 75px; position: absolute; left: 25px; top: 25px; }
+        .photo-box { width: 90px; height: 110px; border: 1px solid #333; position: absolute; right: 25px; top: 25px; background: #f9f9f9; text-align: center; font-size: 0.6rem; padding-top: 40px; }
+        .header-text { text-align: center; margin-bottom: 25px; }
+        h2 { color: var(--blue); font-size: 1.1rem; margin: 0; width: 60%; margin: auto; text-transform: uppercase; }
+        .sub-header { font-size: 0.7rem; color: #555; margin-top: 5px; line-height: 1.4; }
+        .tag { border: 1px solid #333; padding: 3px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; display: inline-block; margin-top: 10px; background: #eee; }
+
+        /* Form Sections */
+        .section-head { color: var(--red); font-size: 0.85rem; font-weight: bold; border-bottom: 1px solid #ddd; margin: 25px 0 12px; padding-bottom: 5px; text-transform: uppercase; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 10px; }
         .input-group { display: flex; flex-direction: column; }
-        label { font-size: 0.75rem; font-weight: bold; margin-bottom: 3px; }
-        input, select { padding: 7px; border: 1px solid #bbb; border-radius: 3px; font-size: 0.85rem; width: 100%; box-sizing: border-box; }
-        
-        /* Office Use Section (Short) */
-        .office-section { margin-top: 25px; border: 1.5px solid #444; padding: 12px; background: #fafafa; }
-        .office-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; }
-        .sign-box { border-top: 1px solid #333; margin-top: 25px; font-size: 0.7rem; font-weight: bold; text-align: center; padding-top: 4px; }
+        label { font-size: 0.75rem; font-weight: bold; margin-bottom: 4px; color: #333; }
+        input, select { padding: 8px; border: 1px solid #aaa; border-radius: 4px; font-size: 0.9rem; width: 100%; box-sizing: border-box; }
+        .full-row { grid-column: span 2; }
 
-        .apply-btn { width: 100%; background: #27ae60; color: white; border: none; padding: 12px; border-radius: 4px; font-weight: bold; font-size: 1rem; cursor: pointer; margin-top: 20px; }
-        #console-window { background: #000; color: #0f0; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 10px; height: 100px; overflow-y: auto; margin-top: 15px; border: 1px solid #555; }
+        /* Office Section */
+        .office-box { margin-top: 30px; border: 2px solid #333; padding: 15px; background: #fcfcfc; }
+        .sign-area { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 25px; text-align: center; }
+        .sign-line { border-top: 1px solid #333; padding-top: 5px; font-size: 0.7rem; font-weight: bold; }
+
+        .submit-btn { width: 100%; background: #27ae60; color: white; border: none; padding: 15px; border-radius: 6px; font-weight: bold; font-size: 1.1rem; cursor: pointer; margin-top: 20px; box-shadow: 0 3px 6px rgba(0,0,0,0.1); }
+        #console { background: #111; color: #0f0; padding: 12px; border-radius: 6px; font-family: monospace; font-size: 10px; height: 120px; overflow-y: auto; margin-top: 20px; border: 1px solid #444; }
     </style>
 </head>
 <body>
 
     <div class="top-nav">
-        <span style="font-size: 0.8rem; font-weight: bold;">داخلا پورٽل مھڪار (GBELS WASSAN)</span>
-        <a href="#" class="nav-btn manual-btn">📄 Manual Form (PDF)</a>
-        <a href="#" class="nav-btn online-btn">💻 Online Apply</a>
+        <span style="font-weight:bold; font-size:0.9rem;">داخلا پورٽل مھڪار (GBELS WASSAN)</span>
+        <a href="#" class="nav-btn">Manual Form (PDF)</a>
+        <a href="#" class="nav-btn active-btn">Online Apply</a>
     </div>
 
     <div class="form-box">
-        <img src="logo.png" class="school-logo">
-        <div class="student-photo-box"><p style="font-size:0.5rem; text-align:center; margin-top:40px;">Photo Here</p></div>
-
-        <div class="header-main">
+        <div class="photo-box">STUDENT PHOTO</div>
+        <div class="header-text">
             <h2>GOVERNMENT BOYS ELEMENTARY LOWER SECONDARY SCHOOL WASSAN</h2>
-            <div class="sub-header">Taluka & District Naushahro Feroze | SEMIS: 416040489</div>
-            <div class="session-tag">ADMISSION FORM (2026-2027)</div>
+            <div class="sub-header">Village Muhammad Sharif Wassan, Taluka & District Naushahro Feroze<br>SEMIS Code: 416040489 | WhatsApp: +92 300 8909756</div>
+            <div class="tag">ADMISSION FORM (Session: 2026-2027)</div>
         </div>
 
         <form id="admissionForm">
-            <span class="section-title">1. STUDENT INFORMATION (شاگرد جي معلومات)</span>
+            <div class="section-head">1. Student Information (شاگرد جي معلومات)</div>
             <div class="grid">
-                <div class="input-group"><label>Full Name:</label><input type="text" id="sName" required></div>
-                <div class="input-group"><label>Father Name:</label><input type="text" id="fName" required></div>
-                <div class="input-group"><label>Caste:</label><input type="text" id="caste" required></div>
+                <div class="input-group"><label>Student Full Name:</label><input type="text" id="sName" required></div>
+                <div class="input-group"><label>Father's Name:</label><input type="text" id="fName" required></div>
+                <div class="input-group"><label>Surname / Caste:</label><input type="text" id="caste" required></div>
                 <div class="input-group"><label>Date of Birth:</label><input type="date" id="dob" required></div>
                 <div class="input-group"><label>Gender:</label><select id="gender"><option>Male</option><option>Female</option></select></div>
-                <div class="input-group"><label>B-Form / CNIC:</label><input type="text" id="cnic" required></div>
+                <div class="input-group"><label>Religion:</label><input type="text" id="religion" value="Islam"></div>
+                <div class="input-group full-row"><label>B-Form / CNIC Number:</label><input type="text" id="cnic" placeholder="45304-XXXXXXX-X" required></div>
             </div>
 
-            <span class="section-title">2. ACADEMIC & CONTACT</span>
+            <div class="section-head">2. Academic & Contact Details</div>
             <div class="grid">
-                <div class="input-group"><label>Class Required:</label><input type="text" id="tClass" required></div>
-                <div class="input-group"><label>Previous School:</label><input type="text" id="pSchool"></div>
-                <div class="input-group"><label>WhatsApp No:</label><input type="tel" id="whatsapp" required></div>
-                <div class="input-group"><label>Address:</label><input type="text" id="address" required></div>
+                <div class="input-group"><label>Admission Required in Class:</label><input type="text" id="tClass" required></div>
+                <div class="input-group"><label>Previous School Name:</label><input type="text" id="pSchool"></div>
+                <div class="input-group"><label>Last Class Passed:</label><input type="text" id="lastClass"></div>
+                <div class="input-group"><label>Percentage / Grade:</label><input type="text" id="grade"></div>
             </div>
 
-            <span class="section-title">3. DOCUMENTS (REQUIRED)</span>
+            <div class="section-head">3. Parent / Guardian Details</div>
+            <div class="grid">
+                <div class="input-group"><label>Father Occupation:</label><input type="text" id="occup"></div>
+                <div class="input-group"><label>Mobile / WhatsApp No:</label><input type="tel" id="whatsapp" required></div>
+                <div class="input-group full-row"><label>Residential Address:</label><input type="text" id="address" required></div>
+            </div>
+
+            <div class="section-head">4. Required Documents (Mandatory)</div>
             <div class="grid">
                 <div class="input-group"><label>B-Form Copy:</label><input type="file" id="fileB" required></div>
                 <div class="input-group"><label>SLC Copy:</label><input type="file" id="fileS" required></div>
@@ -99,28 +91,29 @@
                 <div class="input-group"><label>Result Card:</label><input type="file" id="fileR" required></div>
             </div>
 
-            <div class="office-section">
-                <h5 style="text-align: center; margin: 0 0 10px; text-decoration: underline;">FOR OFFICE USE ONLY</h5>
-                <div class="office-grid">
+            <div class="office-box">
+                <h5 style="text-align: center; margin-top: 0; text-decoration: underline;">FOR OFFICE USE ONLY (صرف آفيس جي استعمال لاءِ)</h5>
+                <div class="grid">
                     <div class="input-group"><label>G.R Number:</label><input type="text" style="border:none; border-bottom:1px solid #333;"></div>
                     <div class="input-group"><label>Admission Date:</label><input type="text" style="border:none; border-bottom:1px solid #333;"></div>
                 </div>
-                <div class="office-grid">
-                    <div class="sign-box">Class Teacher Signature</div>
-                    <div class="sign-box">HM / Incharge Signature</div>
+                <div class="sign-area">
+                    <div class="sign-line">Class Teacher Signature</div>
+                    <div class="sign-line">Admission Incharge / HM</div>
                 </div>
             </div>
 
-            <button type="submit" id="submitBtn" class="apply-btn">Apply Online & Send via WhatsApp ✅</button>
+            <button type="submit" id="submitBtn" class="submit-btn">Apply Online & Send via WhatsApp ✅</button>
         </form>
 
-        <div id="console-window">> [SYSTEM] Ready for admission...</div>
+        <div id="console">> [SYSTEM] All systems ready...</div>
     </div>
 
     <script>
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0YfSmQrLTiob9juGfMkVy_-thwhLRc9cH_roq0J_fTuGoAxdrsEAuFS2oPBP2Ejsf/exec";
 
-        const log = (msg) => { document.getElementById('console-window').innerHTML += `<br>> ${msg}`; };
+        const log = (msg) => { document.getElementById('console').innerHTML += `<br>> ${msg}`; document.getElementById('console').scrollTop = 9999; };
+        
         const toBase64 = file => new Promise((resolve, reject) => {
             const reader = new FileReader(); reader.readAsDataURL(file);
             reader.onload = () => resolve(reader.result); reader.onerror = error => reject(error);
@@ -128,8 +121,10 @@
 
         document.getElementById('admissionForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            log("Process started...");
-            
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            log("Starting submission...");
+
             try {
                 const bFile = await toBase64(document.getElementById('fileB').files[0]);
                 const sFile = await toBase64(document.getElementById('fileS').files[0]);
@@ -142,22 +137,31 @@
                     caste: document.getElementById('caste').value,
                     dob: document.getElementById('dob').value,
                     gender: document.getElementById('gender').value,
-                    religion: "Islam",
+                    religion: document.getElementById('religion').value,
                     cnic: document.getElementById('cnic').value,
                     targetClass: document.getElementById('tClass').value,
                     prevSchool: document.getElementById('pSchool').value,
+                    lastClass: document.getElementById('lastClass').value,
+                    grade: document.getElementById('grade').value,
                     whatsapp: document.getElementById('whatsapp').value,
-                    occup: "N/A",
+                    occup: document.getElementById('occup').value,
                     address: document.getElementById('address').value,
                     bFormFile: bFile, slcFile: sFile, fatherCnicFile: fFile, resultCardFile: rFile
                 };
 
-                log("Sending data to Google Script...");
+                log("Uploading data to Google Cloud...");
                 await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
-                log("Success! Data saved to Sheet.");
+                log("Data successfully saved to Google Sheet.");
+
+                // WhatsApp
+                const msg = `*NEW ADMISSION - GBELS WASSAN*%0AStudent: ${payload.name}%0AFather: ${payload.father}%0AClass: ${payload.targetClass}%0A_Form Submitted Successfully!_`;
+                window.open(`https://wa.me/923008909756?text=${msg}`, '_blank');
                 
-                window.open(`https://wa.me/923008909756?text=New Admission: ${payload.name}`, '_blank');
-            } catch (err) { log("ERROR: " + err); }
+                btn.disabled = false;
+            } catch (err) {
+                log("ERROR: " + err);
+                btn.disabled = false;
+            }
         });
     </script>
 </body>
