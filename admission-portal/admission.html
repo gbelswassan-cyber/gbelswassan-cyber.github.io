@@ -1,419 +1,209 @@
 <!DOCTYPE html>
-<html lang="sd" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admission Form - GBELS WASSAN</title>
+    <title>GBELS WASSAN Admission Portal</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
-        :root {
-            --primary-blue: #1a237e;
-            --accent-green: #2ecc71;
-            --bg-gray: #f4f4f4;
+        :root { --blue: #002d5b; --gold: #ffcc00; --red: #a52a2a; }
+        body { font-family: Arial, sans-serif; background-color: #f0f4f8; margin: 0; padding: 15px; }
+
+        /* Top Navigation Buttons */
+        .top-nav {
+            max-width: 800px; margin: 0 auto 15px; background: #e8f0fe;
+            border: 1px dashed #333; padding: 15px; display: flex;
+            justify-content: center; gap: 20px; align-items: center;
+        }
+        .nav-btn {
+            padding: 8px 15px; border-radius: 5px; text-decoration: none;
+            font-weight: bold; font-size: 0.85rem; border: 2px solid var(--blue);
+            display: flex; align-items: center; gap: 8px;
+        }
+        .manual-btn { background: #333; color: white; border-color: #333; }
+        .online-btn { background: var(--blue); color: white; }
+
+        /* Form Container Box */
+        .form-box {
+            max-width: 850px; margin: auto; background: white;
+            border: 2px solid var(--blue); padding: 40px; position: relative;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212; /* Screen background */
-            margin: 0;
-            padding: 0;
-        }
+        /* Header Section */
+        .header-main { text-align: center; border-bottom: 1px solid #ccc; margin-bottom: 20px; }
+        .school-logo { width: 80px; position: absolute; left: 40px; top: 40px; }
+        .student-photo-box { width: 90px; height: 110px; border: 1px solid #333; position: absolute; right: 40px; top: 40px; background: #fafafa; }
+        
+        h2 { color: var(--blue); font-size: 1.2rem; margin: 5px 0; width: 70%; margin: auto; text-transform: uppercase; }
+        .sub-header { font-size: 0.75rem; color: #555; margin-bottom: 10px; line-height: 1.4; }
+        .session-tag { border: 1px solid #333; padding: 2px 15px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-top: 10px; font-weight: bold; }
 
-        /* Controls for Screen */
-        .no-print-nav {
-            background: #1e1e1e;
-            padding: 15px;
-            text-align: center;
-            border-bottom: 2px solid var(--accent-green);
-        }
+        /* Form Styling */
+        .section-title { color: var(--red); font-size: 0.85rem; font-weight: bold; border-bottom: 1px solid #ccc; margin: 25px 0 15px; display: block; padding-bottom: 5px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 12px; }
+        .input-group { display: flex; flex-direction: column; }
+        label { font-size: 0.8rem; font-weight: bold; margin-bottom: 4px; color: #333; }
+        input, select { padding: 8px; border: 1px solid #aaa; border-radius: 3px; font-size: 0.9rem; }
+        .full { grid-column: span 2; }
 
-        .btn-nav {
-            padding: 10px 20px;
-            margin: 5px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            color: white;
-        }
+        /* Submit Button */
+        .apply-btn { width: 100%; background: #2ecc71; color: white; border: none; padding: 15px; border-radius: 5px; font-weight: bold; font-size: 1rem; cursor: pointer; margin-top: 25px; transition: 0.3s; }
+        .apply-btn:disabled { background: #95a5a6; cursor: not-allowed; }
 
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 10px;
-        }
-
-        /* --- THE FORM SHEET DESIGN (تصوير جي مطابق) --- */
-        .admission-sheet {
-            background: white;
-            color: black;
-            padding: 40px;
-            border: 2px solid #333;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-            position: relative;
-        }
-
-        .header-section {
-            text-align: center;
-            border-bottom: 2px solid black;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-        }
-
-        .logo-placeholder {
-            position: absolute;
-            top: 40px;
-            right: 40px; /* Logo on right */
-            width: 80px;
-        }
-
-        .photo-box {
-            position: absolute;
-            top: 40px;
-            left: 40px; /* Photo on left */
-            width: 100px;
-            height: 120px;
-            border: 1px solid black;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            text-align: center;
-        }
-
-        .school-name {
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--primary-blue);
-            margin: 0;
-        }
-
-        .school-info {
-            font-size: 11px;
-            margin: 2px 0;
-        }
-
-        .form-badge {
-            border: 1px solid black;
-            padding: 4px 15px;
-            display: inline-block;
-            font-weight: bold;
-            margin-top: 10px;
-            font-size: 14px;
-        }
-
-        /* Section Titles */
-        .section-head {
-            background: #f0f0f0;
-            border: 1px solid black;
-            padding: 5px 10px;
-            font-weight: bold;
-            font-size: 13px;
-            margin: 15px 0 10px 0;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /* Form Grid */
-        .form-row {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 10px;
-        }
-
-        .form-group {
-            flex: 1;
-        }
-
-        label {
-            display: block;
-            font-size: 11px;
-            font-weight: bold;
-            margin-bottom: 3px;
-        }
-
-        input[type="text"], input[type="date"], input[type="tel"], select {
-            width: 100%;
-            padding: 7px;
-            border: 1px solid #999;
-            box-sizing: border-box;
-            font-size: 13px;
-        }
-
-        /* Document Upload / Checkbox Area */
-        .doc-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border: 1px solid #eee;
-            padding: 5px;
-            margin-bottom: 5px;
-        }
-
-        .doc-check {
-            width: 15px;
-            height: 15px;
-            border: 1px solid black;
-            margin-left: 10px;
-        }
-
-        /* Office Use Section */
-        .office-box {
-            margin-top: 20px;
-            border: 1px dashed black;
-            padding: 10px;
-        }
-
-        .footer-sigs {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 50px;
-            text-align: center;
-            font-size: 12px;
-        }
-
-        .sig-line {
-            border-top: 1px solid black;
-            width: 180px;
-            padding-top: 5px;
-        }
-
-        /* --- Search Bar Styling --- */
-        #search-panel {
-            background: #1e1e1e;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: none;
-        }
-
-        /* Hide UI on Print */
-        @media print {
-            .no-print-nav, #search-panel, .btn-submit-row, input[type="file"] {
-                display: none !important;
-            }
-            body { background: white; }
-            .container { margin: 0; padding: 0; max-width: 100%; }
-            .admission-sheet { border: none; box-shadow: none; padding: 20px; }
-        }
+        /* Console Window */
+        #console-window { background: #1a1a1a; color: #00ff00; padding: 12px; border-radius: 5px; font-family: 'Courier New', monospace; font-size: 11px; height: 130px; overflow-y: auto; margin-top: 25px; border: 2px solid #555; line-height: 1.5; }
+        .log-success { color: #00ff00; }
+        .log-error { color: #ff4444; }
+        .log-info { color: #00d9ff; }
     </style>
 </head>
 <body>
 
-<div class="no-print-nav">
-    <button class="btn-nav" style="background: var(--accent-green);" onclick="toggleSearch()">🔍 ريڪارڊ ڳوليو</button>
-    <button class="btn-nav" style="background: #555;" onclick="window.location.reload()">🔄 نئون فارم</button>
-</div>
-
-<div class="container">
-
-    <div id="search-panel">
-        <h4 style="color: white; margin: 0 0 10px 0;">ريڪارڊ ڳوليو (B-Form نمبر داخل ڪريو)</h4>
-        <div style="display: flex; gap: 10px;">
-            <input type="text" id="searchInput" placeholder="45304-xxxxxxx-x" style="flex: 2;">
-            <button onclick="fetchStudentData()" style="flex: 1; background: orange; border: none; cursor: pointer; font-weight: bold;">ڳوليو</button>
-        </div>
-        <p id="statusMsg" style="color: #2ecc71; font-size: 12px; margin-top: 10px;"></p>
+    <div class="top-nav">
+        <span style="font-size: 0.85rem; font-weight: bold; color: var(--blue);">داخلا پورٽل مھڪار (GBELS WASSAN)</span>
+        <a href="YOUR_MANUAL_PDF_LINK" target="_blank" class="nav-btn manual-btn">📄 Manual Form (PDF) ڊائون لوڊ</a>
+        <a href="#" class="nav-btn online-btn">💻 Online Apply (آن لائن فارم ڀريو)</a>
     </div>
 
-    <div class="admission-sheet" id="mainForm">
-        
-        <div class="photo-box">شاگرد جي تصوير</div>
+    <div class="form-box">
+        <img src="https://via.placeholder.com/80" class="school-logo" alt="School Logo">
+        <div class="student-photo-box">
+            <p style="font-size:0.6rem; text-align:center; margin-top:40px; color: #999;">Passport Size<br>Photo</p>
+        </div>
 
-        <div class="header-section">
-            <h1 class="school-name">GOVERNMENT BOYS ELEMENTARY LOWER SECONDARY SCHOOL WASSAN</h1>
-            <p class="school-info">Village Muhammad Sharif Wassan, Taluka & District Naushahro Feroze</p>
-            <p class="school-info">SEMIS Code: 416040490 | WhatsApp: +92 300 0000000</p>
-            <div class="form-badge">ADMISSION FORM (Session: 2026-2027)</div>
+        <div class="header-main">
+            <h2>GOVERNMENT BOYS ELEMENTARY LOWER SECONDARY SCHOOL WASSAN</h2>
+            <div class="sub-header">Village Muhammad Sharif Wassan, Taluka & District Naushahro Feroze<br>SEMIS Code: 416040489 | WhatsApp: +92 300 8909756</div>
+            <div class="session-tag">ADMISSION FORM (Session: 2026-2027)</div>
         </div>
 
         <form id="admissionForm">
-            <div class="section-head">
-                <span>1. STUDENT INFORMATION (شاگرد جي معلومات)</span>
+            <span class="section-title">1. STUDENT INFORMATION (شاگرد جي معلومات)</span>
+            <div class="grid">
+                <div class="input-group"><label>Student Full Name:</label><input type="text" id="sName" placeholder="e.g. Hafsa" required></div>
+                <div class="input-group"><label>Father's Name:</label><input type="text" id="fName" placeholder="e.g. Saeed Ahmed" required></div>
+                <div class="input-group"><label>Surname / Caste:</label><input type="text" id="caste" placeholder="e.g. Wassan" required></div>
+                <div class="input-group"><label>Date of Birth:</label><input type="date" id="dob" required></div>
+                <div class="input-group"><label>Gender:</label><select id="gender"><option>Male</option><option>Female</option></select></div>
+                <div class="input-group"><label>Religion:</label><input type="text" id="religion" value="Islam"></div>
             </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Student Full Name:</label>
-                    <input type="text" id="s_name">
-                </div>
-                <div class="form-group">
-                    <label>Father's Name:</label>
-                    <input type="text" id="f_name">
-                </div>
+            <div class="input-group"><label>B-Form / CNIC Number:</label><input type="text" id="cnic" placeholder="45304-XXXXXXX-X" required></div>
+
+            <span class="section-title">2. ACADEMIC & CONTACT DETAILS</span>
+            <div class="grid">
+                <div class="input-group"><label>Admission Required in Class:</label><input type="text" id="tClass" placeholder="e.g. Class Two" required></div>
+                <div class="input-group"><label>Previous School Name:</label><input type="text" id="pSchool" placeholder="e.g. GBELS Wassan"></div>
             </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Surname / Caste:</label>
-                    <input type="text" id="caste">
-                </div>
-                <div class="form-group">
-                    <label>Date of Birth:</label>
-                    <input type="date" id="dob">
-                </div>
-                <div class="form-group">
-                    <label>Gender:</label>
-                    <select id="gender"><option>Male</option><option>Female</option></select>
-                </div>
+            <div class="grid">
+                <div class="input-group"><label>Mobile / WhatsApp No:</label><input type="tel" id="whatsapp" placeholder="03001234567" required></div>
+                <div class="input-group"><label>Father Occupation:</label><input type="text" id="occup" placeholder="e.g. Teacher"></div>
             </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label>B-Form / CNIC Number:</label>
-                    <input type="text" id="cnic_display">
-                </div>
-                <div class="form-group">
-                    <label>Religion:</label>
-                    <input type="text" value="Islam" id="religion">
-                </div>
+            <div class="input-group"><label>Residential Address:</label><input type="text" id="address" class="full" required></div>
+
+            <span class="section-title">3. REQUIRED DOCUMENTS (MANDATORY)</span>
+            <div class="grid">
+                <div class="input-group"><label>B-Form Copy:</label><input type="file" id="fileB" accept="image/*" required></div>
+                <div class="input-group"><label>SLC Copy:</label><input type="file" id="fileS" accept="image/*" required></div>
+                <div class="input-group"><label>Father CNIC:</label><input type="file" id="fileC" accept="image/*" required></div>
+                <div class="input-group"><label>Result Card:</label><input type="file" id="fileR" accept="image/*" required></div>
             </div>
 
-            <div class="section-head">
-                <span>2. ACADEMIC & CONTACT DETAILS</span>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Admission Required in Class:</label>
-                    <select id="adm_class">
-                        <option>Class One</option><option>Class Two</option>
-                        <option>Class Three</option><option>Class Four</option><option>Class Five</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Previous School Name:</label>
-                    <input type="text" id="prev_school">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Last Class Passed:</label>
-                    <input type="text" id="last_class">
-                </div>
-                <div class="form-group">
-                    <label>Percentage / Grade:</label>
-                    <input type="text" id="grade">
-                </div>
-            </div>
-
-            <div class="section-head">
-                <span>3. PARENT / GUARDIAN DETAILS</span>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Father Occupation:</label>
-                    <input type="text" id="job">
-                </div>
-                <div class="form-group">
-                    <label>Mobile / WhatsApp No:</label>
-                    <input type="tel" id="whatsapp">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Residential Address:</label>
-                    <input type="text" id="address">
-                </div>
-            </div>
-
-            <div class="section-head">
-                <span>4. REQUIRED DOCUMENTS (MANDATORY)</span>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <div class="doc-row">
-                        <span>B-Form Copy:</span>
-                        <div style="display:flex; align-items:center;">
-                            <input type="file" class="no-print">
-                            <div class="doc-check"></div>
-                        </div>
-                    </div>
-                    <div class="doc-row">
-                        <span>SLC Copy:</span>
-                        <div style="display:flex; align-items:center;">
-                            <input type="file" class="no-print">
-                            <div class="doc-check"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="doc-row">
-                        <span>Father CNIC:</span>
-                        <div style="display:flex; align-items:center;">
-                            <input type="file" class="no-print">
-                            <div class="doc-check"></div>
-                        </div>
-                    </div>
-                    <div class="doc-row">
-                        <span>Result Card:</span>
-                        <div style="display:flex; align-items:center;">
-                            <input type="file" class="no-print">
-                            <div class="doc-check"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="office-box">
-                <div style="text-align: center; font-weight: bold; margin-bottom: 10px; font-size: 12px;">FOR OFFICE USE ONLY (صرف آفيس جي استعمال لاء)</div>
-                <div class="form-row">
-                    <div class="form-group"><label>G.R Number:</label><input type="text"></div>
-                    <div class="form-group"><label>Admission Date:</label><input type="text"></div>
-                </div>
-            </div>
-
-            <div class="footer-sigs">
-                <div class="sig-line">Class Teacher Signature</div>
-                <div class="sig-line">Admission Incharge</div>
-                <div class="sig-line">Head Master Stamp</div>
-            </div>
-
-            <div class="btn-submit-row no-print" style="margin-top: 30px; display: flex; gap: 10px;">
-                <button type="button" onclick="window.print()" style="flex: 1; padding: 15px; background: #e74c3c; color: white; border: none; font-weight: bold; cursor: pointer;">🖨️ پرنٽ ۽ ڊائون لوڊ ڪريو</button>
-                <button type="button" onclick="alert('آن لائن درخواست موڪلي وئي!')" style="flex: 1; padding: 15px; background: var(--accent-green); color: white; border: none; font-weight: bold; cursor: pointer;">Apply Online & Send WhatsApp ✅</button>
-            </div>
+            <button type="submit" id="submitBtn" class="apply-btn">Apply Online & Send via WhatsApp ✅</button>
         </form>
+
+        <div id="console-window">
+            <span class="log-info">> [SYSTEM] GBELS Wassan Admission Portal Loaded.</span><br>
+            <span class="log-info">> [SYSTEM] Waiting for user input...</span>
+        </div>
     </div>
-</div>
 
-<script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwSAKtUa6CbUgyYJuIEadXN56jIGVuporFE6KwD5erNWCjem1U_aQ-Y3i6ng00fXA80Kg/exec";
+    <script>
+        // --- YOUR SCRIPT URL ---
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0YfSmQrLTiob9juGfMkVy_-thwhLRc9cH_roq0J_fTuGoAxdrsEAuFS2oPBP2Ejsf/exec";
 
-    function toggleSearch() {
-        const panel = document.getElementById('search-panel');
-        panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
-    }
+        const logWindow = document.getElementById('console-window');
+        function addLog(text, type = 'info') {
+            const time = new Date().toLocaleTimeString();
+            logWindow.innerHTML += `<br><span class="log-${type}">> [${time}] ${text}</span>`;
+            logWindow.scrollTop = logWindow.scrollHeight;
+        }
 
-    function fetchStudentData() {
-        const id = document.getElementById('searchInput').value;
-        const msg = document.getElementById('statusMsg');
-        
-        if(!id) { alert("B-Form نمبر لکو"); return; }
-        
-        msg.innerText = "ڊيٽا ڳولي رهيو آهي... مهرباني ڪري انتظار ڪريو.";
-        msg.style.color = "orange";
+        const toBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
 
-        fetch(`${SCRIPT_URL}?action=search&id=${id}`)
-            .then(res => res.json())
-            .then(data => {
-                if(data.status === "success" || data.result === "found") {
-                    msg.innerText = "ريڪارڊ ملي ويو! فارم ڀرجي چڪو آهي.";
-                    msg.style.color = "#2ecc71";
+        document.getElementById('admissionForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            
+            try {
+                addLog("Submission started. Processing files...", "info");
 
-                    // Mapping data to fields
-                    document.getElementById('s_name').value = data.name || "";
-                    document.getElementById('f_name').value = data.fatherName || "";
-                    document.getElementById('cnic_display').value = id;
-                    document.getElementById('whatsapp').value = data.phone || "";
-                    document.getElementById('caste').value = data.caste || "";
-                    document.getElementById('address').value = data.address || "";
-                } else {
-                    msg.innerText = "معاف ڪجو، هي ريڪارڊ موجود ناهي.";
-                    msg.style.color = "red";
-                }
-            })
-            .catch(err => {
-                msg.innerText = "رابطي ۾ غلطي ٿي وئي.";
-                msg.style.color = "red";
-            });
-    }
-</script>
+                // Convert images to Base64
+                const bFile = await toBase64(document.getElementById('fileB').files[0]);
+                const sFile = await toBase64(document.getElementById('fileS').files[0]);
+                const fFile = await toBase64(document.getElementById('fileC').files[0]);
+                const rFile = await toBase64(document.getElementById('fileR').files[0]);
 
+                const payload = {
+                    name: document.getElementById('sName').value,
+                    father: document.getElementById('fName').value,
+                    caste: document.getElementById('caste').value,
+                    dob: document.getElementById('dob').value,
+                    gender: document.getElementById('gender').value,
+                    religion: document.getElementById('religion').value,
+                    cnic: document.getElementById('cnic').value,
+                    targetClass: document.getElementById('tClass').value,
+                    prevSchool: document.getElementById('pSchool').value,
+                    whatsapp: document.getElementById('whatsapp').value,
+                    occup: document.getElementById('occup').value,
+                    address: document.getElementById('address').value,
+                    bFormFile: bFile,
+                    slcFile: sFile,
+                    fatherCnicFile: fFile,
+                    resultCardFile: rFile
+                };
+
+                addLog("Sending data to Google Sheet & Drive...", "info");
+
+                // Send to Google Script
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify(payload)
+                });
+
+                addLog("Data sent successfully!", "success");
+
+                // Generate PDF Receipt
+                addLog("Generating PDF Receipt...", "info");
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                doc.text("GBELS WASSAN - ADMISSION RECEIPT", 20, 20);
+                doc.text(`Student: ${payload.name}`, 20, 40);
+                doc.text(`Father: ${payload.father}`, 20, 50);
+                doc.text(`Class: ${payload.targetClass}`, 20, 60);
+                doc.save(`Receipt_${payload.name}.pdf`);
+                addLog("Receipt downloaded.", "success");
+
+                // WhatsApp Redirect
+                setTimeout(() => {
+                    addLog("Redirecting to WhatsApp...", "info");
+                    const waMsg = `*GBELS WASSAN ADMISSION*%0AName: ${payload.name}%0AFather: ${payload.father}%0AClass: ${payload.targetClass}%0A_Form submitted online._`;
+                    window.open(`https://wa.me/923008909756?text=${waMsg}`, '_blank');
+                    btn.disabled = false;
+                }, 2000);
+
+            } catch (error) {
+                addLog("ERROR: " + error.message, "error");
+                btn.disabled = false;
+            }
+        });
+    </script>
 </body>
 </html>
