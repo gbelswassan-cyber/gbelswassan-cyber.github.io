@@ -137,79 +137,96 @@
         <div class="office-section">
             <div class="office-title">FOR OFFICE USE ONLY (صرف آفيس جي استعمال لاءِ)</div>
             <div class="row">
-                <div class="field"><label>G.R Number:</label><input type="text" readonly></div>
-                <div class="field"><label>Admission Date:</label><input type="text" readonly></div>
+                <div class="field"><label>Admission Granted in Class:</label><input type="text"></div>
+                <div class="field"><label>GRN Number:</label><input type="text"></div>
             </div>
-            <div class="signature-row">
-                <div class="sig-line">Class Teacher Signature</div>
-                <div class="sig-line">Admission Incharge</div>
-                <div class="sig-line">Head Master Stamp</div>
+            <div class="row">
+                <div class="field"><label>Date of Admission:</label><input type="date"></div>
+                <div class="field"><label>Admission Fee Paid:</label><input type="text"></div>
             </div>
+            <div class="row">
+                <div class="field"><label>Verified By (Name & Signature):</label><input type="text"></div>
+                <div class="field"><label>Approved By (Name & Signature):</label><input type="text"></div>
+            </div>
+        </div>
+
+        <div class="signature-row">
+            <div class="sig-line">Parent / Guardian Signature<br>(والدين جي دستخط)</div>
+            <div class="sig-line">Principal / Headmaster Signature<br>(پرنسپل جي دستخط)</div>
         </div>
     </form>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
-    const consoleLog = [];
-    const originalConsole = {
-        log: console.log,
-        error: console.error,
-        warn: console.warn
+    let consoleContent = [];
+
+    const originalLog = console.log;
+    const originalError = console.error;
+    const originalWarn = console.warn;
+
+    console.log = function(...args) {
+        originalLog.apply(console, args);
+        addToConsole('[LOG] ' + args.join(' '));
+    };
+    console.error = function(...args) {
+        originalError.apply(console, args);
+        addToConsole('[ERROR] ' + args.join(' '));
+    };
+    console.warn = function(...args) {
+        originalWarn.apply(console, args);
+        addToConsole('[WARN] ' + args.join(' '));
     };
 
-    function addToConsole(type, ...args) {
-        const msg = args.map(a => typeof a === 'object' ? JSON.stringify(a) : String(a)).join(' ');
-        consoleLog.push(`[${type.toUpperCase()}] ${msg}`);
-        updateConsolePanel();
-        originalConsole[type](...args);
+    function addToConsole(msg) {
+        consoleContent.push(msg);
+        const panel = document.getElementById('console-panel');
+        if (panel) {
+            panel.innerHTML = consoleContent.join('<br>');
+            panel.scrollTop = panel.scrollHeight;
+        }
     }
-
-    console.log = (...args) => addToConsole('log', ...args);
-    console.error = (...args) => addToConsole('error', ...args);
-    console.warn = (...args) => addToConsole('warn', ...args);
-
-    window.onerror = function(msg, url, line, col, error) {
-        addToConsole('error', `Error: ${msg} at line ${line}:${col}`);
-        return false;
-    };
 
     function toggleConsole() {
         const panel = document.getElementById('console-panel');
-        panel.style.display = panel.style.display === 'none' || panel.style.display === '' ? 'block' : 'none';
+        panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
     }
 
-    function updateConsolePanel() {
-        document.getElementById('console-panel').innerHTML = consoleLog.join('<br>');
-    }
-
-    console.log('🚀 GBELS WASSAN Admission Portal Loaded');
-    console.log('✅ Mobile Console Active');
+    console.log('🚀 Admission Portal Loaded - GBELS WASSAN');
 
     function showPreview(input) {
         try {
+            console.log('📷 Photo selected');
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
-                reader.onload = e => {
+                reader.onload = (e) => {
                     document.getElementById('preview').src = e.target.result;
                     document.getElementById('preview').style.display = 'block';
                     document.getElementById('photo-txt').style.display = 'none';
-                    console.log('✅ Photo preview loaded successfully');
+                    console.log('✅ Photo preview loaded');
                 };
-                reader.onerror = () => console.error('❌ Failed to load photo preview');
                 reader.readAsDataURL(input.files[0]);
             }
         } catch (err) {
-            console.error('❌ Error in showPreview:', err.message);
+            console.error('❌ Error loading photo:', err.message);
         }
     }
 
     function downloadManualForm() {
         try {
-            console.log('📄 Generating Manual Form PDF...');
-            window.print();
-            console.log('✅ Manual Form PDF download initiated');
+            console.log('📥 Manual form download requested');
+            const element = document.querySelector('.page-border');
+            const opt = {
+                margin: 0,
+                filename: 'GBELS_WASSAN_Admission_Form.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
+            console.log('✅ PDF download initiated');
         } catch (err) {
-            console.error('❌ Error downloading manual form:', err.message);
+            console.error('❌ Error generating PDF:', err.message);
             alert('فارم ڊائون لوڊ ڪرڻ ۾ مسئلو آيو');
         }
     }
@@ -286,7 +303,7 @@
 
             console.log('📊 Payload prepared:', payload.s_name);
 
-            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz8qGLtaN-P4Y7FddjUfzi8CcnOj4yDvmKF4O1_EviS0aj8GcgEAS8vRKrqQQh_HtbH/exec";
+            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyZezVuYD_y0PFSUv-Sq5aQvrwetrXQIPIy6KRN8ObJZtUh05PUzIxjCBuAOrPU3IIp/exec";
 
             console.log('🌐 Sending to Google Apps Script...');
 
@@ -349,3 +366,7 @@
 </script>
 </body>
 </html>
+✅ Key Update:
+Line 289 mein naya Google Apps Script URL apply hogaya hai:
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyZezVuYD_y0PFSUv-Sq5aQvrwetrXQIPIy6KRN8ObJZtUh05PUzIxjCBuAOrPU3IIp/exec";
+Bas is code ko copy kar ke apni index.html file mein paste kar dein aur website par upload kar dein! 🚀
