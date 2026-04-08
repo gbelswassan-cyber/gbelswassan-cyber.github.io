@@ -1,206 +1,227 @@
 <!DOCTYPE html>
-<html lang="sd">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://gbelswassan-cyber.github.io/admission-portal/" />
-    <title>Admission Portal | GBELS WASSAN</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="canonical" href="https://gbelswassan-cyber.github.io/" />
+    <title>Government Boys Elementary Lower Secondary School Wassan | Official Web Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Noto+Naskh+Arabic:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #002d5b; --accent: #8b0000; --whatsapp: #25D366; --btn-dark: #333; }
-        body { font-family: 'Poppins', 'Segoe UI', Tahoma, sans-serif; background: #f0f2f5; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; }
-        .sindhi { direction: rtl; font-family: 'Noto Naskh Arabic', serif; font-size: 1rem; line-height: 2; }
-        .selection-menu { background: #eef6ff; padding: 15px; border: 2px dashed var(--primary); border-radius: 12px; margin-bottom: 15px; text-align: center; width: 100%; max-width: 800px; box-sizing: border-box; }
-        .btn-choice { padding: 12px 25px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: white; margin: 5px; font-size: 14px; transition: 0.3s; }
-        .btn-manual { background: var(--btn-dark); }
-        .btn-online { background: var(--primary); }
-        .page-border { background: white; width: 210mm; min-height: 297mm; padding: 10mm; border: 3px solid var(--primary); box-shadow: 0 0 20px rgba(0,0,0,0.2); position: relative; box-sizing: border-box; }
-        .header { display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 15px; }
-        .logo { width: 85px; height: 85px; border-radius: 50%; border: 1px solid #ddd; }
-        .school-info { text-align: center; flex: 1; padding: 0 10px; }
-        .school-info h1 { margin: 0; color: var(--primary); font-size: 17px; text-transform: uppercase; font-weight: 800; }
-        .school-info p { margin: 2px 0; font-size: 10px; font-weight: 600; color: #333; }
-        .admission-tag { font-size: 12px; color: var(--accent); font-weight: bold; border: 1.5px solid #000; padding: 3px 15px; display: inline-block; margin-top: 5px; border-radius: 4px; }
-        .photo-box { width: 90px; height: 110px; border: 2px dashed #555; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 10px; background: #fdfdfd; font-weight: bold; overflow: hidden; position: relative; cursor: pointer; }
-        .photo-box img { width: 100%; height: 100%; object-fit: cover; display: none; }
-        .section { border: 1.2px solid #000; padding: 15px 10px 8px 10px; border-radius: 5px; margin-bottom: 15px; position: relative; }
-        .section-label { position: absolute; top: -10px; left: 12px; background: white; padding: 0 8px; font-weight: 800; font-size: 11px; color: var(--accent); text-transform: uppercase; }
-        .row { display: flex; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
-        .field { flex: 1; display: flex; flex-direction: column; min-width: 150px; }
-        label { font-weight: bold; font-size: 11px; margin-bottom: 3px; color: #222; }
-        input, select { padding: 8px; border: 1px solid #999; border-radius: 4px; font-size: 13px; background: #fff; }
-        .office-section { border: 1.5px solid var(--primary); padding: 12px; background: #f9f9f9; border-radius: 6px; margin-top: 15px; }
-        .office-title { text-align: center; font-weight: 900; text-decoration: underline; margin-bottom: 10px; font-size: 13px; }
-        .signature-row { display: flex; justify-content: space-between; margin-top: 30px; }
-        .sig-line { border-top: 1.2px solid #000; width: 170px; text-align: center; font-size: 11px; font-weight: bold; padding-top: 4px; }
-        .btn-submit { background: var(--whatsapp); color: white; padding: 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; width: 100%; margin: 10px 0; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .btn-submit:disabled { background: #ccc; cursor: not-allowed; }
-        #console-panel { display: none; position: fixed; bottom: 70px; right: 10px; width: 90%; max-width: 400px; height: 300px; background: #1e1e1e; color: #00ff00; border: 2px solid #ff5722; border-radius: 8px; padding: 10px; overflow-y: auto; z-index: 9998; font-family: monospace; font-size: 12px; }
-        
-        @media print {
-            .no-print { display: none !important; }
-            body { padding: 0; background: white; }
-            .page-border { border: 2px solid var(--primary); box-shadow: none; width: 100%; margin: 0; padding: 10mm; }
+        :root {
+            --ajrak-red: #a52a2a;
+            --ajrak-blue: #002d5b;
+            --ajrak-gold: #ffcc00;
+            --white: #ffffff;
+            --bg-light: #f4f7f9;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: #333; line-height: 1.8; }
+        .ticker-wrapper { background: #ff0000; color: white; padding: 12px 0; overflow: hidden; border-bottom: 3px solid var(--ajrak-gold); }
+        .ticker-text { display: inline-block; white-space: nowrap; animation: ticker 30s linear infinite; direction: rtl; font-family: 'Noto Naskh Arabic', serif; font-size: 1.2rem; }
+        @keyframes ticker { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        header {
+            background: linear-gradient(rgba(0, 45, 91, 0.80), rgba(0, 45, 91, 0.80)), url('New building.png');
+            background-size: cover; background-position: center; color: white; padding: 90px 20px; text-align: center; border-bottom: 8px solid var(--ajrak-gold);
+        }
+        .header-logo { width: 130px; border-radius: 50%; border: 4px solid var(--ajrak-gold); background: white; margin-bottom: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
+        header h1 { font-family: 'Montserrat', sans-serif; font-size: 2rem; text-transform: uppercase; letter-spacing: 1px; line-height: 1.2; max-width: 1000px; margin: 0 auto; }
+        .header-map-link { color: var(--ajrak-gold); text-decoration: none; font-size: 1.1rem; display: block; margin-top: 15px; font-weight: 500; }
+        .header-map-link:hover { text-decoration: underline; }
+        .semis-code { display: inline-block; background: var(--ajrak-gold); color: var(--ajrak-blue); padding: 6px 20px; border-radius: 5px; font-weight: 800; margin-top: 20px; font-size: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        nav {
+            background: var(--ajrak-blue); padding: 18px 5%; position: sticky; top: 0; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center; box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            flex-wrap: wrap;
+        }
+        .nav-brand { color: var(--ajrak-gold); font-weight: 800; font-size: 1.2rem; border: 2px solid var(--ajrak-gold); padding: 5px 12px; border-radius: 5px; text-decoration: none; }
+        .nav-links { list-style: none; display: flex; gap: 25px; align-items: center; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--ajrak-gold); }
+        .admission-btn { background: var(--ajrak-red); padding: 10px 22px; border-radius: 50px; border: 2px solid var(--ajrak-gold); animation: pulse 2s infinite; font-weight: bold !important; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; background: none; border: none; padding: 5px; }
+        .hamburger span { display: block; width: 26px; height: 3px; background: var(--ajrak-gold); border-radius: 3px; transition: 0.3s; }
+        .container { max-width: 1150px; margin: 60px auto; padding: 0 25px; }
+        .section-card { background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); margin-bottom: 50px; border: 1px solid #eee; }
+        .section-title { text-align: center; color: var(--ajrak-blue); margin-bottom: 45px; position: relative; font-weight: 800; text-transform: uppercase; font-size: 1.8rem; letter-spacing: 1px; }
+        .section-title::after { content: ''; width: 80px; height: 5px; background: var(--ajrak-red); position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); }
+        .mission-flex { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; margin-bottom: 20px; }
+        .mission-text { flex: 1; background: #f8fbff; padding: 35px; border-radius: 15px; border-right: 8px solid var(--ajrak-blue); direction: rtl; font-family: 'Noto Naskh Arabic', serif; font-size: 1.2rem; line-height: 2.2; box-shadow: inset 0 0 15px rgba(0,0,0,0.02); }
+        .mission-img { width: 400px; border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); border: 5px solid white; }
+        .history-content { direction: rtl; font-family: 'Noto Naskh Arabic', serif; text-align: justify; font-size: 1.2rem; line-height: 2.4; }
+        .sindhi { direction: rtl; font-family: 'Noto Naskh Arabic', serif; }
+        .table-container { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; min-width: 800px; }
+        th { background: var(--ajrak-blue); color: white; padding: 20px; text-align: left; font-size: 1rem; }
+        td { padding: 18px; border-bottom: 1px solid #eee; font-size: 1rem; }
+        tr:hover { background: #fffde7; }
+        .badge { padding: 5px 12px; border-radius: 5px; font-size: 0.9rem; font-weight: bold; border: 1px solid #ddd; }
+        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+        .link-card {
+            background: #ffffff; padding: 25px; border-radius: 12px; text-align: center;
+            text-decoration: none; color: var(--ajrak-blue); font-weight: 800;
+            border: 2px solid #e9ecef; transition: 0.4s; display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .link-card:hover { background: var(--ajrak-red); color: white; border-color: var(--ajrak-gold); transform: translateY(-8px); box-shadow: 0 10px 20px rgba(165, 42, 42, 0.2); }
+        .link-card span { font-size: 0.8rem; font-weight: 400; margin-top: 5px; opacity: 0.8; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .gallery-grid img { width: 100%; border-radius: 15px; height: 250px; object-fit: cover; transition: 0.4s; cursor: pointer; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .gallery-grid img:hover { transform: scale(1.03); }
+        footer { background: #000; color: white; padding: 100px 20px 50px; text-align: center; border-top: 8px solid var(--ajrak-red); }
+        .footer-name { color: var(--ajrak-gold); font-size: 1.6rem; margin-bottom: 20px; font-weight: 800; text-transform: uppercase; }
+        .footer-links a { color: white; text-decoration: none; transition: 0.3s; margin: 0 10px; }
+        .footer-links a:hover { color: var(--ajrak-gold); text-decoration: underline; }
+        .web-url { color: var(--ajrak-gold); font-size: 1.2rem; font-weight: bold; margin-top: 20px; display: inline-block; }
+        @media (max-width: 992px) { .mission-img { width: 100%; } }
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.5rem; }
+            .hamburger { display: flex; }
+            .nav-links {
+                display: none; flex-direction: column; width: 100%; gap: 0;
+                background: var(--ajrak-blue); padding: 10px 0 15px; margin-top: 10px;
+            }
+            .nav-links.open { display: flex; }
+            .nav-links li { width: 100%; text-align: center; }
+            .nav-links a { display: block; padding: 12px 20px; font-size: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+            .nav-links li:last-child a { border-bottom: none; margin-top: 10px; }
+            .admission-btn { display: inline-block; margin: 5px auto; width: auto; }
         }
     </style>
 </head>
 <body>
 
-<div class="selection-menu no-print">
-    <p class="sindhi" style="margin:0 0 10px 0; font-weight:bold; color:var(--primary);">داخلا پورٽل ۾ ڀليڪار (GBELS WASSAN)</p>
-    <button class="btn-choice btn-manual" onclick="window.print()">Manual Form (PDF / Print) 🖨️</button>
-    <button class="btn-choice btn-online" onclick="document.getElementById('form-start').scrollIntoView({behavior: 'smooth'});">Online Apply (آن لائن فارم) 📲</button>
-</div>
-
-<div class="page-border" id="form-start">
-    <div class="header">
-        <img src="https://gbelswassan-cyber.github.io/logo.png.png" class="logo" alt="School Logo">
-        <div class="school-info">
-            <h1>GOVERNMENT BOYS ELEMENTARY LOWER SECONDARY SCHOOL WASSAN</h1>
-            <p>Village Muhammad Sharif Wassan, Taluka & District Naushahro Feroze</p>
-            <p style="font-size:9px;">SEMIS Code: 416040489 | WhatsApp: +92 300 8909756</p>
-            <span class="admission-tag">ADMISSION FORM (Session: 2026-2027)</span>
-        </div>
-        <div class="photo-box" onclick="document.getElementById('student_img').click()">
-            <span id="photo-txt">Passport Size<br>Photo Here</span>
-            <img id="preview" alt="Student Photo">
-            <input type="file" id="student_img" accept="image/*" style="display:none" onchange="showPreview(this)">
-        </div>
+    <div class="ticker-wrapper">
+        <div class="ticker-text">📢 پڌري پوي ٿي: تعليمي سال 2026-27 لاءِ داخلاون شروع ٿي ويون آهن. ڪلاس ECE کان اٺين تائين پنهنجي ٻارن جي داخلا لاءِ جلد رجسٽريشن ڪرايو.</div>
     </div>
 
-    <form id="admissionForm">
-        <div class="section">
-            <span class="section-label">1. STUDENT INFORMATION (شاگرد جي معلومات)</span>
-            <div class="row">
-                <div class="field"><label>Student Full Name:</label><input type="text" id="s_name" required></div>
-                <div class="field"><label>Father's Name:</label><input type="text" id="f_name" required></div>
-            </div>
-            <div class="row">
-                <div class="field"><label>Surname / Caste:</label><input type="text" id="caste" required></div>
-                <div class="field"><label>Date of Birth:</label><input type="date" id="dob" required></div>
-                <div class="field">
-                    <label>Gender:</label>
-                    <select id="gender"><option value="">-- Select --</option><option>Male</option><option>Female</option></select>
+    <header>
+        <img src="logo.png.png" class="header-logo" alt="GBELS Wassan Logo">
+        <h1>Government Boys Elementary Lower Secondary School Wassan</h1>
+        <a href="https://www.google.com/maps/search/?api=1&query=Muhammad+Sharif+Wassan" target="_blank" class="header-map-link">
+            📍 Village Muhammad Sharif Wassan, Taluka & District Naushahro Feroze, Sindh
+        </a>
+        <div class="semis-code">SEMIS CODE: 416040489</div>
+    </header>
+
+    <nav>
+        <a href="#" class="nav-brand">GBELS WASSAN</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about" onclick="closeMenu()">Mission</a></li>
+            <li><a href="#history" onclick="closeMenu()">History</a></li>
+            <li><a href="#faculty" onclick="closeMenu()">Faculty</a></li>
+            <li><a href="#gallery" onclick="closeMenu()">Gallery</a></li>
+            <li><a href="#links" onclick="closeMenu()">Boards & Links</a></li>
+            <li><a href="https://gbelswassan-cyber.github.io/admission-portal/index.html" class="admission-btn">Admission 2026</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <h2 class="section-title" id="about">Our Mission (اسان جا مقصد)</h2>
+        <div class="section-card mission-flex">
+            <img src="img1.png" class="mission-img" alt="School Vision">
+            <div class="mission-text">
+                <p>اسان جو بنيادي مقصد ڳوٺ محمد شريف وسڻ ۽ ان جي آس پاس وارن علائقن جي شاگردن کي اعليٰ ۽ معياري تعليم فراهم ڪرڻ آهي. اسان چاهيون ٿا ته اسان جا شاگرد نه صرف تعليمي طور تي پر اخلاقي طور تي به ملڪ جا بهترين شهري ثابت ٿين.</p>
+                <div style="margin-top:20px;">
+                    <p>✅ **معياري تعليم:** جديد دور جي تقاضائن موجب تدريس.</p>
+                    <p>✅ **ڪردار سازي:** شاگردن جي اخلاقي ۽ ذهني تربيت.</p>
+                    <p>✅ **ڊجيٽل سهولتون:** اسڪول کي مڪمل ڊجيٽلائيز ڪرڻ ۽ شاگردن کي ٽيڪنالاجي سان روشناس ڪرائڻ.</p>
+                    <p>✅ **راندين جون سرگرميون:** جسماني واڌ ويجهه لاءِ راندين کي هٿي ڏيڻ.</p>
                 </div>
             </div>
-            <div class="row">
-                <div class="field"><label>B-Form / CNIC Number:</label><input type="text" id="cnic" required></div>
-                <div class="field"><label>Religion:</label><input type="text" id="religion"></div>
-            </div>
         </div>
 
-        <div class="section">
-            <span class="section-label">2. ACADEMIC & CONTACT DETAILS</span>
-            <div class="row">
-                <div class="field"><label>Admission Required in Class:</label><input type="text" id="adm_class" required></div>
-                <div class="field"><label>Previous School Name:</label><input type="text" id="prev_school"></div>
-            </div>
-            <div class="row">
-                <div class="field"><label>Last Class Passed:</label><input type="text" id="last_class"></div>
-                <div class="field"><label>Mobile / WhatsApp No:</label><input type="text" id="phone" required></div>
-            </div>
+        <h2 class="section-title" id="history">School History (اسان جي تاريخ)</h2>
+        <div class="section-card history-content">
+            <p>گورنمينٽ بوائز ايليمينٽري لوئر سيڪنڊري اسڪول وسڻ جي تاريخ تمام پراڻي ۽ شاندار آهي. هن علم جي مرڪز جو بنياد <strong>1956ع</strong> ۾ رکيو ويو، جنهن جو مقصد علائقي ۾ تعليمي کوٽ کي ختم ڪرڻ هو. گذريل ڪيترن ئي ڏهاڪن کان هي اسڪول هزارين شاگردن کي علم جي روشني فراهم ڪري چڪو آهي.</p>
+            <p style="margin-top:15px;">وقت گذرڻ سان گڏ اسڪول جي بلڊنگ ۽ تعليمي معيار ۾ وڏيون تبديليون آيون آهن. سال <strong>2026ع</strong> هن اداري لاءِ تمام اهم آهي، ڇاڪاڻ ته هن سال اسڪول کي اپ گريڊ ڪري <strong>ايليمينٽري لوئر سيڪنڊري</strong> جو درجو ڏنو ويو آهي، جنهن کانپوءِ هاڻي هتي اٺين ڪلاس تائين معياري تعليم فراهم ڪئي پئي وڃي.</p>
         </div>
 
-        <div class="section no-print">
-            <span class="section-label">3. DOCUMENTS UPLOAD (آن لائن اپلوڊ)</span>
-            <div class="row">
-                <div class="field"><label>B-Form Copy:</label><input type="file" class="doc-file" data-name="B-Form"></div>
-                <div class="field"><label>Father CNIC:</label><input type="file" class="doc-file" data-name="Father-CNIC"></div>
-            </div>
+        <h2 class="section-title" id="faculty">Official Faculty Roster</h2>
+        <div class="section-card table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Name of Employee</th>
+                        <th>P.ID</th>
+                        <th>Designation</th>
+                        <th>Qualification</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td><strong>Sarfaraz Ali Wassan</strong></td><td>10718953</td><td><span class="badge" style="background:#e3f2fd;">PST (BPS-14)</span></td><td>M.A + M.Phil</td></tr>
+                    <tr><td>2</td><td><strong>Ali Sher Wassan</strong></td><td>10381947</td><td><span class="badge" style="background:#e3f2fd;">PST (BPS-16)</span></td><td>P.T.C + B.A</td></tr>
+                    <tr><td>3</td><td><strong>Aftab Ahmed Mooro</strong></td><td>10718932</td><td><span class="badge" style="background:#e3f2fd;">PST (BPS-14)</span></td><td>M.A + M.Ed</td></tr>
+                    <tr><td>4</td><td><strong>Muneer Ahmed</strong></td><td>11016664</td><td><span class="badge" style="background:#e3f2fd;">PST (BPS-14)</span></td><td>M.A + B.Ed</td></tr>
+                    <tr><td>5</td><td><strong>Toqeer Ahmed</strong></td><td>11116636</td><td><span class="badge" style="background:#e3f2fd;">PST (BPS-14)</span></td><td>MSc Mathematics</td></tr>
+                    <tr><td>6</td><td><strong>Iftikhar Ahmed</strong></td><td>10829825</td><td><span class="badge" style="background:#e3f2fd;">PST (BPS-14)</span></td><td>M.A + M.Ed</td></tr>
+                    <tr><td>7</td><td><strong>Mehdi Khoso</strong></td><td>10718934</td><td><span class="badge" style="background:#e3f2fd;">PST (BPS-14)</span></td><td>M.A + M.Ed</td></tr>
+                    <tr><td>8</td><td><strong>Nek Muhammad</strong></td><td>10718971</td><td><span class="badge" style="background:#e3f2fd;">PST (BPS-14)</span></td><td>M.A + M.Ed</td></tr>
+                    <tr style="background:#fffafa;"><td>9</td><td><strong>Mushtaque Ahmed</strong></td><td>10713543</td><td><span class="badge" style="background:#ffebee; color:#c62828;">Chowkidar</span></td><td>Primary Education</td></tr>
+                </tbody>
+            </table>
         </div>
 
-        <div class="no-print">
-            <button type="button" id="submitBtn" class="btn-submit" onclick="handleUpload()">فارم جمع ڪريو ۽ واٽسپ موڪليو ✅</button>
-            <p id="status" style="text-align:center; font-size:12px; color:var(--primary); font-weight:bold;"></p>
+        <h2 class="section-title" id="links">Educational Boards & Portals</h2>
+        <div class="section-card links-grid">
+            <a href="https://www.sindheducation.gov.pk/" target="_blank" class="link-card">SE&LD Sindh <span>School Education Dept.</span></a>
+            <a href="https://eportal.sindheducation.gov.pk/" target="_blank" class="link-card">E-Transfer Portal <span>Human Resources Dept.</span></a>
+            <a href="https://apply.sts.net.pk/?ssid=658" target="_blank" class="link-card">STS IBA Sukkur <span>Jobs & Testing Service</span></a>
+            <a href="https://spsc.gov.pk/" target="_blank" class="link-card">SPSC Official <span>Public Service Commission</span></a>
+            <a href="https://stbb.edu.pk/" target="_blank" class="link-card">STBB Books <span>PDF Textbooks Online</span></a>
+            <a href="https://steda.gos.pk/" target="_blank" class="link-card">STEDA Sindh <span>Teacher Development</span></a>
+            <a href="https://bisesba.edu.pk/" target="_blank" class="link-card">BISE SBA <span>Exam & Results Board</span></a>
+            <a href="https://pitesindh.edu.pk/labschool.php" target="_blank" class="link-card">PITE Sindh <span>Training Institute</span></a>
         </div>
 
-        <div class="office-section">
-            <div class="office-title">FOR OFFICE USE ONLY (صرف آفيس جي استعمال لاءِ)</div>
-            <div class="signature-row">
-                <div class="sig-line">Class Teacher Signature</div>
-                <div class="sig-line">Head Master Stamp</div>
-            </div>
+        <h2 class="section-title" id="gallery">School Gallery (تصويرون)</h2>
+        <div class="section-card gallery-grid">
+            <img src="IMG_20251206_110626.jpg" alt="School Activity">
+            <img src="IMG_20251206_112157.jpg" alt="School Activity">
+            <img src="IMG_20260206_210942.png" alt="School View">
+            <img src="IMG_20260206_211033.png" alt="School View">
+            <img src="IMG_20260206_211123.png" alt="School View">
+            <img src="IMG_20260206_211147.png" alt="School View">
+            <img src="IMG_20260206_211206.png" alt="School View">
+            <img src="Assembly 1.png" alt="School Assembly">
+            <img src="14Aug.png" alt="Independence Day">
+            <img src="school_group_photo.jpg.jpg" alt="School Group Photo">
+            <img src="New building.png" alt="New School Building">
+            <img src="teacher.png" alt="School Teacher">
         </div>
-    </form>
-</div>
 
-<script>
-    // توهان جو گوگل اسڪرپٽ لنڪ هتي لڳايو ويو آهي
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz8qGLtaN-P4Y7FddjUfzi8CcnOj4yDvmKF4O1_EviS0aj8GcgEAS8vRKrqQQh_HtbH/exec";
+    </div>
 
-    function showPreview(input) {
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            reader.onload = e => {
-                document.getElementById('preview').src = e.target.result;
-                document.getElementById('preview').style.display = 'block';
-                document.getElementById('photo-txt').style.display = 'none';
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
+    <footer>
+        <h2 class="footer-name">Government Boys Elementary Lower Secondary School Wassan</h2>
+        <div class="footer-links">
+            <p style="margin-bottom:15px;">
+                <a href="https://www.google.com/maps/search/?api=1&query=Muhammad+Sharif+Wassan" target="_blank">📍 Village Muhammad Sharif Wassan, Naushahro Feroze</a>
+            </p>
+            <p>
+                WhatsApp: <a href="https://wa.me/923008909756" target="_blank"><strong>+92 300 8909756</strong></a> |
+                Email: <a href="mailto:gbelswassan@gmail.com"><strong>gbelswassan@gmail.com</strong></a>
+            </p>
+            <a href="https://gbelswassan-cyber.github.io" class="web-url">gbelswassan-cyber.github.io</a>
+        </div>
+        <div style="margin-top:60px; font-size:0.85rem; opacity:0.6;">
+            © 2026 Government Boys Elementary Lower Secondary School Wassan | Official Portal Development
+        </div>
+    </footer>
 
-    function fileToBase64(file) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result.split(',')[1]);
-            reader.onerror = error => reject(error);
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', function() {
+            navLinks.classList.toggle('open');
         });
-    }
-
-    async function handleUpload() {
-        const btn = document.getElementById('submitBtn');
-        const status = document.getElementById('status');
-
-        if(!document.getElementById('s_name').value || !document.getElementById('cnic').value) {
-            alert("مهرباني ڪري شاگرد جو نالو ۽ B-Form نمبر لکو!");
-            return;
+        function closeMenu() {
+            navLinks.classList.remove('open');
         }
-
-        try {
-            btn.disabled = true;
-            status.innerText = "ڊيٽا اپلوڊ ٿي رهي آهي، مهرباني ڪري انتظار ڪريو...";
-
-            const docs = {};
-            const docInputs = document.querySelectorAll('.doc-file');
-            for (const input of docInputs) {
-                if (input.files && input.files[0]) {
-                    docs[input.dataset.name] = await fileToBase64(input.files[0]);
-                }
-            }
-
-            const payload = {
-                s_name: document.getElementById('s_name').value,
-                f_name: document.getElementById('f_name').value,
-                phone: document.getElementById('phone').value,
-                cnic: document.getElementById('cnic').value,
-                adm_class: document.getElementById('adm_class').value,
-                docs: docs
-            };
-
-            // گوگل شيٽ ۾ ڊيٽا موڪلڻ
-            await fetch(SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                body: JSON.stringify(payload),
-                headers: { 'Content-Type': 'text/plain' }
-            });
-
-            status.innerText = "ڊيٽا محفوظ ٿي وئي! واٽسپ کلي رهيو آهي...";
-            
-            // واٽسپ پيغام موڪلڻ
-            const msg = `*GBELS WASSAN ADMISSION*%0Aشاگرد: ${payload.s_name}%0Aڪلاس: ${payload.adm_class}%0Aآن لائن فارم جمع ٿي ويو.`;
-            window.open(`https://wa.me/923008909756?text=${msg}`, '_blank');
-            
-            btn.disabled = false;
-        } catch (e) {
-            console.error(e);
-            alert("ڊيٽا موڪلڻ ۾ غلطي آئي.");
-            btn.disabled = false;
-        }
-    }
-</script>
-
+    </script>
 </body>
 </html>
