@@ -1,179 +1,151 @@
+
 <!DOCTYPE html>
-<html lang="sd">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admission Portal | GBELS WASSAN</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>Government Boys Elementary Lower Secondary School Wassan | Admission Form</title>
     <style>
-        :root { --primary: #002d5b; --accent: #8b0000; --whatsapp: #25D366; }
-        body { font-family: 'Poppins', sans-serif; background: #f0f2f5; margin: 0; padding: 5px; display: flex; flex-direction: column; align-items: center; }
-        .page-border { background: white; width: 100%; max-width: 800px; padding: 15px; border: 1px solid var(--primary); box-shadow: 0 0 10px rgba(0,0,0,0.1); box-sizing: border-box; margin-top: 10px; }
-        .header { display: flex; flex-direction: row; align-items: center; justify-content: space-between; border-bottom: 1px solid #000; padding-bottom: 10px; margin-bottom: 15px; }
-        .logo { width: 50px; height: 50px; }
-        .school-info { text-align: center; flex: 1; padding: 0 5px; }
-        .school-info h1 { margin: 0; font-size: 13px; color: var(--primary); line-height: 1.2; }
-        .photo-box { width: 65px; height: 80px; border: 1px solid #000; background: #fdfdfd; font-size: 8px; text-align: center; display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: pointer; position: relative; }
-        .photo-box img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
-        .row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; }
-        .field { flex: 1; min-width: 140px; display: flex; flex-direction: column; }
-        label { font-weight: bold; font-size: 11px; margin-bottom: 3px; color: #333; }
-        input, select { padding: 10px; border: 1px solid #999; border-radius: 5px; font-size: 14px; }
-        .doc-row { display: flex; flex-direction: column; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
-        .doc-label { font-size: 11px; font-weight: bold; margin-bottom: 5px; }
-        .btn-submit { background: var(--whatsapp); color: white; padding: 15px; border: none; border-radius: 8px; font-weight: bold; width: 100%; font-size: 16px; cursor: pointer; transition: 0.3s; }
-        .btn-submit:disabled { background: #ccc; cursor: not-allowed; }
-        .office-box { border: 1px solid var(--primary); padding: 10px; background: #f9fcff; margin-top: 15px; }
-        .sig-row { display: flex; justify-content: space-between; margin-top: 30px; text-align: center; }
-        .sig-item { border-top: 1px solid #000; width: 30%; font-size: 9px; font-weight: bold; }
-        @media print { .no-print { display: none !important; } .page-border { border: 1px solid #000; box-shadow: none; width: 210mm; padding: 10mm; } }
+        @media print { .no-print { display: none; } body { padding: 0; margin: 0; } .page-border { border: 2px solid #000; width: 100%; height: auto; box-shadow: none; margin: 0; } }
+        :root { --primary: #002d5b; --accent: #8b0000; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f0f0; padding: 20px; direction: ltr; }
+        .page-border { background: white; width: 210mm; min-height: 297mm; margin: auto; padding: 40px; box-sizing: border-box; position: relative; border: 10px double var(--primary); box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+        
+        .header { display: flex; align-items: center; border-bottom: 4px solid var(--primary); padding-bottom: 10px; margin-bottom: 10px; }
+        .logo { width: 100px; height: 100px; object-fit: contain; }
+        .school-info { flex: 1; text-align: center; }
+        .school-info h1 { margin: 0; color: var(--primary); font-size: 20px; text-transform: uppercase; font-weight: bold; }
+        .school-info p { margin: 3px 0; font-weight: bold; font-size: 13px; color: #333; }
+        
+        .contact-bar { background: #f2f2f2; padding: 8px; font-size: 11px; display: flex; justify-content: space-around; border-radius: 5px; margin-bottom: 15px; border: 1px solid #ccc; font-weight: bold; }
+        
+        .admission-title { background: var(--primary); color: white; padding: 10px; text-align: center; font-size: 18px; font-weight: bold; margin-bottom: 20px; border-radius: 5px; }
+        
+        .session-info { display: flex; justify-content: space-between; margin-bottom: 15px; font-weight: bold; border: 1px solid #000; padding: 10px; border-radius: 5px; background: #fafafa; font-size: 13px; }
+
+        .section { margin-bottom: 15px; border: 1px solid #000; padding: 15px 12px 5px 12px; border-radius: 5px; position: relative; }
+        .section-label { position: absolute; top: -11px; left: 15px; background: white; padding: 0 10px; font-weight: bold; color: var(--accent); font-size: 12px; text-transform: uppercase; }
+        
+        .row { display: flex; flex-wrap: wrap; margin-bottom: 10px; }
+        .field { flex: 1; min-width: 180px; display: flex; align-items: flex-end; margin-bottom: 5px; }
+        .field label { font-weight: bold; margin-right: 8px; font-size: 12px; white-space: nowrap; }
+        .field span { border-bottom: 1px dotted #000; flex: 1; height: 16px; margin-right: 10px; }
+
+        .checkbox-group { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; font-size: 11px; font-weight: bold; }
+        .check-box { width: 14px; height: 14px; border: 1.5px solid #000; display: inline-block; vertical-align: middle; margin-right: 3px; }
+
+        .declaration { font-size: 11px; line-height: 1.6; margin-top: 15px; border: 1px dashed #000; padding: 10px; background: #fffdf5; }
+        .footer-sigs { display: flex; justify-content: space-between; margin-top: 35px; text-align: center; }
+        .sig-box { width: 200px; border-top: 1.5px solid #000; padding-top: 5px; font-size: 12px; font-weight: bold; }
+
+        .office-use { background: #f9f9f9; border: 2px solid var(--primary); margin-top: 20px; padding: 15px; border-radius: 10px; }
+        .photo-box { width: 110px; height: 130px; border: 2px dashed #777; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 10px; position: absolute; right: 45px; top: 130px; background: #fff; }
+
+        .btn-print { background: var(--primary); color: white; padding: 15px 40px; border: none; border-radius: 50px; font-size: 18px; font-weight: bold; cursor: pointer; margin-bottom: 20px; }
     </style>
 </head>
 <body>
 
+<center class="no-print">
+    <button class="btn-print" onclick="window.print()">Print Admission Form 🖨️</button>
+</center>
+
 <div class="page-border">
     <div class="header">
-        <img src="https://gbelswassan-cyber.github.io/logo.png.png" class="logo">
+        <img src="logo.png" class="logo" alt="School Logo">
         <div class="school-info">
-            <h1>GBELS WASSAN</h1>
-            <p style="font-size: 8px;">Taluka & District Naushahro Feroze</p>
-            <div style="font-size: 10px; font-weight: bold; border: 1px solid #000; margin-top: 4px;">ADMISSION FORM 2026-27</div>
+            <h1>Government Boys Elementary Lower Secondary School Wassan</h1>
+            <p>Village Muhammad Sharif Wassan, Taluka & District Naushahro Feroze</p>
+            <p>SEMIS Code: 416040489 | Established: 1956</p>
         </div>
-        <div class="photo-box" onclick="document.getElementById('student_img').click()">
-            <span id="photo-txt">Photo</span>
-            <img id="preview" style="display:none">
-            <input type="file" id="student_img" accept="image/*" style="display:none" onchange="showPreview(this)">
+        <div style="width: 100px;"></div>
+    </div>
+
+    <div class="contact-bar">
+        <span>🌐 gbelswassan.github.io</span>
+        <span>📧 gbelswassan@gmail.com</span>
+        <span>📞 +92 300 8909756</span>
+    </div>
+
+    <div class="photo-box">Passport Size<br>Photograph</div>
+
+    <div class="admission-title">ADMISSION FORM (Session: 2026-2027)</div>
+
+    <div class="session-info">
+        <span>G.R No: _______________</span>
+        <span>Admission Date: ___/___/2026</span>
+    </div>
+
+    <div class="section">
+        <span class="section-label">1. Student Information</span>
+        <div class="row"><div class="field"><label>Full Name:</label><span></span></div></div>
+        <div class="row">
+            <div class="field"><label>Father's Name:</label><span></span></div>
+            <div class="field"><label>Surname / Caste:</label><span></span></div>
+        </div>
+        <div class="row">
+            <div class="field"><label>Date of Birth:</label><span></span></div>
+            <div class="field"><label>Religion:</label><span></span></div>
+            <div class="field"><label>Blood Group:</label><span></span></div>
+        </div>
+        <div class="row">
+            <div class="field"><label>Gender:</label> <div class="checkbox-group"><span class="check-box"></span> Male <span class="check-box"></span> Female</div></div>
+            <div class="field"><label>B-Form / CNIC No:</label><span></span></div>
         </div>
     </div>
 
-    <form id="admissionForm">
+    <div class="section">
+        <span class="section-label">2. Academic Details</span>
         <div class="row">
-            <div class="field"><label>Student Name:</label><input type="text" id="s_name" required></div>
-            <div class="field"><label>Father Name:</label><input type="text" id="f_name" required></div>
-        </div>
-        <div class="row">
-            <div class="field"><label>Caste:</label><input type="text" id="caste" required></div>
-            <div class="field"><label>B-Form No:</label><input type="text" id="cnic" required></div>
+            <div class="field"><label>Admission Sought Class:</label><span></span></div>
+            <div class="field"><label>Previous School:</label><span></span></div>
         </div>
         <div class="row">
-            <div class="field"><label>Class Required:</label><input type="text" id="adm_class" required></div>
-            <div class="field"><label>WhatsApp No:</label><input type="text" id="phone" required></div>
+            <div class="field"><label>Last Class Passed:</label><span></span></div>
+            <div class="field"><label>Percentage / Grade:</label><span></span></div>
         </div>
+    </div>
 
-        <div style="margin: 15px 0; font-size: 12px; font-weight: bold; color: var(--accent);">DOCUMENTS UPLOAD:</div>
-        
-        <div class="doc-row">
-            <span class="doc-label">B-Form Copy:</span>
-            <input type="file" class="doc-file" data-name="B-Form">
+    <div class="section">
+        <span class="section-label">3. Parent / Guardian Details</span>
+        <div class="row">
+            <div class="field"><label>Father's Occupation:</label><span></span></div>
+            <div class="field"><label>Mobile / WhatsApp No:</label><span></span></div>
         </div>
-        <div class="doc-row">
-            <span class="doc-label">Father CNIC:</span>
-            <input type="file" class="doc-file" data-name="Father-CNIC">
-        </div>
+        <div class="row"><div class="field"><label>Residential Address:</label><span></span></div></div>
+    </div>
 
-        <button type="button" id="submitBtn" class="btn-submit no-print" onclick="handleUpload()">Submit & Send WhatsApp ✅</button>
-        <p id="status" style="text-align:center; font-size:12px; color:var(--primary); font-weight:bold; margin-top:10px;"></p>
-
-        <div class="office-box">
-            <div style="text-align: center; font-size: 10px; font-weight: bold; margin-bottom: 10px;">FOR OFFICE USE ONLY</div>
-            <div class="row">
-                <div class="field"><label>G.R No:</label><input type="text" readonly></div>
-                <div class="field"><label>Date:</label><input type="text" readonly></div>
-            </div>
-            <div class="sig-row">
-                <div class="sig-item">Teacher</div>
-                <div class="sig-item">Incharge</div>
-                <div class="sig-item">Head Master</div>
-            </div>
+    <div class="section">
+        <span class="section-label">4. Required Documents (Mandatory)</span>
+        <div class="checkbox-group" style="padding: 5px 0;">
+            <span><span class="check-box"></span> 4 Passport Size Photos</span>
+            <span><span class="check-box"></span> Attested Copy of B-Form</span>
+            <span><span class="check-box"></span> Original School Leaving Certificate (SLC)</span>
+            <span><span class="check-box"></span> Copy of Father's CNIC</span>
+            <span><span class="check-box"></span> Previous Class Result Card</span>
         </div>
-    </form>
+    </div>
+
+    <div class="declaration">
+        <strong>DECLARATION:</strong> I hereby declare that the information provided is correct. I agree to follow all school rules and maintain discipline.
+        <div class="footer-sigs">
+            <div class="sig-box">Signature of Parent</div>
+            <div class="sig-box">Date</div>
+        </div>
+    </div>
+
+    <div class="office-use">
+        <center><strong>FOR OFFICE USE ONLY</strong></center><br>
+        <div class="row">
+            <div class="field"><label>Verified Documents:</label> <span class="check-box"></span> All OK</div>
+            <div class="field"><label>Admission Status:</label> <span class="check-box"></span> Approved <span class="check-box"></span> Pending</div>
+        </div>
+        <div class="footer-sigs">
+            <div class="sig-box">Class Teacher Signature</div>
+            <div class="sig-box">Head Master Stamp</div>
+        </div>
+    </div>
 </div>
-
-<script>
-    // توهان جو اپڊيٽ ٿيل اسڪرپٽ لنڪ
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxHk2Tfz1fRYfzzKvpMNRykOS1QxsJTqHMr4uzrJwwjBtzA9NewtBJoyEsmb1ZFH4TK/exec";
-
-    function showPreview(input) {
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            reader.onload = e => {
-                document.getElementById('preview').src = e.target.result;
-                document.getElementById('preview').style.display = 'block';
-                document.getElementById('photo-txt').style.display = 'none';
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-    function fileToBase64(file) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result.split(',')[1]);
-            reader.onerror = error => reject(error);
-        });
-    }
-
-    async function handleUpload() {
-        const btn = document.getElementById('submitBtn');
-        const status = document.getElementById('status');
-        
-        const s_name = document.getElementById('s_name').value;
-        const cnic = document.getElementById('cnic').value;
-
-        if(!s_name || !cnic) {
-            alert("مهرباني ڪري شاگرد جو نالو ۽ B-Form نمبر لکو!");
-            return;
-        }
-
-        try {
-            btn.disabled = true;
-            status.innerText = "ڊيٽا اپلوڊ ٿي رهي آهي... مهرباني ڪري انتظار ڪريو.";
-
-            const docs = {};
-            const photoInput = document.getElementById('student_img');
-            if (photoInput.files[0]) docs["Photo"] = await fileToBase64(photoInput.files[0]);
-
-            const docInputs = document.querySelectorAll('.doc-file');
-            for (const input of docInputs) {
-                if (input.files[0]) {
-                    docs[input.dataset.name] = await fileToBase64(input.files[0]);
-                }
-            }
-
-            const payload = {
-                s_name: s_name,
-                f_name: document.getElementById('f_name').value,
-                caste: document.getElementById('caste').value,
-                cnic: cnic,
-                adm_class: document.getElementById('adm_class').value,
-                phone: document.getElementById('phone').value,
-                docs: docs
-            };
-
-            await fetch(SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                body: JSON.stringify(payload)
-            });
-
-            status.style.color = "green";
-            status.innerText = "ڊيٽا محفوظ ٿي وئي! واٽسپ کلي رهيو آهي...";
-            
-            setTimeout(() => {
-                const msg = `*GBELS WASSAN ADMISSION*%0Aشاگرد: ${payload.s_name}%0Aڪلاس: ${payload.adm_class}%0Aآن لائن فارم جمع ٿي ويو.`;
-                window.open(`https://wa.me/923008909756?text=${msg}`, '_blank');
-                btn.disabled = false;
-            }, 1500);
-
-        } catch (e) {
-            console.error(e);
-            alert("ڪا غلطي آئي آهي. مهرباني ڪري نيٽ چيڪ ڪريو.");
-            btn.disabled = false;
-            status.innerText = "";
-        }
-    }
-</script>
 
 </body>
 </html>
+
