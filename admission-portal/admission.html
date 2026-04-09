@@ -14,37 +14,39 @@
         .btn-choice { padding: 12px 25px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: white; margin: 5px; font-size: 14px; transition: 0.3s; }
         .btn-manual { background: var(--btn-dark); }
         .btn-online { background: var(--primary); }
-        .page-border { background: white; width: 210mm; min-height: 297mm; padding: 10mm; border: 3px solid var(--primary); box-shadow: 0 0 20px rgba(0,0,0,0.2); position: relative; box-sizing: border-box; }
+        
+        /* Fixed: Form cutting issue resolved here */
+        .page-border { background: white; width: 100%; max-width: 210mm; min-height: auto; padding: 10mm; border: 3px solid var(--primary); box-shadow: 0 0 20px rgba(0,0,0,0.2); position: relative; box-sizing: border-box; overflow: hidden; margin-bottom: 20px; }
+        
         .header { display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 15px; }
-        .logo { width: 85px; height: 85px; border-radius: 50%; border: 1px solid #ddd; }
+        .logo { width: 80px; height: 80px; border-radius: 50%; border: 1px solid #ddd; }
         .school-info { text-align: center; flex: 1; padding: 0 10px; }
-        .school-info h1 { margin: 0; color: var(--primary); font-size: 17px; text-transform: uppercase; font-weight: 800; }
+        .school-info h1 { margin: 0; color: var(--primary); font-size: 16px; text-transform: uppercase; font-weight: 800; }
         .school-info p { margin: 2px 0; font-size: 10px; font-weight: 600; color: #333; }
-        .admission-tag { font-size: 12px; color: var(--accent); font-weight: bold; border: 1.5px solid #000; padding: 3px 15px; display: inline-block; margin-top: 5px; border-radius: 4px; }
-        .photo-box { width: 90px; height: 110px; border: 2px dashed #555; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 10px; background: #fdfdfd; font-weight: bold; overflow: hidden; position: relative; cursor: pointer; }
+        .admission-tag { font-size: 11px; color: var(--accent); font-weight: bold; border: 1.5px solid #000; padding: 3px 10px; display: inline-block; margin-top: 5px; border-radius: 4px; }
+        .photo-box { width: 90px; height: 110px; border: 2px dashed #555; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 9px; background: #fdfdfd; font-weight: bold; overflow: hidden; position: relative; cursor: pointer; }
         .photo-box img { width: 100%; height: 100%; object-fit: cover; display: none; }
         .section { border: 1.2px solid #000; padding: 15px 10px 8px 10px; border-radius: 5px; margin-bottom: 15px; position: relative; }
         .section-label { position: absolute; top: -10px; left: 12px; background: white; padding: 0 8px; font-weight: 800; font-size: 11px; color: var(--accent); text-transform: uppercase; }
         .row { display: flex; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
-        .field { flex: 1; display: flex; flex-direction: column; min-width: 150px; }
+        .field { flex: 1; display: flex; flex-direction: column; min-width: 140px; }
         label { font-weight: bold; font-size: 11px; margin-bottom: 3px; color: #222; }
-        input, select { padding: 8px; border: 1px solid #999; border-radius: 4px; font-size: 13px; background: #fff; }
+        input, select { padding: 8px; border: 1px solid #999; border-radius: 4px; font-size: 13px; background: #fff; width: 100%; box-sizing: border-box; }
         .office-section { border: 1.5px solid var(--primary); padding: 12px; background: #f9f9f9; border-radius: 6px; margin-top: 15px; }
-        .office-title { text-align: center; font-weight: 900; text-decoration: underline; margin-bottom: 10px; font-size: 13px; }
-        .signature-row { display: flex; justify-content: space-between; margin-top: 30px; }
-        .sig-line { border-top: 1.2px solid #000; width: 170px; text-align: center; font-size: 11px; font-weight: bold; padding-top: 4px; }
+        .office-title { text-align: center; font-weight: 900; text-decoration: underline; margin-bottom: 10px; font-size: 12px; }
+        .signature-row { display: flex; justify-content: space-between; margin-top: 25px; }
+        .sig-line { border-top: 1.2px solid #000; width: 45%; text-align: center; font-size: 10px; font-weight: bold; padding-top: 4px; }
         .btn-submit { background: var(--whatsapp); color: white; padding: 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; width: 100%; margin: 10px 0; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .btn-submit:disabled { background: #ccc; cursor: not-allowed; }
         #mobile-console { position: fixed; bottom: 10px; right: 10px; width: 50px; height: 50px; background: #ff5722; color: white; border-radius: 50%; border: none; font-size: 20px; cursor: pointer; z-index: 9999; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
         #console-panel { display: none; position: fixed; bottom: 70px; right: 10px; width: 90%; max-width: 400px; height: 300px; background: #1e1e1e; color: #00ff00; border: 2px solid #ff5722; border-radius: 8px; padding: 10px; overflow-y: auto; z-index: 9998; font-family: monospace; font-size: 12px; }
+
         @media print {
             @page { size: A4; margin: 0; }
             .no-print { display: none !important; }
             body { padding: 0; background: white; }
-            .page-border { border: 2px solid var(--primary); box-shadow: none; width: 100%; height: 100%; margin: 0; padding: 10mm; page-break-after: avoid; transform: scale(1); transform-origin: top left; }
+            .page-border { border: 2px solid var(--primary); box-shadow: none; width: 100%; max-width: none; height: auto; margin: 0; padding: 10mm; transform: none; }
             input, select { border: none; border-bottom: 1px solid #000; background: transparent; }
-            select option[value=""] { display: none; }
-            input::placeholder { color: transparent; }
         }
     </style>
 </head>
@@ -160,31 +162,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
     let consoleContent = [];
-
     const originalLog = console.log;
-    const originalError = console.error;
-    const originalWarn = console.warn;
-
     console.log = function(...args) {
         originalLog.apply(console, args);
         addToConsole('[LOG] ' + args.join(' '));
-    };
-    console.error = function(...args) {
-        originalError.apply(console, args);
-        addToConsole('[ERROR] ' + args.join(' '));
-    };
-    console.warn = function(...args) {
-        originalWarn.apply(console, args);
-        addToConsole('[WARN] ' + args.join(' '));
     };
 
     function addToConsole(msg) {
         consoleContent.push(msg);
         const panel = document.getElementById('console-panel');
-        if (panel) {
-            panel.innerHTML = consoleContent.join('<br>');
-            panel.scrollTop = panel.scrollHeight;
-        }
+        if (panel) { panel.innerHTML = consoleContent.join('<br>'); panel.scrollTop = panel.scrollHeight; }
     }
 
     function toggleConsole() {
@@ -192,181 +179,85 @@
         panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
     }
 
-    console.log('🚀 Admission Portal Loaded - GBELS WASSAN');
-
     function showPreview(input) {
-        try {
-            console.log('📷 Photo selected');
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    document.getElementById('preview').src = e.target.result;
-                    document.getElementById('preview').style.display = 'block';
-                    document.getElementById('photo-txt').style.display = 'none';
-                    console.log('✅ Photo preview loaded');
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        } catch (err) {
-            console.error('❌ Error loading photo:', err.message);
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                document.getElementById('preview').src = e.target.result;
+                document.getElementById('preview').style.display = 'block';
+                document.getElementById('photo-txt').style.display = 'none';
+            };
+            reader.readAsDataURL(input.files[0]);
         }
     }
 
     function downloadManualForm() {
-        try {
-            console.log('📥 Manual form download requested');
-            const element = document.querySelector('.page-border');
-            const opt = {
-                margin: 0,
-                filename: 'GBELS_WASSAN_Admission_Form.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
-            html2pdf().set(opt).from(element).save();
-            console.log('✅ PDF download initiated');
-        } catch (err) {
-            console.error('❌ Error generating PDF:', err.message);
-            alert('فارم ڊائون لوڊ ڪرڻ ۾ مسئلو آيو');
-        }
-    }
-
-    function fileToBase64(file) {
-        return new Promise((resolve, reject) => {
-            try {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => {
-                    resolve(reader.result.split(',')[1]);
-                    console.log(`✅ File converted: ${file.name}`);
-                };
-                reader.onerror = error => {
-                    console.error(`❌ Error converting file: ${file.name}`);
-                    reject(error);
-                };
-            } catch (err) {
-                console.error('❌ fileToBase64 error:', err.message);
-                reject(err);
-            }
-        });
+        console.log('📥 Downloading PDF...');
+        const element = document.querySelector('.page-border');
+        const opt = {
+            margin: 0,
+            filename: 'GBELS_WASSAN_Form.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+        html2pdf().set(opt).from(element).save();
     }
 
     async function handleUpload() {
         const btn = document.getElementById('submitBtn');
         const status = document.getElementById('status');
+        const s_name = document.getElementById('s_name').value;
+        const cnic = document.getElementById('cnic').value;
+
+        if(!s_name || !cnic) {
+            alert("مهرباني ڪري شاگرد جو نالو ۽ B-Form نمبر لکو!");
+            return;
+        }
+
+        btn.disabled = true;
+        status.innerText = "ڊيٽا موڪلي پئي وڃي...";
+
+        const payload = {
+            s_name: s_name,
+            f_name: document.getElementById('f_name').value,
+            phone: document.getElementById('phone').value,
+            caste: document.getElementById('caste').value,
+            dob: document.getElementById('dob').value,
+            gender: document.getElementById('gender').value,
+            cnic: cnic,
+            adm_class: document.getElementById('adm_class').value,
+            address: document.getElementById('address').value
+        };
+
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyZezVuYD_y0PFSUv-Sq5aQvrwetrXQIPIy6KRN8ObJZtUh05PUzIxjCBuAOrPU3IIp/exec";
 
         try {
-            console.log('🔄 Starting form submission...');
-
-            if(!document.getElementById('s_name').value || !document.getElementById('cnic').value) {
-                console.warn('⚠️ Required fields missing');
-                alert("مهرباني ڪري شاگرد جو نالو ۽ B-Form نمبر لکو!");
-                return;
-            }
-
-            btn.disabled = true;
-            status.innerText = "دستاويز اپلوڊ ٿي رهيا آهن، مهرباني ڪري انتظار ڪريو...";
-            console.log('📤 Uploading documents...');
-
-            const docs = {};
-            
-            const docInputs = document.querySelectorAll('.doc-file');
-            for (const input of docInputs) {
-                if (input.files && input.files[0]) {
-                    const name = input.dataset.name;
-                    docs[name] = await fileToBase64(input.files[0]);
-                }
-            }
-
-            const photoInput = document.getElementById('student_img');
-            if (photoInput.files && photoInput.files[0]) {
-                docs['Photo'] = await fileToBase64(photoInput.files[0]);
-            }
-
-            const payload = {
-                s_name: document.getElementById('s_name').value,
-                f_name: document.getElementById('f_name').value,
-                phone: document.getElementById('phone').value,
-                caste: document.getElementById('caste').value,
-                dob: document.getElementById('dob').value,
-                gender: document.getElementById('gender').value,
-                cnic: document.getElementById('cnic').value,
-                religion: document.getElementById('religion').value,
-                adm_class: document.getElementById('adm_class').value,
-                prev_school: document.getElementById('prev_school').value,
-                last_class: document.getElementById('last_class').value,
-                grade: document.getElementById('grade').value,
-                occupation: document.getElementById('occupation').value,
-                address: document.getElementById('address').value,
-                docs: docs
-            };
-
-            console.log('📊 Payload prepared:', payload.s_name);
-
-            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyZezVuYD_y0PFSUv-Sq5aQvrwetrXQIPIy6KRN8ObJZtUh05PUzIxjCBuAOrPU3IIp/exec";
-
-            console.log('🌐 Sending to Google Apps Script...');
-
             await fetch(SCRIPT_URL, {
                 method: 'POST',
                 body: JSON.stringify(payload),
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                mode: 'no-cors'
             });
-
-            console.log('✅ Data sent successfully to server');
-            status.innerText = "ڊيٽا ۽ دستاويز ڪاميابيءَ سان محفوظ ٿي ويا! PDF ڊائون لوڊ ٿي رهيو آهي...";
-            
-            setTimeout(() => {
-                generatePDF();
-                sendToWA(payload);
-            }, 1000);
-
+            console.log('✅ Data Saved');
+            status.innerText = "ڊيٽا محفوظ ٿي وئي! WhatsApp کلي رهيو آهي...";
+            sendToWA(payload);
         } catch (e) {
-            console.error('❌ Upload Error:', e.message);
-            status.innerText = "ڊيٽا موڪلڻ ۾ ڪجهه مسئلو آيو، پر WhatsApp کلي رهيو آهي.";
-            setTimeout(() => {
-                generatePDF();
-                sendToWA(payload);
-            }, 1000);
-        }
-    }
-
-    function generatePDF() {
-        try {
-            console.log('📄 Auto-generating PDF...');
-            window.print();
-            console.log('✅ PDF download triggered automatically');
-        } catch (err) {
-            console.error('❌ Error generating PDF:', err.message);
+            console.error('❌ Error:', e);
+            sendToWA(payload);
         }
     }
 
     function sendToWA(data) {
-        try {
-            console.log('💬 Opening WhatsApp...');
-            const msg = `*GBELS WASSAN ADMISSION FORM*%0A` +
-                        `----------------------------%0A` +
-                        `شاگرد جو نالو: ${data.s_name}%0A` +
-                        `پيءُ جو نالو: ${data.f_name}%0A` +
-                        `ڪلاس: ${data.adm_class}%0A` +
-                        `B-Form: ${data.cnic}%0A` +
-                        `----------------------------%0A` +
-                        `ڊيٽا آن لائن جمع ڪئي وئي آهي. ✅`;
-            window.open(`https://wa.me/923008909756?text=${msg}`, '_blank');
-            document.getElementById('submitBtn').disabled = false;
-            document.getElementById('status').innerText = "فارم جمع ٿي ويو! ✅";
-            console.log('✅ WhatsApp opened successfully');
-        } catch (err) {
-            console.error('❌ Error opening WhatsApp:', err.message);
-        }
+        const msg = `*GBELS WASSAN ADMISSION*%0A` +
+                    `شاگرد: ${data.s_name}%0A` +
+                    `والد: ${data.f_name}%0A` +
+                    `ڪلاس: ${data.adm_class}%0A` +
+                    `B-Form: ${data.cnic}%0A` +
+                    `ڊيٽا آن لائن جمع ٿي وئي. ✅`;
+        window.open(`https://wa.me/923008909756?text=${msg}`, '_blank');
+        document.getElementById('submitBtn').disabled = false;
+        document.getElementById('status').innerText = "فارم ڪاميابي سان موڪليو ويو!";
     }
-
-    console.log('✅ All systems ready - تلك عشرة كاملة');
 </script>
 </body>
 </html>
-✅ Key Update:
-Line 289 mein naya Google Apps Script URL apply hogaya hai:
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyZezVuYD_y0PFSUv-Sq5aQvrwetrXQIPIy6KRN8ObJZtUh05PUzIxjCBuAOrPU3IIp/exec";
-Bas is code ko copy kar ke apni index.html file mein paste kar dein aur website par upload kar dein! 🚀
