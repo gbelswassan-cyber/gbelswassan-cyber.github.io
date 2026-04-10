@@ -219,25 +219,29 @@
         logToConsole("⏳ Processing files and data...");
 
         try {
+            // هيٺ ڏنل Payload توهان جي شيٽ جي Headers مطابق سيٽ ڪيو ويو آهي
             const payload = {
-                s_name,
-                f_name: document.getElementById('f_name').value,
-                phone: document.getElementById('phone').value,
-                caste: document.getElementById('caste').value,
-                dob: document.getElementById('dob').value,
-                gender: document.getElementById('gender').value,
-                cnic,
-                adm_class: document.getElementById('adm_class').value,
-                prev_school: document.getElementById('prev_school').value,
-                last_class: document.getElementById('last_class').value,
-                grade: document.getElementById('grade').value,
-                address: document.getElementById('address').value,
-                religion: document.getElementById('religion').value,
-                stu_photo: await fileToBase64(document.getElementById('stu_photo').files[0]),
-                doc_bform: await fileToBase64(document.getElementById('doc_bform').files[0]),
-                doc_slc: await fileToBase64(document.getElementById('doc_slc').files[0]),
-                doc_fcnic: await fileToBase64(document.getElementById('doc_fcnic').files[0]),
-                doc_result: await fileToBase64(document.getElementById('doc_result').files[0])
+                "Timestamp": new Date().toLocaleString(),
+                "Student Full Name": s_name,
+                "Father's Name": document.getElementById('f_name').value,
+                "Surname/Caste": document.getElementById('caste').value,
+                "Date of Birth": document.getElementById('dob').value,
+                "Gender": document.getElementById('gender').value,
+                "B-Form/CNIC No": cnic,
+                "Religion": document.getElementById('religion').value,
+                "Admission Class": document.getElementById('adm_class').value,
+                "Previous School": document.getElementById('prev_school').value,
+                "Last Class Pass": document.getElementById('last_class').value,
+                "Percentage/Grade": document.getElementById('grade').value,
+                "Father Occupation": document.getElementById('occupation').value,
+                "Mobile/WhatsApp": document.getElementById('phone').value,
+                "Address": document.getElementById('address').value,
+                // Files
+                "stu_photo": await fileToBase64(document.getElementById('stu_photo').files[0]),
+                "doc_bform": await fileToBase64(document.getElementById('doc_bform').files[0]),
+                "doc_slc": await fileToBase64(document.getElementById('doc_slc').files[0]),
+                "doc_fcnic": await fileToBase64(document.getElementById('doc_fcnic').files[0]),
+                "doc_result": await fileToBase64(document.getElementById('doc_result').files[0])
             };
 
             logToConsole("📤 Sending to GBELS Database...");
@@ -251,15 +255,20 @@
             logToConsole(`✅ Data Saved: ${s_name}`);
             sendToWA(payload);
         } catch (e) {
-            logToConsole("⚠️ Connection Issue. Check Console.");
-            sendToWA({s_name, f_name: document.getElementById('f_name').value, adm_class: document.getElementById('adm_class').value, cnic});
+            logToConsole("⚠️ Connection Issue. Sending via WhatsApp...");
+            sendToWA({
+                "Student Full Name": s_name, 
+                "Father's Name": document.getElementById('f_name').value, 
+                "Admission Class": document.getElementById('adm_class').value, 
+                "B-Form/CNIC No": cnic
+            });
         } finally {
             btn.disabled = false;
         }
     }
 
     function sendToWA(data) {
-        const msg = `*GBELS WASSAN ADMISSION*%0Aشاگرد: ${data.s_name}%0Aوالد: ${data.f_name}%0Aڪلاس: ${data.adm_class}%0AB-Form: ${data.cnic}%0Aڊيٽا آن لائن جمع ٿي وئي. ✅`;
+        const msg = `*GBELS WASSAN ADMISSION*%0A شاگرد: ${data["Student Full Name"]}%0A والد: ${data["Father's Name"]}%0A ڪلاس: ${data["Admission Class"]}%0A B-Form: ${data["B-Form/CNIC No"]}%0A ڊيٽا آن لائن جمع ٿي وئي. ✅`;
         window.open(`https://wa.me/923008909756?text=${msg}`, '_blank');
     }
 </script>
