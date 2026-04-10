@@ -9,70 +9,29 @@
         :root { --primary: #002d5b; --accent: #8b0000; --whatsapp: #25D366; --btn-dark: #333; }
         body { font-family: 'Poppins', sans-serif; background: #f0f2f5; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; }
         .sindhi { direction: rtl; font-family: 'Noto Naskh Arabic', serif; }
-        
         .selection-menu { background: #eef6ff; padding: 15px; border: 2px dashed var(--primary); border-radius: 12px; margin-bottom: 15px; text-align: center; width: 100%; max-width: 800px; box-sizing: border-box; }
         .btn-choice { padding: 12px 25px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: white; margin: 5px; font-size: 14px; }
         .btn-manual { background: var(--btn-dark); }
         .btn-online { background: var(--primary); }
-
-        .page-border { 
-            background: white; width: 100%; max-width: 210mm; padding: 8mm; 
-            border: 2px solid var(--primary); box-shadow: 0 0 20px rgba(0,0,0,0.2); 
-            position: relative; box-sizing: border-box; overflow: hidden; 
-        }
-        
+        .page-border { background: white; width: 100%; max-width: 210mm; padding: 8mm; border: 2px solid var(--primary); box-shadow: 0 0 20px rgba(0,0,0,0.2); position: relative; box-sizing: border-box; overflow: hidden; }
         .header { display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #000; padding-bottom: 8px; margin-bottom: 12px; }
         .logo { width: 75px; height: 75px; border-radius: 50%; }
         .school-info { text-align: center; flex: 1; padding: 0 10px; }
         .school-info h1 { margin: 0; color: var(--primary); font-size: 15px; text-transform: uppercase; font-weight: 800; }
         .school-info p { margin: 2px 0; font-size: 9px; font-weight: 600; color: #333; }
         .admission-tag { font-size: 10px; color: var(--accent); font-weight: bold; border: 1.5px solid #000; padding: 2px 10px; display: inline-block; margin-top: 5px; border-radius: 4px; }
-        
         .photo-box { width: 85px; height: 100px; border: 2px dashed #555; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 8px; background: #fdfdfd; font-weight: bold; }
-
         .section { border: 1.2px solid #000; padding: 12px 10px 6px 10px; border-radius: 5px; margin-bottom: 12px; position: relative; }
         .section-label { position: absolute; top: -9px; left: 12px; background: white; padding: 0 8px; font-weight: 800; font-size: 10px; color: var(--accent); text-transform: uppercase; }
-        
         .row { display: flex; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
         .field { flex: 1; display: flex; flex-direction: column; min-width: 140px; }
         label { font-weight: bold; font-size: 10px; margin-bottom: 2px; color: #222; }
         input, select { padding: 7px; border: 1px solid #999; border-radius: 4px; font-size: 12px; background: #fff; width: 100%; box-sizing: border-box; }
-
-        /* Document Checkbox Styling */
         .doc-item { display: flex; align-items: center; gap: 8px; margin-top: 5px; }
-        .print-box { 
-            display: none; 
-            width: 14px; 
-            height: 14px; 
-            border: 1.5px solid #000; 
-            background: #fff;
-        }
-
-        #mobile-console {
-            background: #1a1a1a; color: #00ff00; font-family: 'Courier New', monospace;
-            padding: 10px; border-radius: 8px; font-size: 11px; margin-top: 15px;
-            width: 100%; max-width: 800px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            max-height: 150px; overflow-y: auto;
-        }
+        #mobile-console { background: #1a1a1a; color: #00ff00; font-family: 'Courier New', monospace; padding: 10px; border-radius: 8px; font-size: 11px; margin-top: 15px; width: 100%; max-width: 800px; max-height: 150px; overflow-y: auto; }
         .log-entry { margin-bottom: 4px; border-left: 2px solid #00ff00; padding-left: 5px; }
-
-        .office-section { border: 1.5px solid var(--primary); padding: 10px; background: #f9f9f9; border-radius: 6px; margin-top: 10px; }
-        .office-title { text-align: center; font-weight: 900; text-decoration: underline; margin-bottom: 8px; font-size: 11px; }
-
-        .signature-row { display: flex; justify-content: space-between; margin-top: 25px; }
-        .sig-line { border-top: 1.2px solid #000; width: 45%; text-align: center; font-size: 10px; font-weight: bold; padding-top: 4px; }
-
         .btn-submit { background: var(--whatsapp); color: white; padding: 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; width: 100%; margin: 10px 0; }
-        .btn-submit:disabled { background: #999; }
-
-        @media print {
-            @page { size: A4; margin: 0; }
-            .no-print, #mobile-console, input[type="file"] { display: none !important; }
-            .print-box { display: inline-block !important; }
-            body { padding: 0; background: white; }
-            .page-border { border: 2px solid var(--primary); box-shadow: none; width: 100%; max-width: none; height: auto; margin: 0; padding: 10mm; }
-            input, select { border: none; border-bottom: 1px solid #000; background: transparent; }
-        }
+        @media print { .no-print, #mobile-console, input[type="file"] { display: none !important; } }
     </style>
 </head>
 <body>
@@ -89,7 +48,6 @@
         <div class="school-info">
             <h1>GOVERNMENT BOYS ELEMENTARY LOWER SECONDARY SCHOOL WASSAN</h1>
             <p>Village Muhammad Sharif Wassan, Taluka & District Naushahro Feroze</p>
-            <p style="font-size:9px;">SEMIS Code: 416040489 | WhatsApp: +92 300 8909756</p>
             <span class="admission-tag">ADMISSION FORM (Session: 2026-2027)</span>
         </div>
         <div class="photo-box">Passport Size<br>Photo Here</div>
@@ -119,75 +77,27 @@
                 <div class="field"><label>Admission Required in Class:</label><input type="text" id="adm_class" required></div>
                 <div class="field"><label>Previous School Name:</label><input type="text" id="prev_school"></div>
             </div>
-            <div class="row">
-                <div class="field"><label>Last Class Passed:</label><input type="text" id="last_class"></div>
-                <div class="field"><label>Percentage / Grade:</label><input type="text" id="grade"></div>
-            </div>
         </div>
 
         <div class="section">
-            <span class="section-label">3. PARENT / GUARDIAN DETAILS</span>
+            <span class="section-label">3. CONTACT DETAILS</span>
             <div class="row">
-                <div class="field"><label>Father Occupation:</label><input type="text" id="occupation"></div>
                 <div class="field"><label>Mobile / WhatsApp No:</label><input type="text" id="phone" required></div>
-            </div>
-            <div class="row">
                 <div class="field"><label>Residential Address:</label><input type="text" id="address" required></div>
             </div>
         </div>
 
         <div class="section">
-            <span class="section-label">4. REQUIRED DOCUMENTS (MANDATORY)</span>
+            <span class="section-label">4. UPLOAD DOCUMENTS (دستاويز اپلوڊ ڪريو)</span>
             <div class="row">
                 <div class="field">
-                    <label>B-Form Copy:</label>
-                    <div class="doc-item">
-                        <div class="print-box"></div>
-                        <input type="file">
-                    </div>
-                </div>
-                <div class="field">
-                    <label>SLC Copy:</label>
-                    <div class="doc-item">
-                        <div class="print-box"></div>
-                        <input type="file">
-                    </div>
-                </div>
-                <div class="field">
-                    <label>Father CNIC:</label>
-                    <div class="doc-item">
-                        <div class="print-box"></div>
-                        <input type="file">
-                    </div>
-                </div>
-                <div class="field">
-                    <label>Result Card:</label>
-                    <div class="doc-item">
-                        <div class="print-box"></div>
-                        <input type="file">
-                    </div>
+                    <label>B-Form / Picture:</label>
+                    <input type="file" id="file_main" accept="image/*">
                 </div>
             </div>
         </div>
 
-        <button type="button" id="submitBtn" class="btn-submit no-print" onclick="handleSubmit()">Apply Online & Send via WhatsApp ✅</button>
-
-        <div class="office-section">
-            <div class="office-title">FOR OFFICE USE ONLY (صرف آفيس جي استعمال لاءِ)</div>
-            <div class="row">
-                <div class="field"><label>GRN Number:</label><input type="text"></div>
-                <div class="field"><label>Date of Admission:</label><input type="date"></div>
-            </div>
-            <div class="row">
-                <div class="field"><label>Verified By:</label><input type="text"></div>
-                <div class="field"><label>Approved By:</label><input type="text"></div>
-            </div>
-        </div>
-
-        <div class="signature-row">
-            <div class="sig-line">Parent Signature</div>
-            <div class="sig-line">Principal Signature</div>
-        </div>
+        <button type="button" id="submitBtn" class="btn-submit no-print" onclick="handleSubmit()">Apply Online ✅</button>
     </form>
 </div>
 
@@ -196,56 +106,69 @@
 </div>
 
 <script>
+    // پنهنجو اصلي گوگل اسڪرپٽ يو آر ايل هتي لکو
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyZezVuYD_y0PFSUv-Sq5aQvrwetrXQIPIy6KRN8ObJZtUh05PUzIxjCBuAOrPU3IIp/exec";
 
     function logToConsole(message) {
         const consoleBox = document.getElementById('mobile-console');
         const entry = document.createElement('div');
         entry.className = 'log-entry';
-        entry.innerText = `[LOG] ✅ ${message}`;
+        entry.innerText = `[LOG] ${message}`;
         consoleBox.appendChild(entry);
         consoleBox.scrollTop = consoleBox.scrollHeight;
     }
 
+    // فائل کي Base64 ۾ تبديل ڪرڻ جو فنڪشن
+    function readFile(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result.split(',')[1]);
+            reader.onerror = error => reject(error);
+            reader.readAsDataURL(file);
+        });
+    }
+
     async function handleSubmit() {
         const btn = document.getElementById('submitBtn');
-        const s_name = document.getElementById('s_name').value;
-        const cnic = document.getElementById('cnic').value;
+        const fileInput = document.getElementById('file_main');
+        
+        const payload = {
+            s_name: document.getElementById('s_name').value,
+            f_name: document.getElementById('f_name').value,
+            cnic: document.getElementById('cnic').value,
+            phone: document.getElementById('phone').value,
+            adm_class: document.getElementById('adm_class').value,
+            address: document.getElementById('address').value,
+            fileData: "",
+            fileName: ""
+        };
 
-        if(!s_name || !cnic) {
-            logToConsole("❌ ERROR: Name and B-Form are required!");
-            alert("مهرباني ڪري شاگرد جو نالو ۽ B-Form نمبر لکو!");
+        if(!payload.s_name || !payload.cnic) {
+            alert("مهرباني ڪري شاگرد جو نالو ۽ B-Form لکو!");
             return;
         }
 
         btn.disabled = true;
-        logToConsole("📤 Sending data to Spreadsheet...");
-
-        const payload = {
-            s_name: s_name,
-            f_name: document.getElementById('f_name').value,
-            phone: document.getElementById('phone').value,
-            caste: document.getElementById('caste').value,
-            dob: document.getElementById('dob').value,
-            gender: document.getElementById('gender').value,
-            cnic: cnic,
-            adm_class: document.getElementById('adm_class').value,
-            prev_school: document.getElementById('prev_school').value,
-            last_class: document.getElementById('last_class').value,
-            grade: document.getElementById('grade').value,
-            address: document.getElementById('address').value
-        };
+        logToConsole("⏳ فائل پروسيس ٿي رهي آهي...");
 
         try {
-            await fetch(SCRIPT_URL, {
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                payload.fileData = await readFile(file);
+                payload.fileName = file.name;
+            }
+
+            logToConsole("📤 ڊيٽا موڪلي رهيا آهيون...");
+
+            const response = await fetch(SCRIPT_URL, {
                 method: 'POST',
-                body: JSON.stringify(payload),
-                mode: 'no-cors'
+                body: JSON.stringify(payload)
             });
-            logToConsole(`✅ Data Saved: ${s_name}`);
+
+            logToConsole("✅ ڊيٽا ڪاميابيءَ سان اسپريڊ شيٽ ۾ محفوظ ٿي وئي!");
             sendToWA(payload);
         } catch (e) {
-            logToConsole("⚠️ Connection issue, opening WhatsApp...");
+            logToConsole("⚠️ ڪنيڪشن جو مسئلو، پر واٽس اپ کلي رهيو آهي...");
             sendToWA(payload);
         } finally {
             btn.disabled = false;
@@ -261,11 +184,7 @@
                     `ڊيٽا آن لائن جمع ٿي وئي. ✅`;
         window.open(`https://wa.me/923008909756?text=${msg}`, '_blank');
     }
-
-    window.onload = () => {
-        logToConsole("Mobile Console Active");
-        logToConsole("All systems ready - ڪل سسٽم تيار آهن");
-    };
 </script>
+
 </body>
 </html>
