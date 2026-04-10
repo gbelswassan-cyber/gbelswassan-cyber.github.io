@@ -28,7 +28,8 @@
         .school-info p { margin: 2px 0; font-size: 9px; font-weight: 600; color: #333; }
         .admission-tag { font-size: 10px; color: var(--accent); font-weight: bold; border: 1.5px solid #000; padding: 2px 10px; display: inline-block; margin-top: 5px; border-radius: 4px; }
         
-        .photo-box { width: 85px; height: 100px; border: 2px dashed #555; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 8px; background: #fdfdfd; font-weight: bold; }
+        .photo-box { width: 85px; height: 100px; border: 2px dashed #555; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 8px; background: #fdfdfd; font-weight: bold; overflow: hidden; position: relative; }
+        #photo-preview { width: 100%; height: 100%; object-fit: cover; display: none; }
 
         .section { border: 1.2px solid #000; padding: 12px 10px 6px 10px; border-radius: 5px; margin-bottom: 12px; position: relative; }
         .section-label { position: absolute; top: -9px; left: 12px; background: white; padding: 0 8px; font-weight: 800; font-size: 10px; color: var(--accent); text-transform: uppercase; }
@@ -38,15 +39,8 @@
         label { font-weight: bold; font-size: 10px; margin-bottom: 2px; color: #222; }
         input, select { padding: 7px; border: 1px solid #999; border-radius: 4px; font-size: 12px; background: #fff; width: 100%; box-sizing: border-box; }
 
-        /* Document Checkbox Styling */
         .doc-item { display: flex; align-items: center; gap: 8px; margin-top: 5px; }
-        .print-box { 
-            display: none; 
-            width: 14px; 
-            height: 14px; 
-            border: 1.5px solid #000; 
-            background: #fff;
-        }
+        .print-box { display: none; width: 14px; height: 14px; border: 1.5px solid #000; background: #fff; }
 
         #mobile-console {
             background: #1a1a1a; color: #00ff00; font-family: 'Courier New', monospace;
@@ -92,7 +86,10 @@
             <p style="font-size:9px;">SEMIS Code: 416040489 | WhatsApp: +92 300 8909756</p>
             <span class="admission-tag">ADMISSION FORM (Session: 2026-2027)</span>
         </div>
-        <div class="photo-box">Passport Size<br>Photo Here</div>
+        <div class="photo-box">
+            <span id="photo-text">Passport Size<br>Photo Here</span>
+            <img id="photo-preview" src="" alt="Preview">
+        </div>
     </div>
 
     <form id="admissionForm">
@@ -110,6 +107,7 @@
             <div class="row">
                 <div class="field"><label>B-Form / CNIC Number:</label><input type="text" id="cnic" required></div>
                 <div class="field"><label>Religion:</label><input type="text" id="religion"></div>
+                <div class="field no-print"><label>Student Photo:</label><input type="file" id="stu_photo" accept="image/*" onchange="previewImage(this)"></div>
             </div>
         </div>
 
@@ -139,34 +137,12 @@
         <div class="section">
             <span class="section-label">4. REQUIRED DOCUMENTS (MANDATORY)</span>
             <div class="row">
-                <div class="field">
-                    <label>B-Form Copy:</label>
-                    <div class="doc-item">
-                        <div class="print-box"></div>
-                        <input type="file">
-                    </div>
-                </div>
-                <div class="field">
-                    <label>SLC Copy:</label>
-                    <div class="doc-item">
-                        <div class="print-box"></div>
-                        <input type="file">
-                    </div>
-                </div>
-                <div class="field">
-                    <label>Father CNIC:</label>
-                    <div class="doc-item">
-                        <div class="print-box"></div>
-                        <input type="file">
-                    </div>
-                </div>
-                <div class="field">
-                    <label>Result Card:</label>
-                    <div class="doc-item">
-                        <div class="print-box"></div>
-                        <input type="file">
-                    </div>
-                </div>
+                <div class="field"><label>B-Form Copy:</label><div class="doc-item"><div class="print-box"></div><input type="file" id="doc_bform"></div></div>
+                <div class="field"><label>SLC Copy:</label><div class="doc-item"><div class="print-box"></div><input type="file" id="doc_slc"></div></div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+                <div class="field"><label>Father CNIC:</label><div class="doc-item"><div class="print-box"></div><input type="file" id="doc_fcnic"></div></div>
+                <div class="field"><label>Result Card:</label><div class="doc-item"><div class="print-box"></div><input type="file" id="doc_result"></div></div>
             </div>
         </div>
 
@@ -207,65 +183,86 @@
         consoleBox.scrollTop = consoleBox.scrollHeight;
     }
 
+    function previewImage(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('photo-preview').src = e.target.result;
+                document.getElementById('photo-preview').style.display = 'block';
+                document.getElementById('photo-text').style.display = 'none';
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    async function fileToBase64(file) {
+        if (!file) return "";
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result.split(',')[1]);
+            reader.onerror = error => reject(error);
+        });
+    }
+
     async function handleSubmit() {
         const btn = document.getElementById('submitBtn');
         const s_name = document.getElementById('s_name').value;
         const cnic = document.getElementById('cnic').value;
 
         if(!s_name || !cnic) {
-            logToConsole("❌ ERROR: Name and B-Form are required!");
             alert("مهرباني ڪري شاگرد جو نالو ۽ B-Form نمبر لکو!");
             return;
         }
 
         btn.disabled = true;
-        logToConsole("📤 Sending data to Spreadsheet...");
-
-        const payload = {
-            s_name: s_name,
-            f_name: document.getElementById('f_name').value,
-            phone: document.getElementById('phone').value,
-            caste: document.getElementById('caste').value,
-            dob: document.getElementById('dob').value,
-            gender: document.getElementById('gender').value,
-            cnic: cnic,
-            adm_class: document.getElementById('adm_class').value,
-            prev_school: document.getElementById('prev_school').value,
-            last_class: document.getElementById('last_class').value,
-            grade: document.getElementById('grade').value,
-            address: document.getElementById('address').value
-        };
+        logToConsole("⏳ Processing files and data...");
 
         try {
+            const payload = {
+                s_name,
+                f_name: document.getElementById('f_name').value,
+                phone: document.getElementById('phone').value,
+                caste: document.getElementById('caste').value,
+                dob: document.getElementById('dob').value,
+                gender: document.getElementById('gender').value,
+                cnic,
+                adm_class: document.getElementById('adm_class').value,
+                prev_school: document.getElementById('prev_school').value,
+                last_class: document.getElementById('last_class').value,
+                grade: document.getElementById('grade').value,
+                address: document.getElementById('address').value,
+                religion: document.getElementById('religion').value,
+                stu_photo: await fileToBase64(document.getElementById('stu_photo').files[0]),
+                doc_bform: await fileToBase64(document.getElementById('doc_bform').files[0]),
+                doc_slc: await fileToBase64(document.getElementById('doc_slc').files[0]),
+                doc_fcnic: await fileToBase64(document.getElementById('doc_fcnic').files[0]),
+                doc_result: await fileToBase64(document.getElementById('doc_result').files[0])
+            };
+
+            logToConsole("📤 Sending to GBELS Database...");
+
             await fetch(SCRIPT_URL, {
                 method: 'POST',
                 body: JSON.stringify(payload),
                 mode: 'no-cors'
             });
+
             logToConsole(`✅ Data Saved: ${s_name}`);
             sendToWA(payload);
         } catch (e) {
-            logToConsole("⚠️ Connection issue, opening WhatsApp...");
-            sendToWA(payload);
+            logToConsole("⚠️ Connection Issue. Check Console.");
+            sendToWA({s_name, f_name: document.getElementById('f_name').value, adm_class: document.getElementById('adm_class').value, cnic});
         } finally {
             btn.disabled = false;
         }
     }
 
     function sendToWA(data) {
-        const msg = `*GBELS WASSAN ADMISSION*%0A` +
-                    `شاگرد: ${data.s_name}%0A` +
-                    `والد: ${data.f_name}%0A` +
-                    `ڪلاس: ${data.adm_class}%0A` +
-                    `B-Form: ${data.cnic}%0A` +
-                    `ڊيٽا آن لائن جمع ٿي وئي. ✅`;
+        const msg = `*GBELS WASSAN ADMISSION*%0Aشاگرد: ${data.s_name}%0Aوالد: ${data.f_name}%0Aڪلاس: ${data.adm_class}%0AB-Form: ${data.cnic}%0Aڊيٽا آن لائن جمع ٿي وئي. ✅`;
         window.open(`https://wa.me/923008909756?text=${msg}`, '_blank');
     }
-
-    window.onload = () => {
-        logToConsole("Mobile Console Active");
-        logToConsole("All systems ready - ڪل سسٽم تيار آهن");
-    };
 </script>
+
 </body>
 </html>
