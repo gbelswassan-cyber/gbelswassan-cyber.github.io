@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GBELS Wassan | Search Portal</title>
+    <style>
+        body { font-family: 'Poppins', sans-serif; background: #f4f7f9; text-align: center; padding: 50px 20px; }
+        .search-card { background: white; max-width: 500px; margin: 0 auto; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 5px solid #002d5b; }
+        h2 { color: #002d5b; }
+        input { width: 80%; padding: 12px; margin: 20px 0; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; }
+        button { background: #a52a2a; color: white; border: none; padding: 12px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        button:hover { background: #002d5b; }
+        #resultArea { margin-top: 30px; padding: 20px; border: 1px dashed #ccc; display: none; text-align: left; }
+    </style>
+</head>
+<body>
+
+    <div class="search-card">
+        <h2>Student Digital Portal</h2>
+        <p>Enter B-Form Number to generate your card</p>
+        
+        <input type="text" id="bformInput" placeholder="45302-XXXXXXX-X">
+        <br>
+        <button onclick="searchStudent()">Search & Generate</button>
+
+        <div id="resultArea">
+            <h3 id="studentName"></h3>
+            <p id="studentClass"></p>
+            <button onclick="window.print()" style="background:green;">Print Now</button>
+        </div>
+    </div>
+
+    <script>
+        function searchStudent() {
+            var bform = document.getElementById('bformInput').value;
+            if(!bform) { alert("Please enter B-Form No"); return; }
+            
+            // Yahan hum Google Apps Script ko call karenge
+            alert("Searching for: " + bform + "\n(Connecting to Database...)");
+            
+            // Note: Isko active karne ke liye humein .gs file mein function likhna hoga
+        }
+    </script>
+</body>
+</html>
