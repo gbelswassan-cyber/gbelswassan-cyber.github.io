@@ -179,7 +179,7 @@
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result.split(',')[1]); // Script expects clean base64
+            reader.onload = () => resolve(reader.result.split(',')[1]);
             reader.onerror = error => reject(error);
         });
     }
@@ -212,6 +212,7 @@
                 grade: document.getElementById('grade').value,
                 address: document.getElementById('address').value,
                 religion: document.getElementById('religion').value,
+                occupation: document.getElementById('occupation').value, // Ab ye data sheet mein jayega
                 docs: {
                     "Photo": await fileToBase64(document.getElementById('stu_photo').files[0]),
                     "B-Form": await fileToBase64(document.getElementById('doc_bform').files[0]),
