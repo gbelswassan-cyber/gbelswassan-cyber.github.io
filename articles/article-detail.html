@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مضمون — GBELS Wassan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Noto+Naskh+Arabic:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ajrak-red: #a52a2a;
+            --ajrak-blue: #002d5b;
+            --ajrak-gold: #ffcc00;
+            --bg-light: #f4f7f9;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: #333; line-height: 1.8; }
+        nav {
+            background: var(--ajrak-blue); padding: 18px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        .nav-brand { color: var(--ajrak-gold); font-weight: 800; font-size: 1.2rem; border: 2px solid var(--ajrak-gold); padding: 5px 12px; border-radius: 5px; text-decoration: none; }
+        .back-btn { color: white; text-decoration: none; font-weight: 600; font-size: 0.95rem; border: 2px solid white; padding: 8px 18px; border-radius: 50px; transition: 0.3s; }
+        .back-btn:hover { background: var(--ajrak-gold); color: var(--ajrak-blue); border-color: var(--ajrak-gold); }
+        .container { max-width: 900px; margin: 60px auto; padding: 0 25px 80px; }
+        .article-box {
+            background: white; border-radius: 20px; padding: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #eee;
+            direction: rtl; font-family: 'Noto Naskh Arabic', serif;
+        }
+        .article-box h1 {
+            color: var(--ajrak-blue); font-size: 2rem; margin-bottom: 15px;
+            line-height: 1.5; border-bottom: 4px solid var(--ajrak-red);
+            padding-bottom: 15px;
+        }
+        .article-meta { color: #888; font-size: 1rem; margin-bottom: 30px; font-family: 'Poppins', sans-serif; direction: ltr; text-align: right; }
+        .article-body { font-size: 1.2rem; line-height: 2.5; color: #333; }
+        .article-body p { margin-bottom: 20px; text-align: justify; }
+        .article-body h2 { color: var(--ajrak-blue); margin: 30px 0 10px; font-size: 1.4rem; }
+        .article-body ul { margin: 10px 20px 20px; }
+        .article-body ul li { margin-bottom: 8px; }
+        .not-found { text-align: center; padding: 80px 20px; font-family: 'Noto Naskh Arabic', serif; direction: rtl; font-size: 1.3rem; color: #888; }
+        footer { background: #000; color: white; padding: 40px 20px; text-align: center; border-top: 6px solid var(--ajrak-red); font-size: 0.9rem; }
+        .footer-gold { color: var(--ajrak-gold); font-weight: 700; }
+        @media (max-width: 768px) {
+            .article-box { padding: 25px; }
+            .article-box h1 { font-size: 1.5rem; }
+            .article-body { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-brand">GBELS WASSAN</a>
+        <a href="index.html#articles" class="back-btn">← واپس جائیں</a>
+    </nav>
+
+    <div class="container">
+        <div id="article-content"></div>
+    </div>
+
+    <footer>
+        <span class="footer-gold">Government Boys Elementary Lower Secondary School Wassan</span><br>
+        © 2026 — تمام حقوق محفوظ ہیں
+    </footer>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const articleId = params.get('id');
+
+        fetch('articles.json')
+            .then(res => res.json())
+            .then(data => {
+                const article = data.find(a => a.id === articleId);
+                const container = document.getElementById('article-content');
+
+                if (!article) {
+                    container.innerHTML = '<div class="not-found">مضمون نہیں ملا۔ براہ کرم واپس جائیں۔</div>';
+                    return;
+                }
+
+                document.title = article.title + ' — GBELS Wassan';
+
+                let bodyHtml = '';
+                if (article.fullContent && article.fullContent.length > 0) {
+                    article.fullContent.forEach(block => {
+                        if (block.type === 'heading') {
+                            bodyHtml += `<h2>${block.text}</h2>`;
+                        } else if (block.type === 'list') {
+                            bodyHtml += '<ul>' + block.items.map(i => `<li>${i}</li>`).join('') + '</ul>';
+                        } else {
+                            bodyHtml += `<p>${block.text}</p>`;
+                        }
+                    });
+                } else {
+                    bodyHtml = `<p>${article.description}</p>`;
+                }
+
+                container.innerHTML = `
+                    <div class="article-box">
+                        <h1>${article.title}</h1>
+                        <div class="article-meta">📅 ${article.dateDisplay || article.date}</div>
+                        <div class="article-body">${bodyHtml}</div>
+                    </div>
+                `;
+            })
+            .catch(() => {
+                document.getElementById('article-content').innerHTML =
+                    '<div class="not-found">ڈیٹا لوڈ نہیں ہو سکا۔ دوبارہ کوشش کریں۔</div>';
+            });
+    </script>
+</body>
+</html>
