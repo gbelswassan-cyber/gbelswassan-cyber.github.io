@@ -40,12 +40,20 @@
         .article-body ul { margin: 10px 20px 20px; }
         .article-body ul li { margin-bottom: 8px; }
         .not-found { text-align: center; padding: 80px 20px; font-family: 'Noto Naskh Arabic', serif; direction: rtl; font-size: 1.3rem; color: #888; }
+        .share-bar { margin-top: 40px; padding-top: 25px; border-top: 2px solid #eee; display: flex; gap: 15px; flex-wrap: wrap; justify-content: flex-end; }
+        .share-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 50px; font-weight: 700; font-size: 1rem; text-decoration: none; transition: 0.3s; font-family: 'Poppins', sans-serif; }
+        .share-whatsapp { background: #25D366; color: white; }
+        .share-whatsapp:hover { background: #1da851; transform: translateY(-3px); box-shadow: 0 6px 15px rgba(37,211,102,0.4); }
+        .share-copy { background: var(--ajrak-blue); color: white; cursor: pointer; border: none; }
+        .share-copy:hover { background: #003d7a; transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,45,91,0.3); }
+        .copy-success { background: #28a745 !important; }
         footer { background: #000; color: white; padding: 40px 20px; text-align: center; border-top: 6px solid var(--ajrak-red); font-size: 0.9rem; }
         .footer-gold { color: var(--ajrak-gold); font-weight: 700; }
         @media (max-width: 768px) {
             .article-box { padding: 25px; }
             .article-box h1 { font-size: 1.5rem; }
             .article-body { font-size: 1.1rem; }
+            .share-bar { justify-content: center; }
         }
     </style>
 </head>
@@ -97,11 +105,23 @@
                     bodyHtml = `<p>${article.description}</p>`;
                 }
 
+                const shareText = encodeURIComponent('📚 ' + article.title + ' — GBELS Wassan\n' + window.location.href);
+
                 container.innerHTML = `
                     <div class="article-box">
                         <h1>${article.title}</h1>
                         <div class="article-meta">📅 ${article.dateDisplay || article.date}</div>
                         <div class="article-body">${bodyHtml}</div>
+                        <div class="share-bar">
+                            <a class="share-btn share-whatsapp"
+                               href="https://wa.me/?text=${shareText}"
+                               target="_blank">
+                               📲 واٹس ایپ پر شیئر کریں
+                            </a>
+                            <button class="share-btn share-copy" id="copyBtn" onclick="copyLink()">
+                               🔗 لنک کاپی کریں
+                            </button>
+                        </div>
                     </div>
                 `;
             })
@@ -109,6 +129,18 @@
                 document.getElementById('article-content').innerHTML =
                     '<div class="not-found">ڈیٹا لوڈ نہیں ہو سکا۔ دوبارہ کوشش کریں۔</div>';
             });
+
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✅ لنک کاپی ہو گیا!';
+                btn.classList.add('copy-success');
+                setTimeout(() => {
+                    btn.textContent = '🔗 لنک کاپی کریں';
+                    btn.classList.remove('copy-success');
+                }, 2500);
+            });
+        }
     </script>
 </body>
 </html>
