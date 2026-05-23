@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Noto+Naskh+Arabic:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
+
         :root{
             --ajrak-red:#a52a2a;
             --ajrak-blue:#002d5b;
@@ -272,6 +273,7 @@
                 justify-content:center;
             }
         }
+
     </style>
 </head>
 
@@ -281,13 +283,13 @@
 
     <nav>
 
-        <a href="./index.html" class="nav-brand">
+        <a href="/" class="nav-brand">
             GBELS WASSAN
         </a>
 
         <!-- FIXED BACK BUTTON -->
 
-        <a href="./index.html#articles" class="back-btn">
+        <a href="/#articles" class="back-btn">
             <span>←</span>
             واپس جائیں
         </a>
@@ -322,7 +324,7 @@
 
         const articleId = params.get('id');
 
-        fetch('./articles.json')
+        fetch('/articles.json')
 
             .then(res => res.json())
 
