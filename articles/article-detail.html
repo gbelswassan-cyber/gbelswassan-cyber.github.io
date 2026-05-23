@@ -61,7 +61,7 @@
             color:var(--ajrak-blue);
         }
 
-        /* ===== UPDATED BACK BUTTON ===== */
+        /* ===== BACK BUTTON ===== */
 
         .back-btn{
             display:inline-flex;
@@ -87,6 +87,8 @@
             min-width:140px;
 
             direction:rtl;
+
+            cursor:pointer;
         }
 
         .back-btn:hover{
@@ -301,11 +303,11 @@
             GBELS WASSAN
         </a>
 
-        <!-- UPDATED BUTTON -->
-        <a href="index.html#articles" class="back-btn">
+        <!-- BACK BUTTON WITH JAVASCRIPT -->
+        <button class="back-btn" onclick="goBack()">
             <span>←</span>
             واپس جائیں
-        </a>
+        </button>
 
     </nav>
 
@@ -328,6 +330,15 @@
     <!-- ================= SCRIPT ================= -->
 
     <script>
+
+        // BACK BUTTON FUNCTION
+        function goBack(){
+            if(document.referrer && document.referrer.includes('gbelswassan-cyber.github.io')){
+                window.history.back();
+            }else{
+                window.location.href = 'index.html';
+            }
+        }
 
         const params = new URLSearchParams(window.location.search);
         const articleId = params.get('id');
